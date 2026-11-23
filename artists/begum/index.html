@@ -8,10 +8,10 @@
   <link rel="icon" href="../../img/mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../styles.css?v=14">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css?v=20">
 </head>
-<body data-root="../../">
+<body class="is-scroll" data-root="../../">
 
   <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
 
@@ -25,18 +25,62 @@
     </nav>
   </header>
 
-  <main id="main" class="page page--artist" data-artist="begum">
-    <div class="artist">
-      <figure class="artist__photo"><img id="artist-photo" alt=""><figcaption id="artist-credit"></figcaption></figure>
-
-      <div class="artist__info">
-        <p class="label muted artist__crumb"><a href="../../artists.html">Artists</a> / <span id="artist-n"></span></p>
-        <h1 class="artist__name" id="artist-name">Begum</h1>
-        <p class="artist__meta" id="artist-meta"></p>
-        <p class="artist__bio" id="artist-bio"></p>
-        <div class="player__frame" id="player"></div>
-        <div class="artist__links" id="artist-links"></div>
+  <main id="main" class="apage" data-artist="begum">
+    <section class="ahero">
+      <div class="ahero__inner">
+        <div class="ahero__text">
+          <p class="ahero__crumb"><a href="../../artists.html">artists</a> / <span id="artist-n"></span></p>
+          <h1 class="ahero__name" id="artist-name">Begum</h1>
+          <p class="ahero__meta" id="artist-meta"></p>
+          <div class="ahero__icons" id="artist-links"></div>
+          <a class="ahero__contact" id="artist-contact" href="mailto:office@nikamma.co">contact</a>
+        </div>
+        <figure class="ahero__photo"><img id="artist-photo" alt=""><figcaption id="artist-credit"></figcaption></figure>
       </div>
+    </section>
+
+    <div class="abody">
+      <div class="abody__main">
+        <section class="box box--bio" id="sec-bio">
+          <h2>bio</h2>
+          <p class="bio__copy" id="artist-bio"></p>
+        </section>
+
+        <section class="box box--tracks" id="sec-tracks">
+          <h2>tracks</h2>
+          <div class="player__frame" id="player"></div>
+        </section>
+
+        <section class="box box--tour" id="sec-tour" hidden>
+          <h2>tour dates</h2>
+          <div id="tour"></div>
+        </section>
+
+        <section class="box box--live" id="sec-live" hidden>
+          <h2>live</h2>
+          <figure class="live__stage"><img id="live-img" alt=""></figure>
+          <div class="live__bar">
+            <p class="live__caption" id="live-caption"></p>
+            <div class="live__nav">
+              <button type="button" id="live-prev" aria-label="Previous photo">←</button>
+              <span id="live-count"></span>
+              <button type="button" id="live-next" aria-label="Next photo">→</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="box box--videos" id="sec-videos" hidden>
+          <h2>videos</h2>
+          <div class="videos__stage" id="video-stage"></div>
+          <ol class="videos__list" id="video-list"></ol>
+        </section>
+      </div>
+
+      <aside class="abody__side" id="sec-store" hidden>
+        <h2>store</h2>
+        <div class="store" id="store"></div>
+        <a class="store__more" id="store-more" target="_blank" rel="noopener">more in the store</a>
+      </aside>
     </div>
 
     <nav class="artist__pager" aria-label="More artists">
@@ -54,8 +98,8 @@
     <p class="bar__note">© <span class="year">2026</span> nikamma</p>
   </footer>
 
-  <script src="../../news.js?v=14"></script>
-  <script src="../../artists.js?v=14"></script>
-  <script src="../../script.js?v=14"></script>
+  <script src="../../news.js?v=20"></script>
+  <script src="../../artists.js?v=20"></script>
+  <script src="../../script.js?v=20"></script>
 </body>
 </html>

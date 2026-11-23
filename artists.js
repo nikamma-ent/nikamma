@@ -1,19 +1,24 @@
 // The roster. Edit this file to change artist pages and the Artists list.
 //
-// spotify: an open.spotify.com link to the release (album, single or playlist)
-//          or artist you want in the player. Leave '' if you don't have one yet.
-// photo:   path inside img/artists/ (web-sized JPG, ~1500px, under ~400KB)
-// credit:  photographer, shown small under the photo. Leave '' to hide.
-// links:   shown as small buttons; remove any you don't need.
+// Each artist page has tabs: bio · tour dates · live · videos · store.
+// A tab only appears if it has something in it.
+//
+// spotify:    open.spotify.com link (album, single, playlist or artist) for the player.
+// photo:      file in img/artists/ (web-sized JPG, ~1500px, under ~400KB).
+// credit:     photographer of that photo. '' hides it.
+// links:      social / streaming buttons next to the name.
+// bandsintown:
+//   artist:   the artist's name exactly as on Bandsintown (or 'id_12345' for their id).
+//   appId:    optional key from Bandsintown for Artists → Settings → API. With a key the
+//             dates show in our own minimal style; without one, Bandsintown's widget is used.
+//             Either way, dates update by themselves whenever they change on Bandsintown.
+// live:       photos from shows: { src: 'img/live/…', caption: 'venue, city year' }.
+// videos:     YouTube videos: { id: 'the part after watch?v=', title: '…' }. The first is featured.
+// store:      { title, note, url, img } cards; img is optional.
 //
 // To add an artist: add an entry here, then copy an existing folder in
 // artists/ (e.g. artists/hulo) to artists/<slug>/ and change data-artist
 // and the <title> in its index.html.
-
-// The roster playlist for the player bar on the Artists page.
-// Make a public playlist in Spotify with songs from every act, then paste its
-// link here (Share → Copy link to playlist). Leave '' to fall back to one artist.
-window.NIKAMMA_PLAYLIST = '';
 
 window.NIKAMMA_ARTISTS = [
   {
@@ -32,6 +37,28 @@ window.NIKAMMA_ARTISTS = [
       YouTube: 'https://www.youtube.com/@adityahulo',
       Bandcamp: 'https://hulo.bandcamp.com',
     },
+    bandsintown: { artist: 'Hulo', appId: '' },
+    live: [
+      { src: 'img/live/hulo/g5a-bw.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
+      { src: 'img/live/hulo/casa-bacardi-kolkata.jpg', caption: 'Casa Bacardi, Kolkata 2025' },
+      { src: 'img/live/hulo/g5a-teal.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
+      { src: 'img/live/hulo/antisocial-mumbai.jpg', caption: 'antiSOCIAL, Mumbai 2025' },
+      { src: 'img/live/hulo/hamilton-bangalore.jpg', caption: 'Hamilton Bar, Bangalore 2025' },
+    ],
+    videos: [
+      { id: 'A-EqlcvPvZE', title: 'Griefcase' },
+      { id: 'YI9RbVDJL7w', title: 'Light and Sound' },
+      { id: '_Q37kQUoTvU', title: 'Save Your Sky' },
+      { id: 'YtlyAqKAW0g', title: 'Golden' },
+      { id: '8-VY0UWOSwA', title: 'Burn' },
+      { id: '2uvLCqoKvK4', title: 'To Be Me' },
+      { id: 'Q8HD8_tIO0U', title: 'Breathe' },
+      { id: 'c0An5a3xcwg', title: "Don't Love" },
+      { id: '_8_MAmKQN7s', title: 'Beenherebefore (with Dipan Basak)' },
+    ],
+    store: [
+      { title: 'Griefcase', note: 'Debut album · Bandcamp', url: 'https://hulo.bandcamp.com', img: 'img/store/hulo-griefcase.jpg' },
+    ],
   },
   {
     slug: 'shashwat-bulusu',
@@ -50,6 +77,12 @@ window.NIKAMMA_ARTISTS = [
       Bandcamp: 'https://shashwatbulusu.bandcamp.com/music',
       'Pinocchio ↗': 'https://pinocchio.nikamma.co',
     },
+    bandsintown: { artist: 'Shashwat Bulusu', appId: '' },
+    live: [],
+    videos: [],
+    store: [
+      { title: 'Pinocchio', note: 'Album · Bandcamp', url: 'https://shashwatbulusu.bandcamp.com/album/pinocchio', img: 'img/store/pinocchio.jpg' },
+    ],
   },
   {
     slug: 'begum',
@@ -63,5 +96,12 @@ window.NIKAMMA_ARTISTS = [
     links: {
       Bandcamp: 'https://begum.bandcamp.com',
     },
+    bandsintown: { artist: 'Begum', appId: '' },
+    live: [],
+    videos: [],
+    store: [
+      { title: 'We Are Okay! tour tee', note: 'Pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
+      { title: 'AMFS tee', note: 'Pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-amfs-tee.jpg' },
+    ],
   },
 ];
