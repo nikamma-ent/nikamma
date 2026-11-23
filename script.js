@@ -336,7 +336,7 @@ function loadTour({ artist, appId }, box) {
         const li = document.createElement('li');
         li.innerHTML = '<span class="tour__date"></span><span class="tour__where"></span><a class="tour__btn" target="_blank" rel="noopener"></a>';
         li.querySelector('.tour__date').textContent = fmt.format(new Date(e.datetime));
-        li.querySelector('.tour__where').textContent = [v.name, [v.city, v.country].filter(Boolean).join(', ')].filter(Boolean).join(' – ');
+        li.querySelector('.tour__where').textContent = [v.city, v.country].filter(Boolean).join(', '); // city only, no venue
         const btn = li.querySelector('.tour__btn');
         btn.href = (offer && offer.url) || e.url;
         btn.textContent = offer ? 'tickets' : 'details';

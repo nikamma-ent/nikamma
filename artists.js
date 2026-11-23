@@ -51,7 +51,7 @@ window.NIKAMMA_ARTISTS = [
       YouTube: 'https://www.youtube.com/@adityahulo',
       Bandcamp: 'https://hulo.bandcamp.com',
     },
-    bandsintown: { artist: 'Hulo', appId: '' },
+    bandsintown: { artist: 'id_15574558', appId: '' }, // bandsintown.com/a/15574558-hulo
     live: [
       { src: 'img/live/hulo/g5a-bw.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
       { src: 'img/live/hulo/casa-bacardi-kolkata.jpg', caption: 'Casa Bacardi, Kolkata 2025' },
@@ -82,7 +82,7 @@ window.NIKAMMA_ARTISTS = [
       Bandcamp: 'https://shashwatbulusu.bandcamp.com/music',
       'Pinocchio ↗': 'https://pinocchio.nikamma.co',
     },
-    bandsintown: { artist: 'Shashwat Bulusu', appId: '' },
+    bandsintown: { artist: 'id_15507468', appId: '' }, // bandsintown.com/a/15507468-shashwat-bulusu
     live: [],
     store: [],
   },
@@ -99,7 +99,7 @@ window.NIKAMMA_ARTISTS = [
     links: {
       Bandcamp: 'https://begum.bandcamp.com',
     },
-    bandsintown: { artist: 'Begum', appId: '' },
+    bandsintown: { artist: 'id_15664566', appId: '' }, // bandsintown.com/a/15664566-begum
     live: [],
     store: [
       { title: 'We Are Okay! tour tee', where: 'begumdarbaar.com', note: 'pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },

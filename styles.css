@@ -295,7 +295,12 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .tour__empty a { color: var(--ink); }
 .box--tour .bit-widget { font-family: var(--sans) !important; }
 .box--tour .bit-event[hidden] { display: none !important; }
+/* date and city on one line (venue is hidden) */
+.box--tour .bit-details-inner-wrapper { display: flex !important; align-items: baseline; gap: 24px; }
+#sec-tour .bit-widget .bit-event .bit-details-inner-wrapper > a.bit-details { flex: 0 0 80px !important; max-width: 80px !important; }
+.box--tour .bit-titleWrapper { flex: 1 1 auto !important; width: auto !important; margin: 0 !important; padding: 0 !important; text-align: left !important; }
 .box--tour .bit-rsvp-container,
+.box--tour .bit-title-venue,
 .box--tour .bit-follow-section-wrapper,
 .box--tour .bit-logo-link,
 .box--tour .bit-logo-link + *:empty { display: none !important; }
