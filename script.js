@@ -240,10 +240,6 @@ function renderArtist(a, i) {
     if (storeUrl) more.href = storeUrl; else more.hidden = true;
   }
 
-  // panels sit two by two; an odd one out at the end spans the full width
-  const panels = [...document.querySelectorAll('.abody__main > .box')].filter((b) => !b.hidden);
-  if (panels.length % 2) panels[panels.length - 1].classList.add('is-wide');
-
   // prev / next
   if (ARTISTS.length > 1) {
     const prev = ARTISTS[(i - 1 + ARTISTS.length) % ARTISTS.length];
