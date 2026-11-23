@@ -289,6 +289,17 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .box { padding: clamp(24px, 3vw, 40px); background: #f1f1f1; }
 .box[hidden], .abody__side[hidden] { display: none; }
 .box--tracks { background: #fff3c4; }
+
+/* press: newest 3 articles, a full-width row between tour/live and videos */
+.apress { width: 100vw; margin-left: calc(50% - 50vw); background: #f1f1f1; }
+.apress[hidden] { display: none; }
+.apress__in { max-width: 1400px; margin: 0 auto; padding: clamp(40px, 7vh, 72px) var(--gut); }
+.apress h2 { font-size: 13px; font-weight: 600; letter-spacing: .02em; margin-bottom: 26px; }
+.press { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
+.press a { display: grid; gap: 8px; text-decoration: none; }
+.press__title { font-size: clamp(18px, 1.6vw, 22px); line-height: 1.3; }
+.press__title::after { content: " ↗"; color: var(--muted); }
+.press a:hover .press__title { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .box h2, .abody__side h2 { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: inherit; margin-bottom: 22px; }
 .abody__side { position: sticky; top: 24px; }
 
@@ -308,6 +319,7 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .astage .live__nav button:hover { border-color: #fff; }
 .astage + .afilm { margin-top: 0; }
 .astage + .afilm .afilm__inner { padding-top: 0; }
+.apress + .afilm { margin-top: 0; }
 .bio__copy { font-size: clamp(19px, 1.5vw, 22px); line-height: 1.55; font-weight: 400; max-width: 46ch; }
 .bio__copy p + p { margin-top: .9em; }
 .box--tracks .player__frame iframe { height: 352px; }
@@ -482,6 +494,7 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
   .abody { grid-template-columns: minmax(0, 1fr); }
   .abody__side { position: static; }
   .astage__in { grid-template-columns: minmax(0, 1fr); }
+  .press { grid-template-columns: minmax(0, 1fr); }
   .store { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .work__item { grid-template-columns: 1fr auto; gap: 2px 12px; }

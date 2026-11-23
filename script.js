@@ -159,6 +159,25 @@ function renderArtist(a, i) {
   show('sec-bio', !!bio);
   mountPlayer($('player'), a);
 
+  // press: pinned articles (artists.js) first, then the newest found by the daily crawler (press.js). 3 in all.
+  const key = (p) => p.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const pinned = ((a.press || {}).pin || []);
+  const pinnedKeys = new Set(pinned.map(key));
+  const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
+  if (press.length) {
+    show('sec-press', true);
+    const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    press.forEach((p) => {
+      const li = document.createElement('li');
+      li.innerHTML = '<a target="_blank" rel="noopener"><p class="press__meta"></p><p class="press__title"></p></a>';
+      li.querySelector('a').href = p.url;
+      const when = p.date ? fmtDay.format(new Date(p.date)) : '';
+      li.querySelector('.press__meta').replaceChildren(chips([p.outlet, when].filter(Boolean).join(' · ')));
+      li.querySelector('.press__title').textContent = p.title;
+      $('press').append(li);
+    });
+  }
+
   // tour dates: loads when it scrolls near the screen
   if (a.bandsintown && a.bandsintown.artist) {
     show('sec-tour', true);

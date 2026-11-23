@@ -17,6 +17,12 @@
 //             dates show in our own minimal style; without one, Bandsintown's widget is used.
 //             Either way, dates update by themselves whenever they change on Bandsintown.
 //   Tip: add ?sample-tour to a page address to preview the widget with sample dates.
+// press:      daily Google News search (tools/sync_press.py → press.js); the newest 3
+//             articles show on the page. query: what to search; names: a headline
+//             must mention one; also: …and one of these words; exclude: skip these;
+//             pin: articles to always show first, in this order:
+//               { outlet, title, url, date: 'YYYY-MM-DD' (optional) }
+//             hide: article links never to show.
 // live:       photos from shows: { src: 'img/live/…', caption: 'venue, city year' }.
 // video:      the featured YouTube video, full width at the end of the page:
 //             { id: 'the part after watch?v=', title: '…' }. Leave it out to hide it.
@@ -51,6 +57,14 @@ window.NIKAMMA_ARTISTS = [
       YouTube: 'https://www.youtube.com/@adityahulo',
       Bandcamp: 'https://hulo.bandcamp.com',
     },
+    press: {
+      query: '"Hulo" (song OR album OR singer OR Griefcase OR Kolkata) OR "Aditya Majumdar"',
+      names: ['Hulo', 'Aditya Majumdar', 'Griefcase'],
+      exclude: ['DNA Music', 'Chiquerella'],
+      pin: [
+        { outlet: 'Platform', title: 'A conversation with indie singer-songwriter Hulo on his debut album, life between Kolkata and Berlin', url: 'https://www.platform-mag.com/music/guitars-griefcases-and-growing-up-hulo.html' },
+      ],
+    },
     bandsintown: { artist: 'id_15574558', appId: '' }, // bandsintown.com/a/15574558-hulo
     live: [
       { src: 'img/live/hulo/g5a-bw.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
@@ -82,6 +96,15 @@ window.NIKAMMA_ARTISTS = [
       Bandcamp: 'https://shashwatbulusu.bandcamp.com/music',
       'Pinocchio ↗': 'https://pinocchio.nikamma.co',
     },
+    press: {
+      query: '"Shashwat Bulusu"',
+      names: ['Shashwat Bulusu', 'Bulusu'],
+      pin: [
+        { outlet: 'Wild City', date: '2026-09-02', title: "Shashwat Bulusu Unpacks Abuse, Self-Harm And Compulsive Lying On 'Pinocchio'", url: 'https://www.thewildcity.com/news/21808-shashwat-bulusu-unpacks-abuse-self-harm-and-compulsive-lying-on-pinocchio' },
+        { outlet: 'Homegrown', date: '2026-08-27', title: "Shashwat Bulusu's Latest Album, 'Pinocchio', Wants To Make You Uncomfortable", url: 'https://homegrown.co.in/homegrown-creators/shashwat-bulusus-latest-album-pinocchio-wants-to-make-you-uncomfortable' },
+        { outlet: 'The Indian Music Diaries', date: '2026-09-19', title: "From Folk to Dissonant Electronica: Shashwat Bulusu's Sonic Confessions in 'Pinocchio'", url: 'https://theindianmusicdiaries.com/from-folk-to-dissonant-electronica-shashwat-bulusus-sonic-confessions-in-pinocchio/' },
+      ],
+    },
     bandsintown: { artist: 'id_15507468', appId: '' }, // bandsintown.com/a/15507468-shashwat-bulusu
     live: [],
     store: [],
@@ -98,6 +121,14 @@ window.NIKAMMA_ARTISTS = [
     spotify: '', // TODO: add Begum's Spotify link
     links: {
       Bandcamp: 'https://begum.bandcamp.com',
+    },
+    press: {
+      query: '"Begum" band (Goa OR Delhi OR album OR trio)',
+      names: ['Begum'],
+      also: ['band', 'trio', 'album', 'single', 'are you ok', 'bagh', 'we are excited', 'better person', 'tour', 'gig', 'music'],
+      pin: [
+        { outlet: 'Musicplus', date: '2026-09-15', title: 'Begum announce four-city India tour after three-year hiatus', url: 'https://www.musicplus.in/begum-announce-four-city-india-tour-after-three-year-hiatus/' },
+      ],
     },
     bandsintown: { artist: 'id_15664566', appId: '' }, // bandsintown.com/a/15664566-begum
     live: [],
