@@ -197,24 +197,42 @@ function renderArtist(a, i) {
     if (yt) { $('video-all').href = yt; $('video-all').hidden = false; }
   }
 
-  // store
-  if ((a.store || []).length) {
+  // store: Bandcamp merch + albums (pulled in daily, see merch.js) + other shops from artists.js
+  // Order: Bandcamp merch, other shops, then Bandcamp albums (newest first). Max 4 cards.
+  const STORE_CAP = 4;
+  const bcAll = (window.NIKAMMA_MERCH || {})[a.slug] || [];
+  const asCard = (m) => ({
+    title: m.title, url: m.url, img: m.img, where: 'bandcamp',
+    note: [m.type, m.price, m.year].filter(Boolean).join(' · '),
+  });
+  const bcMerch = bcAll.filter((m) => m.kind === 'merch').map(asCard);
+  const bcAlbums = bcAll.filter((m) => m.kind !== 'merch').map(asCard);
+  const shops = a.store || [];
+  const items = [...bcMerch, ...shops, ...bcAlbums].slice(0, STORE_CAP);
+  if (items.length) {
     show('sec-store', true);
     const grid = $('store');
-    a.store.forEach((s) => {
+    items.forEach((s) => {
       const card = document.createElement('a');
       card.className = 'store__card'; card.href = s.url; card.target = '_blank'; card.rel = 'noopener';
       card.innerHTML = '<div class="store__img"></div><p class="store__note"></p><p class="store__title"></p>';
       if (s.img) {
-        const im = document.createElement('img'); im.src = ROOT + s.img; im.alt = s.title;
+        const im = document.createElement('img');
+        im.src = /^https?:/.test(s.img) ? s.img : ROOT + s.img; im.alt = s.title; im.loading = 'lazy';
         card.querySelector('.store__img').append(im);
       }
       card.querySelector('.store__title').textContent = s.title;
-      card.querySelector('.store__note').replaceChildren(chips(s.note));
+      card.querySelector('.store__note').replaceChildren(chips([s.where, s.note].filter(Boolean).join(' · ')));
       grid.append(card);
     });
+    // "more in the store": the artist's own shop first, else their Bandcamp
     const more = $('store-more');
-    const storeUrl = a.storeUrl || a.store[0].url;
+    const bc = (a.links || {}).Bandcamp;
+    const external = shops.find((x) => x.where && !/bandcamp/i.test(x.where));
+    const storeUrl = a.storeUrl
+      || (external && external.url)
+      || (bc && new URL(bcMerch.length ? '/merch' : '/music', bc).href)
+      || items[0].url;
     if (storeUrl) more.href = storeUrl; else more.hidden = true;
   }
 

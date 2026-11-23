@@ -17,7 +17,13 @@
 // video:      the featured YouTube video, full width at the end of the page:
 //             { id: 'the part after watch?v=', title: '…' }. Leave it out to hide it.
 //             "more videos" next to it links to the YouTube in links.
-// store:      { title, note, url, img } cards; img is optional.
+// store:      merch from shops other than Bandcamp: { title, where, note, url, img }.
+//             where is the shop (shown as the yellow chip); img is optional.
+//             The store shows 4 cards: Bandcamp merch, these, then Bandcamp albums.
+//             "more in the store" goes to storeUrl if set, else the first shop here
+//             that isn't Bandcamp, else their Bandcamp.
+//             Bandcamp merch and albums are added by themselves every day
+//             (tools/sync_bandcamp.py → merch.js), so don't list Bandcamp things here.
 //
 // To add an artist: add an entry here, then copy an existing folder in
 // artists/ (e.g. artists/hulo) to artists/<slug>/ and change data-artist
@@ -50,7 +56,7 @@ window.NIKAMMA_ARTISTS = [
     ],
     video: { id: 'A-EqlcvPvZE', title: 'Griefcase' },
     store: [
-      { title: 'Griefcase', note: 'Debut album · Bandcamp', url: 'https://hulo.bandcamp.com', img: 'img/store/hulo-griefcase.jpg' },
+      { title: 'Griefcase', where: 'bandcamp', note: 'debut album', url: 'https://hulo.bandcamp.com', img: 'img/store/hulo-griefcase.jpg' },
     ],
   },
   {
@@ -72,9 +78,7 @@ window.NIKAMMA_ARTISTS = [
     },
     bandsintown: { artist: 'Shashwat Bulusu', appId: '' },
     live: [],
-    store: [
-      { title: 'Pinocchio', note: 'Album · Bandcamp', url: 'https://shashwatbulusu.bandcamp.com/album/pinocchio', img: 'img/store/pinocchio.jpg' },
-    ],
+    store: [],
   },
   {
     slug: 'begum',
@@ -91,8 +95,8 @@ window.NIKAMMA_ARTISTS = [
     bandsintown: { artist: 'Begum', appId: '' },
     live: [],
     store: [
-      { title: 'We Are Okay! tour tee', note: 'Pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
-      { title: 'AMFS tee', note: 'Pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-amfs-tee.jpg' },
+      { title: 'We Are Okay! tour tee', where: 'begumdarbaar.com', note: 'pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
+      { title: 'AMFS tee', where: 'begumdarbaar.com', note: 'pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-amfs-tee.jpg' },
     ],
   },
 ];
