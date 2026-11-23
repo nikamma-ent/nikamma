@@ -157,7 +157,34 @@ function renderArtist(a, i) {
     const p = document.createElement('p'); p.textContent = t.trim(); return p;
   }));
   show('sec-bio', !!bio);
-  mountPlayer($('player'), a);
+
+  // releases: their Bandcamp albums (merch.js, daily), newest first, one at a time
+  const releases = ((window.NIKAMMA_MERCH || {})[a.slug] || []).filter((m) => m.kind === 'album');
+  if (releases.length) {
+    show('sec-releases', true);
+    let r = 0;
+    const set = (img, rel) => { if (rel && rel.img) { img.src = rel.img; img.alt = rel.title; img.hidden = false; } else img.hidden = true; };
+    const goRel = (n) => {
+      r = (n + releases.length) % releases.length;
+      const rel = releases[r];
+      const front = $('rel-front');
+      front.classList.add('is-swapping');
+      setTimeout(() => {
+        set(front, rel);
+        set($('rel-back'), releases.length > 1 ? releases[(r + 1) % releases.length] : null);
+        front.classList.remove('is-swapping');
+      }, 160);
+      $('rel-label').textContent = r === 0 ? 'latest release' : 'release';
+      $('rel-title').textContent = rel.title;
+      $('rel-meta').replaceChildren(chips([rel.type, rel.year].filter(Boolean).join(' · ')));
+      $('rel-link').href = rel.url; $('rel-covers').href = rel.url;
+      $('rel-count').textContent = `${pad(r + 1)} / ${pad(releases.length)}`;
+    };
+    $('rel-nav').hidden = releases.length < 2;
+    $('rel-prev').addEventListener('click', () => goRel(r - 1));
+    $('rel-next').addEventListener('click', () => goRel(r + 1));
+    goRel(0);
+  }
 
   // tour dates: loads when it scrolls near the screen
   if (a.bandsintown && a.bandsintown.artist) {
@@ -202,7 +229,7 @@ function renderArtist(a, i) {
   }
 
   // store: Bandcamp merch + albums (pulled in daily, see merch.js) + other shops from artists.js
-  // Order: Bandcamp merch, other shops, then Bandcamp albums (newest first). Max 4 cards.
+  // merch: Bandcamp merch, then other shops. Max 4 cards. (Albums are in releases.)
   const STORE_CAP = 4;
   const bcAll = (window.NIKAMMA_MERCH || {})[a.slug] || [];
   const asCard = (m) => ({
@@ -210,9 +237,8 @@ function renderArtist(a, i) {
     note: [m.type, m.price, m.year].filter(Boolean).join(' · '),
   });
   const bcMerch = bcAll.filter((m) => m.kind === 'merch').map(asCard);
-  const bcAlbums = bcAll.filter((m) => m.kind !== 'merch').map(asCard);
   const shops = a.store || [];
-  const items = [...bcMerch, ...shops, ...bcAlbums].slice(0, STORE_CAP);
+  const items = [...bcMerch, ...shops].slice(0, STORE_CAP);
   if (items.length) {
     show('sec-store', true);
     const grid = $('store');
