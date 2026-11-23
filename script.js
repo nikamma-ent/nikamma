@@ -40,6 +40,19 @@ const ROOT = document.body.dataset.root || '';
 // Always A–Z, so the lineup, the numbering and prev/next all agree.
 const ARTISTS = (window.NIKAMMA_ARTISTS || []).slice().sort((a, b) => a.name.localeCompare(b.name));
 const pad = (n) => String(n).padStart(2, '0');
+
+// XL-style metadata chips: 'singer-songwriter · calcutta' → [singer-songwriter][calcutta], first one yellow.
+function chips(text) {
+  const wrap = document.createElement('span');
+  wrap.className = 'chips';
+  String(text || '').split('·').map((t) => t.trim()).filter(Boolean).forEach((t, i) => {
+    const c = document.createElement('span');
+    c.className = i === 0 ? 'chip chip--accent' : 'chip';
+    c.textContent = t;
+    wrap.append(c);
+  });
+  return wrap;
+}
 const artistUrl = (a) => `${ROOT}artists/${a.slug}/`;
 
 // Turn any open.spotify.com link into its embed URL.
@@ -85,6 +98,7 @@ if (rosterList && ARTISTS.length) {
     li.dataset.slug = a.slug;
     li.innerHTML = `<a class="lineup__name" href="${artistUrl(a)}"></a>`;
     li.querySelector('.lineup__name').textContent = a.name;
+    if (a.latest) li.append(chips(a.latest));
     li.addEventListener('mouseenter', () => { rosterList.classList.add('is-hovering'); showPhoto(a); });
     li.addEventListener('mouseleave', () => rosterList.classList.remove('is-hovering'));
     rosterList.append(li);
@@ -118,7 +132,7 @@ function renderArtist(a, i) {
   // hero
   $('artist-n').textContent = pad(i + 1);
   $('artist-name').textContent = a.name;
-  $('artist-meta').textContent = a.meta;
+  $('artist-meta').replaceChildren(chips(a.meta));
   const photo = $('artist-photo');
   photo.src = `${ROOT}img/artists/${a.photo}`;
   photo.alt = a.name;
@@ -200,13 +214,13 @@ function renderArtist(a, i) {
     a.store.forEach((s) => {
       const card = document.createElement('a');
       card.className = 'store__card'; card.href = s.url; card.target = '_blank'; card.rel = 'noopener';
-      card.innerHTML = '<div class="store__img"></div><p class="store__title"></p><p class="store__note"></p>';
+      card.innerHTML = '<div class="store__img"></div><p class="store__note"></p><p class="store__title"></p>';
       if (s.img) {
         const im = document.createElement('img'); im.src = ROOT + s.img; im.alt = s.title;
         card.querySelector('.store__img').append(im);
       }
       card.querySelector('.store__title').textContent = s.title;
-      card.querySelector('.store__note').textContent = s.note || '';
+      card.querySelector('.store__note').replaceChildren(chips(s.note));
       grid.append(card);
     });
     const more = $('store-more');
