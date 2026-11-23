@@ -16,6 +16,7 @@
   };
   const star = () => {
     const s = document.createElement('span');
+    s.className = 'ticker__dot';
     s.textContent = '✺';
     s.setAttribute('aria-hidden', 'true');
     return s;
