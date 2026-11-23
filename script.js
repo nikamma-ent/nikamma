@@ -151,8 +151,12 @@ function renderArtist(a, i) {
   });
 
   // bio + tracks
-  $('artist-bio').textContent = a.bio || '';
-  show('sec-bio', !!a.bio);
+  // bio: the "Short" part of their bio Google Doc (bios.js, monthly), else a.bio
+  const bio = (window.NIKAMMA_BIOS || {})[a.slug] || a.bio || '';
+  $('artist-bio').replaceChildren(...bio.split(/\n\s*\n/).filter(Boolean).map((t) => {
+    const p = document.createElement('p'); p.textContent = t.trim(); return p;
+  }));
+  show('sec-bio', !!bio);
   mountPlayer($('player'), a);
 
   // tour dates: loads when it scrolls near the screen

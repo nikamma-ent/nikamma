@@ -4,6 +4,10 @@
 // A section only appears if it has something in it.
 //
 // spotify:    open.spotify.com link (album, single, playlist or artist) for the player.
+// bio:        fallback bio, used only if there's no bioDoc (or it can't be read).
+// bioDoc:     Google Doc with the bio (shared: anyone with the link can view). The
+//             part under the heading "Short" is used, refreshed on the 1st of
+//             every month (tools/sync_bios.py → bios.js).
 // photo:      file in img/artists/ (web-sized JPG, ~1500px, under ~400KB).
 // credit:     photographer of that photo. '' hides it.
 // links:      social / streaming buttons next to the name.
@@ -38,6 +42,7 @@ window.NIKAMMA_ARTISTS = [
     latest: 'Griefcase',
     photo: 'hulo.jpg',
     credit: 'Ankan Sarkar',
+    bioDoc: 'https://docs.google.com/document/d/1bPOp2xt4cxbg4x8TUjVE0Jh8fdBW2Q1jxbyrfLt5w5Q/edit',
     spotify: 'https://open.spotify.com/artist/0VmqJsRLRKbPBh9ZgnBzdB',
     links: {
       Spotify: 'https://open.spotify.com/artist/0VmqJsRLRKbPBh9ZgnBzdB',
@@ -67,6 +72,7 @@ window.NIKAMMA_ARTISTS = [
     latest: 'Pinocchio',
     photo: 'shashwat-bulusu.jpg',
     credit: 'Krish Wadhwa',
+    bioDoc: 'https://docs.google.com/document/d/1wrIakRF5feU7GN-zbDvywmvTllz_BEr2yVbD6fkzPY4/edit',
     spotify: 'https://open.spotify.com/album/4C6Cgfuc0ZjnEMV76tnyUK',
     links: {
       Spotify: 'https://open.spotify.com/artist/0OxO7c4K0ozx5CTPDhFOXO',
@@ -88,6 +94,7 @@ window.NIKAMMA_ARTISTS = [
     latest: 'We Are Okay! Tour',
     photo: 'begum.jpg',
     credit: '',
+    bioDoc: 'https://docs.google.com/document/d/1GllctKWiAUX0NmC_XU0HO0rA2HqAiZasdBUNdI5brGs/edit',
     spotify: '', // TODO: add Begum's Spotify link
     links: {
       Bandcamp: 'https://begum.bandcamp.com',

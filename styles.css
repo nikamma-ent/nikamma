@@ -276,6 +276,7 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .box[hidden], .abody__side[hidden] { display: none; }
 .box h2, .abody__side h2 { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ink); margin-bottom: 22px; display: flex; align-items: center; gap: 8px; }
 .bio__copy { font-size: clamp(19px, 1.5vw, 22px); line-height: 1.55; font-weight: 400; max-width: 46ch; }
+.bio__copy p + p { margin-top: .9em; }
 .box--tracks .player__frame iframe { height: 352px; }
 
 /* tour dates: a plain list */
