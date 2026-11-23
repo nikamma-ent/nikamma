@@ -239,19 +239,55 @@ function loadTour({ artist, appId }, box) {
     box.replaceChildren();
     const w = document.createElement('a');
     w.className = 'bit-widget-initializer';
-    Object.entries({
-      'artist-name': artist, 'display-local-dates': 'false', 'display-past-dates': 'false',
-      'auto-style': 'false', 'text-color': '#000000', 'link-color': '#000000',
-      'background-color': 'rgba(0,0,0,0)', 'display-limit': '8', 'display-start-time': 'false',
-      'link-text-color': '#FFFFFF', 'display-lineup': 'false', 'display-play-my-city': 'false',
-      'separator-color': 'rgba(0,0,0,0.1)', 'font': 'Avenir Next', 'display-logo': 'false',
-      'display-track-button': 'true', 'button-height-size': '36',
-    }).forEach(([k, v]) => w.setAttribute(`data-${k}`, v));
+    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#ffd60a';
+    const opts = {
+      'artist-name': artist,
+      // what it shows
+      'display-limit': 'all',              // all dates; paged 5 at a time below
+      'display-past-dates': 'false',
+      'display-local-dates': 'false',
+      'display-start-time': 'false',
+      'display-details': 'false',
+      'display-lineup': 'false',
+      'display-logo': 'false',
+      'display-follow-section': 'false',
+      'display-play-my-city': 'true',
+      'social-share-icon': 'false',
+      // look: nikamma
+      'auto-style': 'false',
+      'layout-style': 'modern',           // not 'legacy': legacy forces the phone layout under 900px
+      'font': 'Avenir Next',
+      'font-size': '16px',
+      'text-color': '#000000',
+      'link-color': '#000000',
+      'background-color': 'rgba(0,0,0,0)',
+      'separator-color': 'rgba(0,0,0,0.1)',
+      'date-format': 'D MMM',
+      'date-capitalization': 'lowercase',
+      'button-label-capitalization': 'lowercase',
+      'header-capitalization': 'lowercase',
+      'location-capitalization': 'lowercase',
+      'venue-capitalization': 'lowercase',
+      'event-ticket-cta-bg-color': accent,
+      'event-ticket-cta-text-color': '#000000',
+      'event-ticket-cta-border-color': accent,
+      'event-ticket-cta-border-radius': '99px',
+      'play-my-city-cta-bg-color': 'rgba(0,0,0,0)',
+      'play-my-city-cta-text-color': '#000000',
+      'play-my-city-cta-border-color': 'rgba(0,0,0,0.25)',
+      'play-my-city-cta-border-radius': '99px',
+    };
+    // add ?sample-tour to an artist page's address to preview with Bandsintown's sample dates
+    if (new URLSearchParams(location.search).has('sample-tour')) opts['sample-events'] = 'true';
+    Object.entries(opts).forEach(([k, v]) => w.setAttribute(`data-${k}`, v));
     box.append(w);
-    const s = document.createElement('script');
-    s.src = 'https://widgetv3.bandsintown.com/main.min.js';
-    s.charset = 'utf-8';
-    document.body.append(s);
+    paginateTour(box, 5);
+    if (!document.querySelector('script[src*="widgetv3.bandsintown.com"]')) {
+      const s = document.createElement('script');
+      s.src = 'https://widgetv3.bandsintown.com/main.min.js';
+      s.charset = 'utf-8';
+      document.body.append(s);
+    }
   };
   if (!appId) return widget();
 
@@ -289,4 +325,41 @@ function loadTour({ artist, appId }, box) {
       }
     })
     .catch(widget);
+}
+
+// Show the widget's upcoming dates `per` at a time, with ← 1 / 3 → under it.
+// The widget can redraw itself, so the current page is re-applied after every change.
+function paginateTour(box, per) {
+  const pager = document.createElement('div');
+  pager.className = 'tour__pager';
+  pager.hidden = true;
+  pager.innerHTML = '<button type="button" aria-label="Earlier dates">←</button><span></span><button type="button" aria-label="Later dates">→</button>';
+  box.after(pager);
+  const [prevBtn, label, nextBtn] = pager.children;
+  let pageNo = 0;
+
+  const apply = () => {
+    const rows = [...box.querySelectorAll('.bit-upcoming-events .bit-event, .bit-events-container .bit-event')]
+      .filter((r, i, all) => all.indexOf(r) === i);
+    const pages = Math.max(1, Math.ceil(rows.length / per));
+    pageNo = Math.min(pageNo, pages - 1);
+    rows.forEach((r, i) => {
+      const on = Math.floor(i / per) === pageNo;
+      if (r.hidden === on) r.hidden = !on;
+    });
+    pager.hidden = pages < 2;
+    label.textContent = `${pageNo + 1} / ${pages}`;
+    prevBtn.disabled = pageNo === 0;
+    nextBtn.disabled = pageNo >= pages - 1;
+  };
+
+  let queued = false;
+  new MutationObserver(() => {
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => { queued = false; apply(); });
+  }).observe(box, { childList: true, subtree: true });
+
+  prevBtn.addEventListener('click', () => { pageNo -= 1; apply(); });
+  nextBtn.addEventListener('click', () => { pageNo += 1; apply(); });
 }

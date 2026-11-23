@@ -273,6 +273,20 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .tour__empty { font-size: 15px; color: var(--muted); }
 .tour__empty a { color: var(--ink); }
 .box--tour .bit-widget { font-family: var(--sans) !important; }
+.box--tour .bit-event[hidden] { display: none !important; }
+.box--tour .bit-rsvp-container,
+.box--tour .bit-follow-section-wrapper,
+.box--tour .bit-logo-link,
+.box--tour .bit-logo-link + *:empty { display: none !important; }
+.tour__pager { display: flex; align-items: center; gap: 14px; margin-top: 18px; font-size: 13px; }
+.tour__pager[hidden] { display: none; }
+.tour__pager button {
+  width: 36px; height: 36px; border-radius: 50%; border: 1px solid #cfcfcf;
+  background: none; cursor: pointer; font-size: 14px; color: var(--ink);
+  transition: background .2s, border-color .2s;
+}
+.tour__pager button:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.tour__pager button:disabled { opacity: .3; cursor: default; }
 
 /* live carousel */
 

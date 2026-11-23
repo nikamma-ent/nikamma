@@ -12,6 +12,7 @@
 //   appId:    optional key from Bandsintown for Artists → Settings → API. With a key the
 //             dates show in our own minimal style; without one, Bandsintown's widget is used.
 //             Either way, dates update by themselves whenever they change on Bandsintown.
+//   Tip: add ?sample-tour to a page address to preview the widget with sample dates.
 // live:       photos from shows: { src: 'img/live/…', caption: 'venue, city year' }.
 // videos:     YouTube videos: { id: 'the part after watch?v=', title: '…' }. The first is featured.
 // store:      { title, note, url, img } cards; img is optional.
