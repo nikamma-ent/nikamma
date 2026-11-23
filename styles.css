@@ -289,9 +289,25 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .box { padding: clamp(24px, 3vw, 40px); background: #f1f1f1; }
 .box[hidden], .abody__side[hidden] { display: none; }
 .box--tracks { background: #fff3c4; }
-.box--tour { background: #000; color: #fff; }
 .box h2, .abody__side h2 { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: inherit; margin-bottom: 22px; }
 .abody__side { position: sticky; top: 24px; }
+
+/* on stage: tour dates + live photos in one black band, edge to edge */
+.astage { width: 100vw; margin: clamp(48px, 8vh, 88px) 0 0 calc(50% - 50vw); background: #000; color: #fff; }
+.astage:not(:has(.box:not([hidden]))) { display: none; }
+.astage__in {
+  max-width: 1400px; margin: 0 auto; padding: clamp(40px, 7vh, 72px) var(--gut);
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(32px, 4vw, 56px); align-items: start;
+}
+.astage__in:has(> .box[hidden]) { grid-template-columns: minmax(0, 1fr); }
+.astage .box { background: none; padding: 0; color: #fff; }
+.astage .live__stage { background: #111; }
+.astage .live__caption { color: rgba(255,255,255,.6); }
+.astage .live__nav { color: #fff; }
+.astage .live__nav button { border-color: rgba(255,255,255,.35); color: #fff; }
+.astage .live__nav button:hover { border-color: #fff; }
+.astage + .afilm { margin-top: 0; }
+.astage + .afilm .afilm__inner { padding-top: 0; }
 .bio__copy { font-size: clamp(19px, 1.5vw, 22px); line-height: 1.55; font-weight: 400; max-width: 46ch; }
 .bio__copy p + p { margin-top: .9em; }
 .box--tracks .player__frame iframe { height: 352px; }
@@ -307,7 +323,16 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 .tour__where { font-size: 16px; }
 .tour__btn { font-size: 14px; text-decoration: none; white-space: nowrap; border-bottom: 1px solid #cfcfcf; }
 .tour__btn:hover { border-bottom: 2px solid var(--accent); }
-.tour__more { display: inline-block; margin-top: 16px; font-size: 14px; }
+.tour__more {
+  display: inline-block; margin-top: 22px; font-size: 14px; text-decoration: none;
+  border-bottom: 2px solid var(--accent); padding-bottom: 2px;
+}
+.tour__more:hover { color: var(--accent); }
+.tour__more[hidden] { display: none; }
+/* sits on the heading line, top right, like "more videos" */
+.box--tour { position: relative; }
+.box--tour > .tour__more { position: absolute; top: 0; right: 0; margin: 0; font-size: 13px; }
+.box:not(.astage .box).box--tour > .tour__more { top: clamp(24px, 3vw, 40px); right: clamp(24px, 3vw, 40px); }
 .tour__empty { font-size: 15px; color: var(--muted); }
 .tour__empty a { color: var(--ink); }
 .box--tour .bit-widget { font-family: var(--sans) !important; }
@@ -456,6 +481,7 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
   .ahero__inner { grid-template-columns: minmax(0, 1fr); }
   .abody { grid-template-columns: minmax(0, 1fr); }
   .abody__side { position: static; }
+  .astage__in { grid-template-columns: minmax(0, 1fr); }
   .store { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
   .work__item { grid-template-columns: 1fr auto; gap: 2px 12px; }

@@ -260,7 +260,8 @@ function whenNear(el, fn) {
 
 // Tour dates from Bandsintown: our own list when there's an API key, the widget otherwise.
 function loadTour({ artist, appId }, box) {
-  const page = `https://www.bandsintown.com/a/${encodeURIComponent(artist)}`;
+  // their Bandsintown page: /a/<id> for 'id_123', else by name
+  const page = `https://www.bandsintown.com/a/${encodeURIComponent(String(artist).replace(/^id_/, ''))}`;
   const widget = () => {
     box.replaceChildren();
     const w = document.createElement('a');
@@ -269,7 +270,7 @@ function loadTour({ artist, appId }, box) {
     const opts = {
       'artist-name': artist,
       // what it shows
-      'display-limit': 'all',              // all dates; paged 5 at a time below
+      'display-limit': 'all',              // all dates; we show 5, then "more shows"
       'display-past-dates': 'false',
       'display-local-dates': 'false',
       'display-start-time': 'false',
@@ -307,7 +308,7 @@ function loadTour({ artist, appId }, box) {
     if (new URLSearchParams(location.search).has('sample-tour')) opts['sample-events'] = 'true';
     Object.entries(opts).forEach(([k, v]) => w.setAttribute(`data-${k}`, v));
     box.append(w);
-    paginateTour(box, 5);
+    limitTour(box, 5, page);
     if (!document.querySelector('script[src*="widgetv3.bandsintown.com"]')) {
       const s = document.createElement('script');
       s.src = 'https://widgetv3.bandsintown.com/main.min.js';
@@ -330,7 +331,7 @@ function loadTour({ artist, appId }, box) {
       const ol = document.createElement('ol');
       ol.className = 'tour__list';
       const fmt = new Intl.DateTimeFormat('en-IN', { day: '2-digit', month: 'short' });
-      events.slice(0, 12).forEach((e) => {
+      events.slice(0, 5).forEach((e) => {
         const v = e.venue || {};
         const offer = (e.offers || []).find((o) => o.url);
         const li = document.createElement('li');
@@ -343,10 +344,10 @@ function loadTour({ artist, appId }, box) {
         ol.append(li);
       });
       box.append(ol);
-      if (events.length > 12) {
+      if (events.length > 5) {
         const more = document.createElement('a');
         more.className = 'tour__more'; more.href = page; more.target = '_blank'; more.rel = 'noopener';
-        more.textContent = `all ${events.length} dates ↗`;
+        more.textContent = 'more shows ↗';
         box.append(more);
       }
     })
@@ -355,28 +356,20 @@ function loadTour({ artist, appId }, box) {
 
 // Show the widget's upcoming dates `per` at a time, with ← 1 / 3 → under it.
 // The widget can redraw itself, so the current page is re-applied after every change.
-function paginateTour(box, per) {
-  const pager = document.createElement('div');
-  pager.className = 'tour__pager';
-  pager.hidden = true;
-  pager.innerHTML = '<button type="button" aria-label="Earlier dates">←</button><span></span><button type="button" aria-label="Later dates">→</button>';
-  box.after(pager);
-  const [prevBtn, label, nextBtn] = pager.children;
-  let pageNo = 0;
+// Show the first `max` dates; if there are more, a "more shows" link to their Bandsintown page.
+function limitTour(box, max, url) {
+  const more = document.createElement('a');
+  more.className = 'tour__more';
+  more.href = url; more.target = '_blank'; more.rel = 'noopener';
+  more.textContent = 'more shows ↗';
+  more.hidden = true;
+  box.after(more);
 
   const apply = () => {
     const rows = [...box.querySelectorAll('.bit-upcoming-events .bit-event, .bit-events-container .bit-event')]
       .filter((r, i, all) => all.indexOf(r) === i);
-    const pages = Math.max(1, Math.ceil(rows.length / per));
-    pageNo = Math.min(pageNo, pages - 1);
-    rows.forEach((r, i) => {
-      const on = Math.floor(i / per) === pageNo;
-      if (r.hidden === on) r.hidden = !on;
-    });
-    pager.hidden = pages < 2;
-    label.textContent = `${pageNo + 1} / ${pages}`;
-    prevBtn.disabled = pageNo === 0;
-    nextBtn.disabled = pageNo >= pages - 1;
+    rows.forEach((r, i) => { const off = i >= max; if (r.hidden !== off) r.hidden = off; });
+    more.hidden = rows.length <= max;
   };
 
   let queued = false;
@@ -385,7 +378,4 @@ function paginateTour(box, per) {
     queued = true;
     requestAnimationFrame(() => { queued = false; apply(); });
   }).observe(box, { childList: true, subtree: true });
-
-  prevBtn.addEventListener('click', () => { pageNo -= 1; apply(); });
-  nextBtn.addEventListener('click', () => { pageNo += 1; apply(); });
 }
