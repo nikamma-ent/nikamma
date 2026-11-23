@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Contact · nikamma</title>
+  <meta name="description" content="nikamma is a small independent music company from India. We work with artists, make records happen and build small, strange things for the people who listen.">
+  <meta property="og:title" content="nikamma">
+  <meta property="og:description" content="A small independent music company from India.">
+  <meta property="og:image" content="img/home.jpg">
+  <link rel="icon" href="img/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=14">
+</head>
+<body class="">
+
+  <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
+
+  <header class="top">
+    <a href="index.html" class="top__logo" aria-label="nikamma, home"><img src="img/logo.png" alt="nikamma" width="700" height="134"></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="artists.html">Artists</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main" class="page page--contact">
+    <h1 class="label tape">Say hi</h1>
+
+    <a class="contact__mail" href="mailto:office@nikamma.co">office@nikamma.co</a>
+
+    <form class="list" onsubmit="event.preventDefault(); this.classList.add('is-done');">
+      <label for="email" class="label muted">Mailing list, rarely sent</label>
+      <div class="list__row">
+        <input id="email" type="email" required placeholder="you@somewhere.com" autocomplete="email">
+        <button type="submit">Join</button>
+      </div>
+      <p class="list__thanks">Noted. We'll be in touch, eventually. 🐒</p>
+    </form>
+
+  </main>
+
+  <footer class="bar">
+    <div class="bar__links">
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
+    </div>
+    <p class="bar__note">© <span class="year">2026</span> nikamma</p>
+  </footer>
+
+  <script src="news.js?v=14"></script>
+  <script src="script.js?v=14"></script>
+</body>
+</html>

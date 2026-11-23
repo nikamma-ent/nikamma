@@ -1,0 +1,10 @@
+.DS_Store
+# full-size originals: web copies (hulo.jpg, shashwat-bulusu.jpg, begum.jpg) are what the site uses
+img/artists/*\[*
+img/artists/*.png
+img/artists/*.jpeg
+# old images from earlier versions, no longer used
+img/begum.jpg
+img/griefcase.jpg
+img/hulo.jpg
+img/pinocchio.jpg
