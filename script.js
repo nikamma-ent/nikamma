@@ -182,30 +182,19 @@ function renderArtist(a, i) {
     whenNear($('sec-live'), () => go(0));
   }
 
-  // videos
-  if ((a.videos || []).length) {
-    show('sec-videos', true);
-    const stage = $('video-stage');
-    const list = $('video-list');
-    const play = (v, autoplay) => {
+  // video: one, full width at the end; "more videos" links to their YouTube
+  if (a.video && a.video.id) {
+    show('sec-video', true);
+    whenNear($('sec-video'), () => {
       const f = document.createElement('iframe');
-      f.src = `https://www.youtube-nocookie.com/embed/${v.id}?rel=0${autoplay ? '&autoplay=1' : ''}`;
-      f.title = v.title;
+      f.src = `https://www.youtube-nocookie.com/embed/${a.video.id}?rel=0`;
+      f.title = a.video.title || a.name;
       f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
       f.allowFullscreen = true;
-      stage.replaceChildren(f);
-      list.querySelectorAll('li').forEach((li) => li.classList.toggle('is-on', li.dataset.id === v.id));
-    };
-    a.videos.forEach((v) => {
-      const li = document.createElement('li');
-      li.dataset.id = v.id;
-      li.innerHTML = '<button type="button"><img loading="lazy" alt=""><span></span></button>';
-      li.querySelector('img').src = `https://i.ytimg.com/vi/${v.id}/mqdefault.jpg`;
-      li.querySelector('span').textContent = v.title;
-      li.querySelector('button').addEventListener('click', () => play(v, true));
-      list.append(li);
+      $('video-stage').replaceChildren(f);
     });
-    whenNear($('sec-videos'), () => play(a.videos[0], false));
+    const yt = (a.links || {}).YouTube;
+    if (yt) { $('video-all').href = yt; $('video-all').hidden = false; }
   }
 
   // store
