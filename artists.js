@@ -17,6 +17,9 @@
 //             dates show in our own minimal style; without one, Bandsintown's widget is used.
 //             Either way, dates update by themselves whenever they change on Bandsintown.
 //   Tip: add ?sample-tour to a page address to preview the widget with sample dates.
+// ticker:     optional lines for this artist's own ticker (under the bio):
+//             [{ text: '…', link: '…' }]. It also picks up site news that names them,
+//             their latest release, press and video by itself.
 // press:      daily Google News search (tools/sync_press.py → press.js); the newest 3
 //             articles show on the page. query: what to search; names: a headline
 //             must mention one; also: …and one of these words; exclude: skip these;

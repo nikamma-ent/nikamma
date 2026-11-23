@@ -1,9 +1,8 @@
-// ---------- ticker: built from news.js ----------
-(function buildTicker() {
-  const track = document.getElementById('ticker');
-  const news = window.NIKAMMA_NEWS || [];
-  if (!track || !news.length) return;
-
+// ---------- tickers ----------
+// fillTicker(track, [{ text, link? }]) builds a scrolling ticker. The site-wide
+// one (top of every page except artist pages) comes from news.js.
+function fillTicker(track, news) {
+  if (!track || !news.length) return false;
   const item = (n, hidden) => {
     const el = document.createElement(n.link ? 'a' : 'span');
     el.textContent = n.text;
@@ -21,18 +20,17 @@
     s.setAttribute('aria-hidden', 'true');
     return s;
   };
-
   // Repeat the list until one copy is wider than the screen, then double it
   // so the -50% scroll loops seamlessly.
   const copy = [];
   const minItems = Math.max(news.length, 6);
   for (let i = 0; copy.length < minItems * 2; i++) copy.push(news[i % news.length]);
   for (let pass = 0; pass < 2; pass++) {
-    copy.forEach((n, i) => {
-      track.append(item(n, pass > 0 || i >= news.length), star());
-    });
+    copy.forEach((n, i) => { track.append(item(n, pass > 0 || i >= news.length), star()); });
   }
-})();
+  return true;
+}
+fillTicker(document.getElementById('ticker'), window.NIKAMMA_NEWS || []);
 
 document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
 
@@ -157,6 +155,21 @@ function renderArtist(a, i) {
     const p = document.createElement('p'); p.textContent = t.trim(); return p;
   }));
   show('sec-bio', !!bio);
+
+  // the artist's own ticker, under the bio: their own lines (artists.js `ticker`),
+  // site news that mentions them, latest release, press and the video
+  {
+    const items = [...(a.ticker || [])];
+    const nm = a.name.toLowerCase();
+    (window.NIKAMMA_NEWS || []).forEach((n) => { if (n.text.toLowerCase().includes(nm)) items.push(n); });
+    const rel = ((window.NIKAMMA_MERCH || {})[a.slug] || []).find((m) => m.kind === 'album');
+    if (rel) items.push({ text: `${rel.title}${rel.year ? ` (${rel.year})` : ''} on bandcamp`, link: rel.url });
+    const pinnedPress = ((a.press || {}).pin || []);
+    const foundPress = (window.NIKAMMA_PRESS || {})[a.slug] || [];
+    [...pinnedPress, ...foundPress].slice(0, 2).forEach((p) => items.push({ text: `${p.outlet}: ${p.title}`, link: p.url }));
+    if (a.video && a.video.id) items.push({ text: `watch: ${a.video.title || a.name}`, link: `https://www.youtube.com/watch?v=${a.video.id}` });
+    if (fillTicker($('aticker'), items)) show('artist-ticker', true);
+  }
   mountPlayer($('player'), a);
 
   // press: pinned articles (artists.js) first, then the newest found by the daily crawler (press.js). 3 in all.
