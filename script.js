@@ -134,38 +134,10 @@ function renderArtist(a, i) {
   $('artist-n').textContent = pad(i + 1);
   $('artist-name').textContent = a.name;
   $('artist-meta').replaceChildren(chips(a.meta));
-  // hero: their photo, then live photos, as a slow carousel
-  const slides = [
-    { src: `${ROOT}img/artists/${a.photo}`, caption: a.credit ? `photo: ${a.credit}` : '' },
-    ...(a.live || []).map((l) => ({ src: ROOT + l.src, caption: l.caption || '' })),
-  ];
   const photo = $('artist-photo');
-  let h = 0, timer;
-  const showSlide = (n) => {
-    h = (n + slides.length) % slides.length;
-    const sl = slides[h];
-    const next = new Image();
-    next.onload = () => {
-      photo.classList.add('is-swapping');
-      setTimeout(() => { photo.src = sl.src; photo.alt = h ? `${a.name} live` : a.name; photo.classList.remove('is-swapping'); }, h === 0 && !photo.src ? 0 : 250);
-    };
-    next.src = sl.src;
-    $('artist-credit').textContent = sl.caption;
-    $('hero-count').textContent = `${pad(h + 1)} / ${pad(slides.length)}`;
-    const ahead = slides[(h + 1) % slides.length]; if (ahead) new Image().src = ahead.src;
-  };
-  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const auto = () => { clearInterval(timer); if (!calm && slides.length > 1) timer = setInterval(() => showSlide(h + 1), 6000); };
-  if (slides.length > 1) {
-    $('hero-nav').hidden = false;
-    $('hero-prev').addEventListener('click', () => { showSlide(h - 1); auto(); });
-    $('hero-next').addEventListener('click', () => { showSlide(h + 1); auto(); });
-    const stage = $('hero-stage');
-    stage.addEventListener('mouseenter', () => clearInterval(timer));
-    stage.addEventListener('mouseleave', auto);
-  }
-  showSlide(0);
-  auto();
+  photo.src = `${ROOT}img/artists/${a.photo}`;
+  photo.alt = a.name;
+  $('artist-credit').textContent = a.credit ? `photo: ${a.credit}` : '';
   $('artist-contact').href = `mailto:office@nikamma.co?subject=${encodeURIComponent(a.name)}`;
 
   const links = $('artist-links');
@@ -185,39 +157,33 @@ function renderArtist(a, i) {
     const p = document.createElement('p'); p.textContent = t.trim(); return p;
   }));
   show('sec-bio', !!bio);
-
-  // releases: their Bandcamp albums (merch.js, daily), newest first, one at a time
-  const releases = ((window.NIKAMMA_MERCH || {})[a.slug] || []).filter((m) => m.kind === 'album');
-  if (releases.length) {
-    show('sec-releases', true);
-    let r = 0;
-    const set = (img, rel) => { if (rel && rel.img) { img.src = rel.img; img.alt = rel.title; img.hidden = false; } else img.hidden = true; };
-    const goRel = (n) => {
-      r = (n + releases.length) % releases.length;
-      const rel = releases[r];
-      const front = $('rel-front');
-      front.classList.add('is-swapping');
-      setTimeout(() => {
-        set(front, rel);
-        set($('rel-back'), releases.length > 1 ? releases[(r + 1) % releases.length] : null);
-        front.classList.remove('is-swapping');
-      }, 160);
-      $('rel-label').textContent = r === 0 ? 'latest release' : 'release';
-      $('rel-title').textContent = rel.title;
-      $('rel-meta').replaceChildren(chips([rel.type, rel.year].filter(Boolean).join(' · ')));
-      $('rel-link').href = rel.url; $('rel-covers').href = rel.url;
-      $('rel-count').textContent = `${pad(r + 1)} / ${pad(releases.length)}`;
-    };
-    $('rel-nav').hidden = releases.length < 2;
-    $('rel-prev').addEventListener('click', () => goRel(r - 1));
-    $('rel-next').addEventListener('click', () => goRel(r + 1));
-    goRel(0);
-  }
+  mountPlayer($('player'), a);
 
   // tour dates: loads when it scrolls near the screen
   if (a.bandsintown && a.bandsintown.artist) {
     show('sec-tour', true);
     whenNear($('sec-tour'), () => loadTour(a.bandsintown, $('tour')));
+  }
+
+  // live photos
+  if ((a.live || []).length) {
+    show('sec-live', true);
+    let idx = 0;
+    const go = (n) => {
+      idx = (n + a.live.length) % a.live.length;
+      const item = a.live[idx];
+      const img = $('live-img');
+      img.classList.add('is-swapping');
+      const next = new Image();
+      next.onload = () => { img.src = next.src; img.alt = item.caption || a.name; img.classList.remove('is-swapping'); };
+      next.src = ROOT + item.src;
+      $('live-caption').textContent = item.caption || '';
+      $('live-count').textContent = `${pad(idx + 1)} / ${pad(a.live.length)}`;
+      const ahead = a.live[(idx + 1) % a.live.length]; if (ahead) new Image().src = ROOT + ahead.src;
+    };
+    $('live-prev').addEventListener('click', () => go(idx - 1));
+    $('live-next').addEventListener('click', () => go(idx + 1));
+    whenNear($('sec-live'), () => go(0));
   }
 
   // video: one, full width at the end; "more videos" links to their YouTube
@@ -236,7 +202,7 @@ function renderArtist(a, i) {
   }
 
   // store: Bandcamp merch + albums (pulled in daily, see merch.js) + other shops from artists.js
-  // merch: Bandcamp merch, then other shops. Max 4 cards. (Albums are in releases.)
+  // Order: Bandcamp merch, other shops, then Bandcamp albums (newest first). Max 4 cards.
   const STORE_CAP = 4;
   const bcAll = (window.NIKAMMA_MERCH || {})[a.slug] || [];
   const asCard = (m) => ({
@@ -244,8 +210,9 @@ function renderArtist(a, i) {
     note: [m.type, m.price, m.year].filter(Boolean).join(' · '),
   });
   const bcMerch = bcAll.filter((m) => m.kind === 'merch').map(asCard);
+  const bcAlbums = bcAll.filter((m) => m.kind !== 'merch').map(asCard);
   const shops = a.store || [];
-  const items = [...bcMerch, ...shops].slice(0, STORE_CAP);
+  const items = [...bcMerch, ...shops, ...bcAlbums].slice(0, STORE_CAP);
   if (items.length) {
     show('sec-store', true);
     const grid = $('store');
@@ -272,6 +239,10 @@ function renderArtist(a, i) {
       || items[0].url;
     if (storeUrl) more.href = storeUrl; else more.hidden = true;
   }
+
+  // panels sit two by two; an odd one out at the end spans the full width
+  const panels = [...document.querySelectorAll('.abody__main > .box')].filter((b) => !b.hidden);
+  if (panels.length % 2) panels[panels.length - 1].classList.add('is-wide');
 
   // prev / next
   if (ARTISTS.length > 1) {
@@ -317,10 +288,10 @@ function loadTour({ artist, appId }, box) {
       'layout-style': 'modern',           // not 'legacy': legacy forces the phone layout under 900px
       'font': 'Avenir Next',
       'font-size': '16px',
-      'text-color': '#000000',
-      'link-color': '#000000',
+      'text-color': '#ffffff',             // tour dates sit on a black panel
+      'link-color': '#ffffff',
       'background-color': 'rgba(0,0,0,0)',
-      'separator-color': 'rgba(0,0,0,0.1)',
+      'separator-color': 'rgba(255,255,255,0.15)',
       'date-format': 'D MMM',
       'date-capitalization': 'lowercase',
       'button-label-capitalization': 'lowercase',
@@ -332,8 +303,8 @@ function loadTour({ artist, appId }, box) {
       'event-ticket-cta-border-color': accent,
       'event-ticket-cta-border-radius': '99px',
       'play-my-city-cta-bg-color': 'rgba(0,0,0,0)',
-      'play-my-city-cta-text-color': '#000000',
-      'play-my-city-cta-border-color': 'rgba(0,0,0,0.25)',
+      'play-my-city-cta-text-color': '#ffffff',
+      'play-my-city-cta-border-color': 'rgba(255,255,255,0.35)',
       'play-my-city-cta-border-radius': '99px',
     };
     // add ?sample-tour to an artist page's address to preview with Bandsintown's sample dates
