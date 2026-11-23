@@ -1,6 +1,6 @@
 // The roster. Edit this file to change artist pages and the Artists list.
 //
-// Each artist page has: bio · tracks · tour dates · live · store, then one video at the end.
+// Each artist page: photo carousel · bio · releases · tour dates · video · merch.
 // A section only appears if it has something in it.
 //
 // spotify:    open.spotify.com link (album, single, playlist or artist) for the player.
@@ -17,7 +17,8 @@
 //             dates show in our own minimal style; without one, Bandsintown's widget is used.
 //             Either way, dates update by themselves whenever they change on Bandsintown.
 //   Tip: add ?sample-tour to a page address to preview the widget with sample dates.
-// live:       photos from shows: { src: 'img/live/…', caption: 'venue, city year' }.
+// live:       photos from shows, shown after their main photo in the top carousel:
+//             { src: 'img/live/…', caption: 'venue, city year' }.
 // video:      the featured YouTube video, full width at the end of the page:
 //             { id: 'the part after watch?v=', title: '…' }. Leave it out to hide it.
 //             "more videos" next to it links to the YouTube in links.

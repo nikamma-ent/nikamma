@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../styles.css?v=41">
+  <link rel="stylesheet" href="../../styles.css?v=42">
 </head>
 <body class="is-scroll" data-root="../../">
 
@@ -37,7 +37,17 @@
         <p class="ahero__meta" id="artist-meta"></p>
         <a class="ahero__contact" id="artist-contact" href="mailto:office@nikamma.co">contact</a>
       </div>
-      <figure class="ahero__photo"><img id="artist-photo" alt=""><figcaption id="artist-credit"></figcaption></figure>
+      <figure class="ahero__photo">
+        <div class="ahero__stage" id="hero-stage"><img id="artist-photo" alt=""></div>
+        <figcaption class="ahero__bar">
+          <span id="artist-credit"></span>
+          <span class="ahero__nav" id="hero-nav" hidden>
+            <button type="button" id="hero-prev" aria-label="Previous photo">←</button>
+            <span id="hero-count"></span>
+            <button type="button" id="hero-next" aria-label="Next photo">→</button>
+          </span>
+        </figcaption>
+      </figure>
     </section>
 
     <section class="box box--bio" id="sec-bio">
@@ -71,18 +81,6 @@
       <div id="tour"></div>
     </section>
 
-    <section class="box box--live" id="sec-live" hidden>
-      <h2>live</h2>
-      <figure class="live__stage"><img id="live-img" alt=""></figure>
-      <div class="live__bar">
-        <p class="live__caption" id="live-caption"></p>
-        <div class="live__nav">
-          <button type="button" id="live-prev" aria-label="Previous photo">←</button>
-          <span id="live-count"></span>
-          <button type="button" id="live-next" aria-label="Next photo">→</button>
-        </div>
-      </div>
-    </section>
 
     <section class="afilm" id="sec-video" hidden>
       <div class="afilm__inner">
@@ -117,10 +115,10 @@
     <p class="bar__note">© <span class="year">2026</span> nikamma</p>
   </footer>
 
-  <script src="../../news.js?v=41"></script>
-  <script src="../../artists.js?v=41"></script>
-  <script src="../../merch.js?v=41"></script>
-  <script src="../../bios.js?v=41"></script>
-  <script src="../../script.js?v=41"></script>
+  <script src="../../news.js?v=42"></script>
+  <script src="../../artists.js?v=42"></script>
+  <script src="../../merch.js?v=42"></script>
+  <script src="../../bios.js?v=42"></script>
+  <script src="../../script.js?v=42"></script>
 </body>
 </html>

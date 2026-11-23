@@ -134,10 +134,38 @@ function renderArtist(a, i) {
   $('artist-n').textContent = pad(i + 1);
   $('artist-name').textContent = a.name;
   $('artist-meta').replaceChildren(chips(a.meta));
+  // hero: their photo, then live photos, as a slow carousel
+  const slides = [
+    { src: `${ROOT}img/artists/${a.photo}`, caption: a.credit ? `photo: ${a.credit}` : '' },
+    ...(a.live || []).map((l) => ({ src: ROOT + l.src, caption: l.caption || '' })),
+  ];
   const photo = $('artist-photo');
-  photo.src = `${ROOT}img/artists/${a.photo}`;
-  photo.alt = a.name;
-  $('artist-credit').textContent = a.credit ? `photo: ${a.credit}` : '';
+  let h = 0, timer;
+  const showSlide = (n) => {
+    h = (n + slides.length) % slides.length;
+    const sl = slides[h];
+    const next = new Image();
+    next.onload = () => {
+      photo.classList.add('is-swapping');
+      setTimeout(() => { photo.src = sl.src; photo.alt = h ? `${a.name} live` : a.name; photo.classList.remove('is-swapping'); }, h === 0 && !photo.src ? 0 : 250);
+    };
+    next.src = sl.src;
+    $('artist-credit').textContent = sl.caption;
+    $('hero-count').textContent = `${pad(h + 1)} / ${pad(slides.length)}`;
+    const ahead = slides[(h + 1) % slides.length]; if (ahead) new Image().src = ahead.src;
+  };
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const auto = () => { clearInterval(timer); if (!calm && slides.length > 1) timer = setInterval(() => showSlide(h + 1), 6000); };
+  if (slides.length > 1) {
+    $('hero-nav').hidden = false;
+    $('hero-prev').addEventListener('click', () => { showSlide(h - 1); auto(); });
+    $('hero-next').addEventListener('click', () => { showSlide(h + 1); auto(); });
+    const stage = $('hero-stage');
+    stage.addEventListener('mouseenter', () => clearInterval(timer));
+    stage.addEventListener('mouseleave', auto);
+  }
+  showSlide(0);
+  auto();
   $('artist-contact').href = `mailto:office@nikamma.co?subject=${encodeURIComponent(a.name)}`;
 
   const links = $('artist-links');
@@ -190,27 +218,6 @@ function renderArtist(a, i) {
   if (a.bandsintown && a.bandsintown.artist) {
     show('sec-tour', true);
     whenNear($('sec-tour'), () => loadTour(a.bandsintown, $('tour')));
-  }
-
-  // live photos
-  if ((a.live || []).length) {
-    show('sec-live', true);
-    let idx = 0;
-    const go = (n) => {
-      idx = (n + a.live.length) % a.live.length;
-      const item = a.live[idx];
-      const img = $('live-img');
-      img.classList.add('is-swapping');
-      const next = new Image();
-      next.onload = () => { img.src = next.src; img.alt = item.caption || a.name; img.classList.remove('is-swapping'); };
-      next.src = ROOT + item.src;
-      $('live-caption').textContent = item.caption || '';
-      $('live-count').textContent = `${pad(idx + 1)} / ${pad(a.live.length)}`;
-      const ahead = a.live[(idx + 1) % a.live.length]; if (ahead) new Image().src = ROOT + ahead.src;
-    };
-    $('live-prev').addEventListener('click', () => go(idx - 1));
-    $('live-next').addEventListener('click', () => go(idx + 1));
-    whenNear($('sec-live'), () => go(0));
   }
 
   // video: one, full width at the end; "more videos" links to their YouTube
