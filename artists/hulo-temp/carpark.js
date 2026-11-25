@@ -186,33 +186,6 @@ function renderArtist(a, i) {
   show('sec-bio', !!bio);
   mountPlayer($('player'), a);   // spotify, right after the bio
 
-  // releases: their Bandcamp albums (merch.js, daily), newest first, one at a time
-  const releases = ((window.NIKAMMA_MERCH || {})[a.slug] || []).filter((m) => m.kind === 'album');
-  if (releases.length) {
-    show('sec-releases', true);
-    let r = 0;
-    const set = (img, rel) => { if (rel && rel.img) { img.src = rel.img; img.alt = rel.title; img.hidden = false; } else img.hidden = true; };
-    const goRel = (n) => {
-      r = (n + releases.length) % releases.length;
-      const rel = releases[r];
-      const front = $('rel-front');
-      front.classList.add('is-swapping');
-      setTimeout(() => {
-        set(front, rel);
-        set($('rel-back'), releases.length > 1 ? releases[(r + 1) % releases.length] : null);
-        front.classList.remove('is-swapping');
-      }, 160);
-      $('rel-label').textContent = r === 0 ? 'latest release' : 'release';
-      $('rel-title').textContent = rel.title;
-      $('rel-meta').replaceChildren(chips([rel.type, rel.year].filter(Boolean).join(' · ')));
-      $('rel-link').href = rel.url; $('rel-covers').href = rel.url;
-      $('rel-count').textContent = `${pad(r + 1)} / ${pad(releases.length)}`;
-    };
-    $('rel-nav').hidden = releases.length < 2;
-    $('rel-prev').addEventListener('click', () => goRel(r - 1));
-    $('rel-next').addEventListener('click', () => goRel(r + 1));
-    goRel(0);
-  }
 
   // tour dates: loads when it scrolls near the screen
   if (a.bandsintown && a.bandsintown.artist) {
@@ -243,6 +216,35 @@ function renderArtist(a, i) {
     // automatic, like a slow slideshow (paused for reduced-motion users)
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     whenNear($('sec-live'), () => { go(0); if (!calm) restart(); });
+  }
+
+  // press (left): pinned articles first, then the newest the daily search found. 3 in all.
+  // news (right): for now, site news that mentions them (news.js); later, what we publish.
+  {
+    const key = (p) => p.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+    const pinned = ((a.press || {}).pin || []);
+    const pinnedKeys = new Set(pinned.map(key));
+    const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
+    const nm = a.name.toLowerCase();
+    const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 4);
+    const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+    press.forEach((p) => {
+      const li = document.createElement('li');
+      li.innerHTML = '<a target="_blank" rel="noopener"><p class="apress__meta"></p><p class="apress__title"></p></a>';
+      li.querySelector('a').href = p.url;
+      li.querySelector('.apress__meta').textContent = [p.outlet, p.date ? fmtDay.format(new Date(p.date)) : ''].filter(Boolean).join(' · ');
+      li.querySelector('.apress__title').textContent = p.title;
+      $('press').append(li);
+    });
+    news.forEach((n) => {
+      const li = document.createElement('li');
+      const el = document.createElement(n.link ? 'a' : 'p');
+      el.textContent = n.text;
+      if (n.link) { el.href = n.link; if (/^https?:/.test(n.link)) { el.target = '_blank'; el.rel = 'noopener'; } }
+      li.append(el); $('news').append(li);
+    });
+    if (!news.length) $('news').innerHTML = '<li><p class="anews__empty">nothing yet.</p></li>';
+    show('sec-press', press.length > 0 || news.length > 0);
   }
 
   // video: one, full width at the end; "more videos" links to their YouTube

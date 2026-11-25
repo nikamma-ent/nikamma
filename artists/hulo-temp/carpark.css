@@ -733,3 +733,21 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .astage2 .bit-widget > .bit-play-my-city-wrapper * { margin-left: 0 !important; }
 .astage2 .bit-widget .bit-event:last-child { border-bottom: 1px solid rgba(0,0,0,.1) !important; padding-bottom: 12px !important; }
 .astage2 .box--tour > .tour__pager { position: static; margin: 16px 0 0; justify-content: flex-start; }
+
+
+/* press (left) + news (right): same grid as bio + store */
+.abio--press { padding-top: 96px; }
+.apress-list, .anews-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
+.apress-list a { display: grid; gap: 6px; text-decoration: none; }
+.apress__meta { font-size: 13px; color: var(--muted); }
+.apress__title { font-size: 18px; line-height: 22.5px; }
+.apress__title::after { content: " ↗"; color: var(--muted); }
+.apress-list a:hover .apress__title, .anews-list a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.anews-list { gap: 18px; }
+.anews-list a, .anews-list p { font-size: 18px; line-height: 22.5px; text-decoration: none; }
+.anews-list a::after { content: " ↗"; color: var(--muted); }
+.anews__empty { color: var(--muted); }
+.abio--press .abio__label { margin-bottom: 24px; }
+
+/* spotify: never shorter than 600px, still stretching to match a taller store */
+.abio__music .player__frame iframe { min-height: 600px; }
