@@ -220,6 +220,32 @@ function renderArtist(a, i) {
     whenNear($('sec-tour'), () => loadTour(a.bandsintown, $('tour')));
   }
 
+  // live photos: a carousel next to the tour dates
+  if ((a.live || []).length) {
+    show('sec-live', true);
+    let idx = 0;
+    const go = (n) => {
+      idx = (n + a.live.length) % a.live.length;
+      const item = a.live[idx];
+      const img = $('live-img');
+      img.classList.add('is-swapping');
+      const next = new Image();
+      next.onload = () => { img.src = next.src; img.alt = item.caption || a.name; img.classList.remove('is-swapping'); };
+      next.src = ROOT + item.src;
+      $('live-caption').textContent = item.caption || '';
+      $('live-count').textContent = `${pad(idx + 1)} / ${pad(a.live.length)}`;
+      const ahead = a.live[(idx + 1) % a.live.length]; if (ahead) new Image().src = ROOT + ahead.src;
+    };
+    $('live-prev').addEventListener('click', () => go(idx - 1));
+    $('live-next').addEventListener('click', () => go(idx + 1));
+    // automatic, like a slow slideshow (paused for reduced-motion users)
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    whenNear($('sec-live'), () => {
+      go(0);
+      if (!calm && a.live.length > 1) setInterval(() => go(idx + 1), 4500);
+    });
+  }
+
   // video: one, full width at the end; "more videos" links to their YouTube
   if (a.video && a.video.id) {
     show('sec-video', true);

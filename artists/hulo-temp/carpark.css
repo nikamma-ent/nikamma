@@ -625,3 +625,61 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .abio__music { margin-top: 56px; }
 .abio__music .abio__label { margin-bottom: 18px; }
 .abio__music .player__frame iframe { height: 520px; }
+
+
+/* spotify player stretches so the left column ends level with the store */
+.abio { align-items: stretch; }
+.abio__main { display: flex; flex-direction: column; }
+.abio__music { flex: 1; display: flex; flex-direction: column; }
+.abio__music .player__frame { flex: 1; display: flex; }
+.abio__music .player__frame iframe { height: auto; min-height: 352px; flex: 1; }
+.abio__store { position: static; align-self: start; }
+
+/* one full row: tour dates left, live photos right */
+.astage2 {
+  width: 100vw; margin-left: calc(50% - 50vw);
+  padding: 96px var(--mp-side);
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 72px; align-items: start;
+}
+.astage2:not(:has(.box:not([hidden]))) { display: none; }
+.astage2:has(> .box[hidden]) { grid-template-columns: minmax(0, 1fr); }
+.astage2 .box { margin: 0 !important; padding: 0 !important; border: 0; }
+.astage2 .live__stage { background: #f9f7f3; aspect-ratio: 16 / 10.5; }
+.astage2 .live__stage img { width: 100%; height: 100%; object-fit: cover; max-width: none; max-height: none; }
+@media (max-width: 860px) {
+  .astage2 { grid-template-columns: minmax(0, 1fr); gap: 48px; padding: 64px var(--mp-side); }
+}
+
+
+/* tour row mirrors the hero: tour dates where the name is (30%), photos where the hero photo is (70%) */
+.astage2 {
+  grid-template-columns: minmax(0, 30%) minmax(0, 70%); gap: 0; align-items: end;
+  padding: 96px var(--mp-side) 64px; background: #f9f7f3;
+}
+.astage2 .box--tour { padding-right: 40px !important; align-self: end; }
+.astage2 .box--tour h2 { font-size: 18px; font-weight: 400; margin-bottom: 18px; }
+.astage2 .live__bar { display: none; }
+.astage2 .live__stage { background: #e9e6e0; position: relative; }
+.astage2 .live__stage img { position: absolute; inset: 0; transition: opacity .8s ease; }
+@media (max-width: 860px) {
+  .astage2 { grid-template-columns: minmax(0, 1fr); }
+  .astage2 .box--live { order: -1; }
+}
+
+/* compact tour rows in the narrow column: date + city on one line, small ticket button on the right */
+.astage2 .bit-widget .bit-event:not([hidden]) {
+  display: flex !important; flex-direction: row !important; align-items: center !important;
+  justify-content: space-between !important; gap: 12px; padding: 12px 0 !important; text-align: left !important;
+}
+.astage2 .bit-widget .bit-mobile-date-and-share-wrapper { display: none !important; }
+.astage2 .bit-widget .bit-details-inner-wrapper {
+  display: flex !important; flex-direction: row !important; align-items: baseline !important;
+  gap: 14px; flex: 1 1 auto; width: auto !important; margin: 0 !important; text-align: left !important;
+}
+.astage2 .bit-widget .bit-date-wrapper, .astage2 .bit-widget .bit-date { display: block !important; }
+.astage2 .bit-widget .bit-details-inner-wrapper > .bit-details { display: block !important; flex: 0 0 64px !important; width: 64px !important; max-width: 64px !important; }
+.astage2 .bit-widget .bit-titleWrapper { flex: 1 1 auto !important; text-align: left !important; margin: 0 !important; }
+.astage2 .bit-widget .bit-event-buttons { width: auto !important; margin: 0 !important; flex: none; }
+.astage2 .bit-widget .bit-offers { min-width: 0 !important; padding: 6px 12px !important; font-size: 13px !important; }
+.astage2 .bit-widget .bit-date, .astage2 .bit-widget .bit-location { font-size: 15px !important; }
+.astage2 .bit-widget .bit-event[hidden] { display: none !important; }
