@@ -59,7 +59,8 @@ const artistUrl = (a) => `${ROOT}artists/${a.slug}/`;
 // Turn any open.spotify.com link into its embed URL.
 function spotifyEmbed(url) {
   const m = /open\.spotify\.com\/(?:intl-[\w-]+\/)?(album|artist|playlist|track|episode|show)\/([A-Za-z0-9]+)/.exec(url || '');
-  return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}?utm_source=generator&theme=0` : null;
+  // no theme param: Spotify tints the player with a colour from the artwork
+  return m ? `https://open.spotify.com/embed/${m[1]}/${m[2]}?utm_source=generator` : null;
 }
 
 function mountPlayer(box, artist) {
@@ -165,7 +166,6 @@ function renderArtist(a, i) {
   }
   showSlide(0);
   auto();
-  $('artist-contact').href = `mailto:office@nikamma.co?subject=${encodeURIComponent(a.name)}`;
 
   const links = $('artist-links');
   Object.entries(a.links || {}).forEach(([label, href]) => {
@@ -184,6 +184,7 @@ function renderArtist(a, i) {
     const p = document.createElement('p'); p.textContent = t.trim(); return p;
   }));
   show('sec-bio', !!bio);
+  mountPlayer($('player'), a);   // spotify, right after the bio
 
   // releases: their Bandcamp albums (merch.js, daily), newest first, one at a time
   const releases = ((window.NIKAMMA_MERCH || {})[a.slug] || []).filter((m) => m.kind === 'album');

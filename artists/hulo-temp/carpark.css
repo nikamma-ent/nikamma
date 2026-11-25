@@ -620,3 +620,8 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
   .abio__main, .abio__store { grid-column: 1; }
   .abio__store { position: static; }
 }
+
+/* music: spotify player right after the bio */
+.abio__music { margin-top: 56px; }
+.abio__music .abio__label { margin-bottom: 18px; }
+.abio__music .player__frame iframe { height: 352px; }
