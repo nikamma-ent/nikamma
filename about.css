@@ -64,3 +64,9 @@
 /* this page is all white: nav, hero and story */
 .about-page .top, .about2, .about2-story { background: #fff; }
 .about2__photos { background: #f2f2f2; }
+
+/* slideshow frames: one landscape photo, or two portraits side by side */
+.about2__frame { position: absolute; inset: 0; display: flex; gap: 0; opacity: 0; transition: opacity .9s ease; }
+.about2__frame.is-on { opacity: 1; }
+.about2__frame img { position: static; opacity: 1; flex: 1 1 0; min-width: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.about2__frame.is-pair { gap: 6px; background: #fff; }

@@ -13,7 +13,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=62">
-  <link rel="stylesheet" href="about.css?v=3">
+  <link rel="stylesheet" href="about.css?v=4">
 </head>
 <body class="is-scroll about-page">
 
@@ -36,7 +36,7 @@
         <h1 class="about2__lead"><span>ni·kam·ma</span> (Hindi, adj.) good-for-nothing. We took the name anyway.</h1>
       </div>
       <figure class="about2__photos" id="about-photos" aria-label="Photos">
-        <img src="img/home.jpg" alt="" class="is-on">
+        <img src="img/about/about-01.jpg" alt="">
       </figure>
     </section>
 
@@ -80,28 +80,33 @@
   <script src="news.js?v=62"></script>
   <script src="script.js?v=62"></script>
   <script>
-    // photos on the right: a slow slideshow (no arrows, no dots)
+    // photos on the right: a slow slideshow of frames (no arrows, no dots).
+    // A frame is one landscape photo, or two portrait photos side by side.
     (function () {
       const box = document.getElementById('about-photos');
-      const srcs = [
-        'img/home.jpg',
-        'img/live/hulo/mumbai-sopan-borkar-1.jpg',
-        'img/artists/shashwat-bulusu.jpg',
-        'img/live/hulo/bangalore-anush-shetty.jpg',
-        'img/artists/begum.jpg',
-        'img/live/hulo/mumbai-sopan-borkar-2.jpg',
+      const frames = [
+        ['img/about/about-01.jpg'],
+        ['img/about/about-02.jpg', 'img/about/about-03.jpg'],
+        ['img/about/about-04.jpg', 'img/about/about-05.jpg'],
+        ['img/about/about-06.jpg'],
+        ['img/about/about-07.jpg', 'img/about/about-08.jpg'],
+        ['img/about/about-09.jpg', 'img/about/about-11.jpg'],
+        ['img/about/about-10.jpg'],
+        ['img/about/about-12.jpg', 'img/about/about-13.jpg'],
       ];
-      const imgs = srcs.map((src, i) => {
-        const im = i === 0 ? box.querySelector('img') : document.createElement('img');
-        im.src = src; im.alt = ''; if (i) box.append(im);
-        return im;
+      const els = frames.map((srcs, i) => {
+        const f = document.createElement('div');
+        f.className = 'about2__frame' + (srcs.length > 1 ? ' is-pair' : '') + (i === 0 ? ' is-on' : '');
+        srcs.forEach((src) => { const im = document.createElement('img'); im.src = src; im.alt = ''; f.append(im); });
+        return f;
       });
+      box.replaceChildren(...els);
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
       let n = 0;
       setInterval(() => {
-        imgs[n].classList.remove('is-on');
-        n = (n + 1) % imgs.length;
-        imgs[n].classList.add('is-on');
+        els[n].classList.remove('is-on');
+        n = (n + 1) % els.length;
+        els[n].classList.add('is-on');
       }, 4500);
     })();
   </script>
