@@ -235,7 +235,7 @@ function renderArtist(a, i) {
   }
 
   // store: Bandcamp merch + albums (pulled in daily, see merch.js) + other shops from artists.js
-  // merch: Bandcamp merch, then other shops. Max 4 cards. (Albums are in releases.)
+  // store (right column): Bandcamp merch, other shops, then Bandcamp albums. Max 4 cards.
   const STORE_CAP = 4;
   const bcAll = (window.NIKAMMA_MERCH || {})[a.slug] || [];
   const asCard = (m) => ({
@@ -244,7 +244,8 @@ function renderArtist(a, i) {
   });
   const bcMerch = bcAll.filter((m) => m.kind === 'merch').map(asCard);
   const shops = a.store || [];
-  const items = [...bcMerch, ...shops].slice(0, STORE_CAP);
+  const bcAlbums = bcAll.filter((m) => m.kind === 'album').map(asCard);
+  const items = [...bcMerch, ...shops, ...bcAlbums].slice(0, STORE_CAP);
   if (items.length) {
     show('sec-store', true);
     const grid = $('store');

@@ -607,3 +607,16 @@ body.is-scroll { padding-top: var(--head, 126px); }
 .ahero--split ~ .artist__pager { padding-bottom: 24px; }
 .apage { position: relative; z-index: 1; }
 footer.bar { position: relative; z-index: 2; background: #fff; }
+
+
+/* bio + social links on the left; store in the right column */
+.abio__main { grid-column: 2; }
+.abio .abio__follow { grid-column: auto; position: static; margin-top: 56px; }
+.abio__store { grid-column: 4; position: sticky; top: calc(var(--head, 126px) + 24px); }
+.abio__store .abio__label { margin-bottom: 24px; }
+.abio__store .store { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.abio__store .store__more { display: inline-block; margin-top: 24px; }
+@media (max-width: 860px) {
+  .abio__main, .abio__store { grid-column: 1; }
+  .abio__store { position: static; }
+}
