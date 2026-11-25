@@ -224,7 +224,7 @@ function renderArtist(a, i) {
     const key = (p) => p.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
     const pinned = ((a.press || {}).pin || []);
     const pinnedKeys = new Set(pinned.map(key));
-    const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
+    const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 5);   // 5 articles
     const nm = a.name.toLowerCase();
     const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 4);
     const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });

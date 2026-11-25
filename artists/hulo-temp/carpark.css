@@ -786,3 +786,9 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 /* tour row: warm white too (same as the hero), not stone */
 :root { --stone: var(--warm-white); }
 .astage2 .live__stage { background: #ece9e3; }
+
+/* news + press section: at least as tall as the hero */
+#sec-press { min-height: calc(100svh - var(--head, 126px)); box-sizing: border-box; }
+
+/* footer: just the line, on the left */
+footer.bar--note { justify-content: flex-start; padding-left: 48px; padding-right: 48px; }
