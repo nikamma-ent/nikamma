@@ -788,7 +788,10 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .astage2 .live__stage { background: #ece9e3; }
 
 /* news + press section: at least as tall as the hero */
-#sec-press { min-height: calc(100svh - var(--head, 126px)); box-sizing: border-box; }
+#sec-press { min-height: 0; }
 
 /* footer: just the line, on the left */
 footer.bar--note { justify-content: flex-start; padding-left: 48px; padding-right: 48px; }
+/* footer: black, carrying on from the videos */
+footer.bar--note { background: #000 !important; color: rgba(255,255,255,.7); padding-top: 28px; padding-bottom: 32px; }
+footer.bar--note .bar__note { color: rgba(255,255,255,.7); }

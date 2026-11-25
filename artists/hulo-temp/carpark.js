@@ -224,7 +224,7 @@ function renderArtist(a, i) {
     const key = (p) => p.title.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
     const pinned = ((a.press || {}).pin || []);
     const pinnedKeys = new Set(pinned.map(key));
-    const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 5);   // 5 articles
+    const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
     const nm = a.name.toLowerCase();
     const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 4);
     const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -305,8 +305,8 @@ function renderArtist(a, i) {
   if (ARTISTS.length > 1) {
     const prev = ARTISTS[(i - 1 + ARTISTS.length) % ARTISTS.length];
     const next = ARTISTS[(i + 1) % ARTISTS.length];
-    $('artist-prev').href = artistUrl(prev); $('artist-prev').textContent = `← ${prev.name}`;
-    $('artist-next').href = artistUrl(next); $('artist-next').textContent = `${next.name} →`;
+    if ($('artist-prev')) { $('artist-prev').href = artistUrl(prev); $('artist-prev').textContent = `← ${prev.name}`; }
+    if ($('artist-next')) { $('artist-next').href = artistUrl(next); $('artist-next').textContent = `${next.name} →`; }
   }
 }
 
