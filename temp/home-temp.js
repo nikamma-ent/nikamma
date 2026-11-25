@@ -8,6 +8,55 @@
   const TEMP_PAGES = { hulo: 'artists/hulo-temp/' };
   const pageFor = (a) => (TEMP_PAGES[a.slug] ? ROOT + TEMP_PAGES[a.slug] : artistUrl(a));
 
+  // header: white bar once the photo has scrolled away; hamburger menu
+  {
+    const top = document.querySelector('.top');
+    const hero = document.querySelector('.frame--tall');
+    const onScroll = () => top.classList.toggle('is-solid', window.scrollY > hero.offsetHeight - top.offsetHeight);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    const menu = $('menu'), open = $('menu-open'), close = $('menu-close');
+    const setMenu = (on) => {
+      menu.hidden = !on; open.setAttribute('aria-expanded', String(on));
+      document.body.classList.toggle('menu-open', on);
+      (on ? close : open).focus();
+    };
+    open.addEventListener('click', () => setMenu(true));
+    close.addEventListener('click', () => setMenu(false));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !menu.hidden) setMenu(false); });
+  }
+
+  // hero: a slider of the artists' photos, crossfading like Carpark's
+  {
+    const box = $('hero-slides');
+    const slides = ARTISTS.filter((a) => a.photo).map((a) => {
+      const img = document.createElement('img');
+      img.className = 'frame__slide'; img.alt = a.name; img.src = `${ROOT}img/artists/${a.photo}`;
+      return { a, img };
+    });
+    if (slides.length) {
+      box.replaceChildren(...slides.map((s) => s.img));
+      const dots = slides.map((s, i) => {
+        const b = document.createElement('button');
+        b.type = 'button'; b.setAttribute('aria-label', s.a.name);
+        b.addEventListener('click', () => { show(i); auto(); });
+        return b;
+      });
+      $('hero-dots').replaceChildren(...dots);
+      let cur = 0, timer;
+      const show = (n) => {
+        cur = (n + slides.length) % slides.length;
+        slides.forEach((s, i) => s.img.classList.toggle('is-on', i === cur));
+        dots.forEach((d, i) => d.classList.toggle('is-on', i === cur));
+        const who = $('hero-who');
+        who.textContent = `${slides[cur].a.name} →`; who.href = pageFor(slides[cur].a); who.hidden = false;
+      };
+      const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const auto = () => { clearInterval(timer); if (!calm && slides.length > 1) timer = setInterval(() => show(cur + 1), 5000); };
+      show(0); auto();
+    }
+  }
+
   // latest releases: every Bandcamp album on the roster, newest first
   const releases = ARTISTS.flatMap((a) => ((window.NIKAMMA_MERCH || {})[a.slug] || [])
     .filter((m) => m.kind === 'album').map((m) => ({ ...m, artist: a })))

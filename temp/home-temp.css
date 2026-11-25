@@ -1,13 +1,96 @@
 /* Layout test: Carpark-style scrolling homepage (index-temp.html only).
    Loaded after styles.css; the real homepage doesn't use this file. */
 
-.home-temp .frame--tall { flex: none; height: calc(100svh - 132px); min-height: 460px; }
+/* no yellow in this design: black and white only */
+.home-temp { --accent: #000; --on-accent: #fff; }
+.home-temp .top { border-bottom: 0; }
+
+/* full-screen photo: header floats over it in white, then turns into a
+   white bar once you scroll past the photo (class .is-solid, set by JS) */
+.home-temp .top {
+  position: fixed; z-index: 20; top: 0; left: 0; right: 0;
+  background: transparent; color: #fff;
+  transition: background .3s, color .3s, box-shadow .3s, padding .3s;
+}
+.home-temp .top__nav { display: none; }
+.home-temp .top__logo img { height: 34px; width: auto; filter: drop-shadow(0 1px 8px rgba(0,0,0,.3)); transition: filter .3s; }
+.home-temp .top.is-solid { background: #fff; color: #000; box-shadow: 0 1px 0 #e6e6e6; padding-top: 14px; padding-bottom: 14px; }
+.home-temp .top.is-solid .top__logo img { filter: invert(1); }
+.top__menu {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: none; border: 0; cursor: pointer; color: inherit;
+  font: 500 13px/1 var(--sans); letter-spacing: .02em; text-transform: lowercase; padding: 6px 0;
+}
+.home-temp .top:not(.is-solid) .top__menu { text-shadow: 0 1px 8px rgba(0,0,0,.35); }
+.top__burger { display: grid; gap: 4px; width: 20px; }
+.top__burger i { display: block; height: 2px; background: currentColor; border-radius: 2px; }
+
+/* the menu itself: full screen, black */
+.menu {
+  position: fixed; inset: 0; z-index: 50; background: #000; color: #fff;
+  display: flex; flex-direction: column; justify-content: center; padding: 0 var(--gut);
+  animation: menuIn .25s ease both;
+}
+.menu[hidden] { display: none; }
+@keyframes menuIn { from { opacity: 0; } }
+.menu__close {
+  position: absolute; top: 22px; right: var(--gut);
+  background: none; border: 0; color: #fff; cursor: pointer; font: 500 13px var(--sans); letter-spacing: .02em;
+}
+.menu__nav { display: grid; gap: clamp(4px, 1vh, 12px); }
+.menu__nav a {
+  font-size: clamp(44px, 8vw, 112px); font-weight: 700; letter-spacing: -.04em; line-height: 1;
+  text-decoration: none; color: #fff; width: max-content;
+}
+.menu__nav a:hover { opacity: .55; }
+.menu__note { margin-top: clamp(28px, 6vh, 56px); font-size: 14px; color: rgba(255,255,255,.6); }
+body.menu-open { overflow: hidden; }
+.home-temp .hpage > .frame--tall { margin: 0; width: 100%; height: 100svh; min-height: 520px; }
+.home-temp .hpage > .ticker + .hband { margin-top: 0; }
+.home-temp .ticker__dot { color: #fff; }
+.home-temp .frame__social a:hover { color: #fff; }
+.home-temp .rel__link:hover { color: #fff; background: #000; }
+.home-temp .hband--black .hband__more { border-bottom-color: #fff; }
+.home-temp .hband--black .hband__more:hover { color: #fff; opacity: .7; }
+.home-temp .hartist .chip--accent { background: #fff; color: #000; }
+
+/* the white "nikamma" wordmark in the middle of the hero */
+.frame__logo { margin: 0 0 22px; line-height: 0; }
+.frame__logo img { display: block; margin: 0 auto; width: clamp(200px, 28vw, 420px); height: auto; filter: drop-shadow(0 2px 18px rgba(0,0,0,.25)); }
+.home-temp .frame__tag { font-size: clamp(15px, 1.3vw, 19px); opacity: .9; }
+
+/* hero slider: artist photos crossfade, not dulled: just a soft fade at the top
+   (for the header) and a faint shade behind the centred text */
+.home-temp .frame__clip::after {
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,.35), rgba(0,0,0,0) 22%),
+    radial-gradient(ellipse 38% 28% at 50% 50%, rgba(0,0,0,.22), rgba(0,0,0,0) 100%),
+    linear-gradient(to top, rgba(0,0,0,.28), rgba(0,0,0,0) 18%);
+}
+
+/* hero slider: artist photos crossfade */
+.frame__slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; animation: none; }
+.frame__slide.is-on { opacity: 1; animation: drift 12s ease-in-out both; }
+.frame__who {
+  position: absolute; z-index: 2; left: 24px; bottom: 22px;
+  color: #fff; font-size: 13px; text-decoration: none; opacity: .9;
+}
+.frame__who:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+.frame__who[hidden] { display: none; }
+.frame__dots { position: absolute; z-index: 2; right: 24px; bottom: 24px; display: flex; gap: 8px; }
+.frame__dots button {
+  width: 8px; height: 8px; padding: 0; border-radius: 50%; border: 1px solid #fff;
+  background: transparent; cursor: pointer; opacity: .8;
+}
+.frame__dots button.is-on { background: #fff; opacity: 1; }
+
+.home-temp .frame--tall { flex: none; }
 .frame__down {
   position: absolute; z-index: 2; left: 50%; bottom: 22px; transform: translateX(-50%);
   color: #fff; font-size: 12px; letter-spacing: .06em; text-decoration: none;
-  border-bottom: 1px solid var(--accent); padding-bottom: 3px; opacity: .85;
+  border-bottom: 1px solid #fff; padding-bottom: 3px; opacity: .85;
 }
-.frame__down:hover { opacity: 1; color: var(--accent); }
+.frame__down:hover { opacity: 1; }
 .hpage { display: block; width: 100%; }
 .hband { margin-top: clamp(16px, 2.2vw, 28px); }
 .hband[hidden] { display: none; }
@@ -73,5 +156,4 @@
   .rel__covers { max-width: 420px; }
   .hartists { grid-template-columns: minmax(0, 1fr); }
   .press { grid-template-columns: minmax(0, 1fr); }
-  .home-temp .frame--tall { height: calc(100svh - 120px); }
 }
