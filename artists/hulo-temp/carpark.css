@@ -699,3 +699,45 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .astage2 .bit-widget .bit-details-inner-wrapper > .bit-details { height: auto !important; min-height: 0 !important; border: 0 !important; padding: 0 !important; }
 .astage2 .bit-widget .bit-offers-container { margin: 0 !important; }
 .astage2 #sec-tour .bit-widget .bit-event .bit-details-inner-wrapper > a.bit-details { flex: 0 0 auto !important; max-width: none !important; }   /* beats the older 80px rule */
+
+/* tour row: same height and padding as the hero */
+.astage2 { min-height: calc(100svh - var(--head, 126px)); padding: 48px var(--mp-side) 64px; box-sizing: border-box; }
+@media (max-width: 860px) { .astage2 { min-height: 0; } }
+
+
+/* tour column: everything left aligned; the list of dates ends level with the photo.
+   "play my city" moves above the list, the page arrows go up to the heading line. */
+.astage2 .box--tour { position: relative; }
+.astage2 .bit-widget, .astage2 .bit-widget * { text-align: left !important; }
+.astage2 .bit-widget { display: flex !important; flex-direction: column; align-items: stretch; }
+.astage2 .bit-widget .bit-upcoming-events, .astage2 .bit-widget .bit-events-container { padding: 0 !important; margin: 0 !important; width: 100% !important; order: 3; }
+.astage2 .bit-widget .bit-play-my-city-wrapper { order: 1; margin: 0 0 14px !important; padding: 0 !important; display: flex !important; align-items: center; gap: 12px; justify-content: flex-start !important; }
+.astage2 .bit-widget [class*="sample-events"] { order: 0; margin: 0 0 14px !important; align-self: flex-start; }
+.astage2 .bit-widget .bit-event:last-child { padding-bottom: 0 !important; border-bottom: 0 !important; }
+.astage2 .box--tour > .tour__pager { position: absolute; top: 0; right: 40px; margin: 0; }
+/* dots on the photo, like the homepage slider */
+.live__dots { position: absolute; z-index: 2; right: 20px; bottom: 18px; display: flex; gap: 8px; }
+.live__dots button {
+  width: 10px; height: 10px; padding: 0; border-radius: 50%;
+  border: 1.5px solid #fff; background: transparent; cursor: pointer;
+  box-shadow: 0 0 6px rgba(0,0,0,.25);
+}
+.live__dots button.is-on { background: #fff; }
+.astage2 .bit-widget > * { order: 5; }
+.astage2 .bit-widget > .bit-sample-badge { order: 0; align-self: flex-start; margin: 0 0 14px !important; }
+.astage2 .bit-widget > .bit-play-my-city-wrapper { order: 1; }
+.astage2 .bit-widget > .bit-nav-bar-container { order: 2; }
+.astage2 .bit-widget > .bit-event-lists { order: 3; }
+/* nothing under the list, so the last date sits on the photo's bottom line */
+.astage2 .bit-widget { padding-bottom: 0 !important; margin-bottom: 0 !important; }
+.astage2 .bit-widget > :last-child:not(.bit-event-lists) { display: none !important; }
+
+/* play my city and the page arrows back at the bottom, both left aligned */
+.astage2 .bit-widget > .bit-event-lists { order: 1; }
+.astage2 .bit-widget > .bit-play-my-city-wrapper {
+  order: 2; margin: 18px 0 0 !important;
+  flex-direction: column !important; align-items: flex-start !important; gap: 10px;
+}
+.astage2 .bit-widget > .bit-play-my-city-wrapper * { margin-left: 0 !important; }
+.astage2 .bit-widget .bit-event:last-child { border-bottom: 1px solid rgba(0,0,0,.1) !important; padding-bottom: 12px !important; }
+.astage2 .box--tour > .tour__pager { position: static; margin: 16px 0 0; justify-content: flex-start; }
