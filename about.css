@@ -1,0 +1,66 @@
+/* About page: two columns like the artist-page hero (Mom+Pop measurements).
+   Loaded after styles.css. */
+:root { --warm-white: #f9f7f3; --side: max(48px, calc((100vw - 1440px) / 2)); }
+
+/* nav like the artist page test: links on the left, monkey on the right, warm white, yellow underline */
+.about-page .top {
+  flex-direction: row-reverse; background: var(--warm-white); border-bottom: 0;
+  padding: 28px 48px;
+}
+.about-page .top__logo img { height: 40px; width: auto; }
+.about-page .top__nav { gap: clamp(20px, 2.2vw, 34px); }
+.about-page .top__nav a { font: 400 18px/1 var(--sans); letter-spacing: 0; }
+
+/* the two columns: text 30%, photos 70% at 16:10.5, both sitting on the bottom */
+.about2 {
+  display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 70%); align-items: end;
+  min-height: calc(100svh - 126px); box-sizing: border-box;
+  padding: 48px var(--side) 64px; background: var(--warm-white);
+  animation: none;
+}
+.about2__text { padding-right: 48px; display: grid; gap: 28px; align-content: end; }
+.about2__lead { font: 400 30px/1.15 var(--sans); letter-spacing: -.005em; }
+.about2__lead span { font-weight: 700; }
+.about2__def { font-size: 18px; line-height: 22.5px; }
+.about2__def span { font-weight: 600; }
+.about2__cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; font-size: 18px; line-height: 26px; }
+.about2__cols h2 { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); margin-bottom: 8px; }
+.about2__cols ul { list-style: none; margin: 0; padding: 0; }
+
+.about2__photos { position: relative; margin: 0; aspect-ratio: 16 / 10.5; overflow: hidden; background: #ece9e3; }
+.about2__photos img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  opacity: 0; transition: opacity .9s ease;
+}
+.about2__photos img.is-on { opacity: 1; }
+
+/* footer: black, one line on the left */
+.about-page footer.bar--note { background: #000; justify-content: flex-start; padding: 28px 48px 32px; }
+.about-page footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
+
+/* the story: white, like the bio (starts 230px in, 450px wide, 18/22.5) with a 360px column on the right */
+.about2-story {
+  display: grid; grid-template-columns: 230px minmax(0, 450px) minmax(0, 1fr) 360px;
+  padding: 96px var(--side); background: #fff;
+}
+.about2-story__copy { grid-column: 2; font-size: 18px; line-height: 22.5px; }
+.about2-story__copy p + p { margin-top: 22px; }
+.about2-story__sign { font-weight: 600; }
+.about2-story__side { grid-column: 4; display: grid; gap: 40px; align-content: start; font-size: 18px; line-height: 26px; }
+.about2-story__side h2 { font-size: 18px; font-weight: 400; margin-bottom: 14px; }
+.about2-story__side ul { list-style: none; margin: 0; padding: 0; color: #444; }
+
+@media (max-width: 860px) {
+  .about2-story { grid-template-columns: minmax(0, 1fr); padding: 48px 20px 64px; row-gap: 48px; }
+  .about2-story__copy, .about2-story__side { grid-column: 1; }
+  .about-page .top { padding: 18px 20px; }
+  .about2 { grid-template-columns: minmax(0, 1fr); min-height: 0; padding: 24px 20px 48px; gap: 32px; }
+  .about2__photos { order: -1; }
+  .about2__text { padding-right: 0; }
+  .about2__lead { font-size: 24px; }
+  .about-page footer.bar--note { padding: 22px 20px 26px; }
+}
+
+/* this page is all white: nav, hero and story */
+.about-page .top, .about2, .about2-story { background: #fff; }
+.about2__photos { background: #f2f2f2; }
