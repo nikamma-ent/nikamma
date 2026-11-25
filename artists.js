@@ -73,11 +73,11 @@ window.NIKAMMA_ARTISTS = [
     },
     bandsintown: { artist: 'id_15574558', appId: '' }, // bandsintown.com/a/15574558-hulo
     live: [
-      { src: 'img/live/hulo/g5a-bw.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
-      { src: 'img/live/hulo/casa-bacardi-kolkata.jpg', caption: 'Casa Bacardi, Kolkata 2025' },
-      { src: 'img/live/hulo/g5a-teal.jpg', caption: 'The G5A Foundation, Mumbai 2025' },
-      { src: 'img/live/hulo/antisocial-mumbai.jpg', caption: 'antiSOCIAL, Mumbai 2025' },
-      { src: 'img/live/hulo/hamilton-bangalore.jpg', caption: 'Hamilton Bar, Bangalore 2025' },
+      { src: 'img/live/hulo/mumbai-sopan-borkar-1.jpg' },
+      { src: 'img/live/hulo/bangalore-anush-shetty.jpg' },
+      { src: 'img/live/hulo/mumbai-sopan-borkar-2.jpg' },
+      { src: 'img/live/hulo/annweshan-priyam.jpg' },
+      { src: 'img/live/hulo/mumbai-sopan-borkar-3.jpg' },
     ],
     video: { id: 'A-EqlcvPvZE', title: 'Griefcase' },
     store: [

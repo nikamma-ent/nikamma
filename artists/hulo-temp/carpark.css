@@ -715,14 +715,6 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .astage2 .bit-widget [class*="sample-events"] { order: 0; margin: 0 0 14px !important; align-self: flex-start; }
 .astage2 .bit-widget .bit-event:last-child { padding-bottom: 0 !important; border-bottom: 0 !important; }
 .astage2 .box--tour > .tour__pager { position: absolute; top: 0; right: 40px; margin: 0; }
-/* dots on the photo, like the homepage slider */
-.live__dots { position: absolute; z-index: 2; right: 20px; bottom: 18px; display: flex; gap: 8px; }
-.live__dots button {
-  width: 10px; height: 10px; padding: 0; border-radius: 50%;
-  border: 1.5px solid #fff; background: transparent; cursor: pointer;
-  box-shadow: 0 0 6px rgba(0,0,0,.25);
-}
-.live__dots button.is-on { background: #fff; }
 .astage2 .bit-widget > * { order: 5; }
 .astage2 .bit-widget > .bit-sample-badge { order: 0; align-self: flex-start; margin: 0 0 14px !important; }
 .astage2 .bit-widget > .bit-play-my-city-wrapper { order: 1; }

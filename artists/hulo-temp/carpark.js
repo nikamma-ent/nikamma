@@ -234,19 +234,8 @@ function renderArtist(a, i) {
       next.src = ROOT + item.src;
       $('live-caption').textContent = item.caption || '';
       $('live-count').textContent = `${pad(idx + 1)} / ${pad(a.live.length)}`;
-      dots.forEach((d, i) => d.classList.toggle('is-on', i === idx));
       const ahead = a.live[(idx + 1) % a.live.length]; if (ahead) new Image().src = ROOT + ahead.src;
     };
-    // dots on the photo; clicking one jumps to that photo and restarts the timer
-    const dotBox = document.createElement('div');
-    dotBox.className = 'live__dots';
-    const dots = a.live.map((l, i) => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.setAttribute('aria-label', `photo ${i + 1}`);
-      b.addEventListener('click', () => { go(i); restart(); });
-      dotBox.append(b); return b;
-    });
-    if (a.live.length > 1) document.querySelector('#sec-live .live__stage').append(dotBox);
     let timer;
     const restart = () => { clearInterval(timer); if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && a.live.length > 1) timer = setInterval(() => go(idx + 1), 4500); };
     $('live-prev').addEventListener('click', () => go(idx - 1));
