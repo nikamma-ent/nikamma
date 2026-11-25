@@ -80,9 +80,7 @@ window.NIKAMMA_ARTISTS = [
       { src: 'img/live/hulo/mumbai-sopan-borkar-3.jpg' },
     ],
     video: { id: 'A-EqlcvPvZE', title: 'Griefcase' },
-    store: [
-      { title: 'Griefcase', where: 'bandcamp', note: 'debut album', url: 'https://hulo.bandcamp.com', img: 'img/store/hulo-griefcase.jpg' },
-    ],
+    store: [],
   },
   {
     slug: 'shashwat-bulusu',
