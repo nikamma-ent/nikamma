@@ -795,3 +795,13 @@ footer.bar--note { justify-content: flex-start; padding-left: 48px; padding-righ
 /* footer: black, carrying on from the videos */
 footer.bar--note { background: #000 !important; color: rgba(255,255,255,.7); padding-top: 28px; padding-bottom: 32px; }
 footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
+
+
+/* seal the 1px seams between sections (the fixed hero was peeking through as thin lines):
+   each section's edge-to-edge colour now also bleeds 1px up and down */
+.ahero--split ~ * { clip-path: inset(-1px -100vmax) !important; }
+
+/* no news ticker on this page; slimmer nav bar with a banana-yellow underline */
+.top { top: 0; padding-top: 16px; padding-bottom: 16px; }
+.top__logo img { height: 30px; }
+.top__nav a::after { background: var(--accent); }
