@@ -751,3 +751,38 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 
 /* spotify: never shorter than 600px, still stretching to match a taller store */
 .abio__music .player__frame iframe { min-height: 600px; }
+
+/* colours, white first: nav + hero white → bio off-white → tour white → press off-white → videos black */
+.top, .ahero--split { background: #fff; }
+.ahero--split ~ #sec-bio, .ahero--split ~ #sec-press { background: #f9f7f3; box-shadow: 0 0 0 100vmax #f9f7f3; }
+.ahero--split ~ #sec-stage { background: #fff; box-shadow: 0 0 0 100vmax #fff; }
+.astage2 .live__stage { background: #f2efe9; }
+
+/* colours, yellow first: nav + hero banana yellow → bio white → tour yellow → press white → videos black */
+.top, .ahero--split { background: var(--accent); }
+.ahero--split ~ #sec-bio, .ahero--split ~ #sec-press { background: #fff; box-shadow: 0 0 0 100vmax #fff; }
+.ahero--split ~ #sec-stage { background: var(--accent); box-shadow: 0 0 0 100vmax var(--accent); }
+.ahero--split .ahero__stage, .astage2 .live__stage { background: rgba(0,0,0,.08); }
+/* on yellow, the yellow ticket buttons turn black so they still show */
+.astage2 .bit-widget .bit-offers { background: #000 !important; border-color: #000 !important; color: #fff !important; }
+.astage2 .bit-widget .bit-offers * { color: #fff !important; }
+.astage2 .bit-widget .bit-play-my-city-button, .astage2 .bit-widget [class*="play-my-city"] a { border-color: rgba(0,0,0,.45) !important; color: #000 !important; }
+.astage2 .bit-sample-badge { background: rgba(0,0,0,.08) !important; color: #000 !important; border-color: transparent !important; }
+.astage2 .tour__pager button { border-color: rgba(0,0,0,.4); }
+
+/* ---------- final colours ----------
+   warm white: nav + hero · white: bio, spotify, store · soft stone grey: tour dates + photos
+   white: press + news · black: videos */
+:root { --warm-white: #f9f7f3; --stone: #e8e5df; }
+.top, .ahero--split { background: var(--warm-white); }
+.ahero--split ~ #sec-bio, .ahero--split ~ #sec-press { background: #fff; box-shadow: 0 0 0 100vmax #fff; }
+.ahero--split ~ #sec-stage { background: var(--stone); box-shadow: 0 0 0 100vmax var(--stone); }
+.ahero--split .ahero__stage { background: #ece9e3; }
+.astage2 .live__stage { background: #dcd8d1; }
+/* stone isn't yellow, so the tickets buttons go back to nikamma yellow */
+.astage2 .bit-widget .bit-offers { background: var(--accent) !important; border-color: var(--accent) !important; color: #000 !important; }
+.astage2 .bit-widget .bit-offers * { color: #000 !important; }
+.astage2 .bit-sample-badge { background: rgba(0,0,0,.06) !important; }
+/* tour row: warm white too (same as the hero), not stone */
+:root { --stone: var(--warm-white); }
+.astage2 .live__stage { background: #ece9e3; }
