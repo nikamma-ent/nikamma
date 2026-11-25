@@ -367,7 +367,7 @@ function loadTour({ artist, appId }, box) {
     if (new URLSearchParams(location.search).has('sample-tour')) opts['sample-events'] = 'true';
     Object.entries(opts).forEach(([k, v]) => w.setAttribute(`data-${k}`, v));
     box.append(w);
-    paginateTour(box, 5);
+    paginateTour(box, 3)   // 3 per page: stacked rows, sized to sit beside the photo;
     if (!document.querySelector('script[src*="widgetv3.bandsintown.com"]')) {
       const s = document.createElement('script');
       s.src = 'https://widgetv3.bandsintown.com/main.min.js';

@@ -683,3 +683,19 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 .astage2 .bit-widget .bit-offers { min-width: 0 !important; padding: 6px 12px !important; font-size: 13px !important; }
 .astage2 .bit-widget .bit-date, .astage2 .bit-widget .bit-location { font-size: 15px !important; }
 .astage2 .bit-widget .bit-event[hidden] { display: none !important; }
+
+/* tour rows stacked in one column: date, then city, then the tickets button */
+.astage2 .bit-widget .bit-event:not([hidden]) {
+  flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important;
+  gap: 8px; padding: 16px 0 !important;
+}
+.astage2 .bit-widget .bit-details-inner-wrapper { flex-direction: column !important; align-items: flex-start !important; gap: 2px; }
+.astage2 .bit-widget .bit-details-inner-wrapper > .bit-details { flex: none !important; width: auto !important; max-width: none !important; }
+.astage2 .bit-widget .bit-date { font-weight: 600; }
+.astage2 .bit-widget .bit-event-buttons { margin-top: 6px !important; }
+.astage2 .bit-widget .bit-event:not([hidden]) { gap: 4px; padding: 12px 0 !important; }
+.astage2 .bit-widget .bit-details-inner-wrapper { gap: 0; }
+.astage2 .bit-widget .bit-event-buttons { margin-top: 4px !important; }
+.astage2 .bit-widget .bit-details-inner-wrapper > .bit-details { height: auto !important; min-height: 0 !important; border: 0 !important; padding: 0 !important; }
+.astage2 .bit-widget .bit-offers-container { margin: 0 !important; }
+.astage2 #sec-tour .bit-widget .bit-event .bit-details-inner-wrapper > a.bit-details { flex: 0 0 auto !important; max-width: none !important; }   /* beats the older 80px rule */
