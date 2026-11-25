@@ -134,10 +134,9 @@ function renderArtist(a, i) {
   $('artist-n').textContent = pad(i + 1);
   $('artist-name').textContent = a.name;
   $('artist-meta').replaceChildren(chips(a.meta));
-  // hero: their photo, then live photos, as a slow carousel
+  // hero: just their main photo (no carousel in this design)
   const slides = [
-    { src: `${ROOT}img/artists/${a.photo}`, caption: a.credit ? `photo: ${a.credit}` : '' },
-    ...(a.live || []).map((l) => ({ src: ROOT + l.src, caption: l.caption || '' })),
+    { src: `${ROOT}img/artists/${a.hero || a.photo}`, caption: a.credit ? `photo: ${a.credit}` : '' },
   ];
   const photo = $('artist-photo');
   let h = 0, timer;

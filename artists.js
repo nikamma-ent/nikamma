@@ -8,6 +8,8 @@
 // bioDoc:     Google Doc with the bio (shared: anyone with the link can view). The
 //             part under the heading "Short" is used, refreshed on the 1st of
 //             every month (tools/sync_bios.py → bios.js).
+// hero:       optional wider photo for the top of the artist page (test design);
+//             landscape, ideally 3:2 at 2400 × 1600. Falls back to photo.
 // photo:      file in img/artists/ (web-sized JPG, ~1500px, under ~400KB).
 // credit:     photographer of that photo. '' hides it.
 // links:      social / streaming buttons next to the name.
@@ -50,6 +52,7 @@ window.NIKAMMA_ARTISTS = [
     bio: 'Raw, intimate songs about love, loss and identity, carried by shimmering guitars and the textures of modern pop. Debut album Griefcase is out now; 50+ shows across India and Europe and counting.',
     latest: 'Griefcase',
     photo: 'hulo.jpg',
+    hero: 'hulo-nkm-hero.jpg',   // big photo at the top of the artist page (test design)
     credit: 'Ankan Sarkar',
     bioDoc: 'https://docs.google.com/document/d/1bPOp2xt4cxbg4x8TUjVE0Jh8fdBW2Q1jxbyrfLt5w5Q/edit',
     spotify: 'https://open.spotify.com/artist/0VmqJsRLRKbPBh9ZgnBzdB',

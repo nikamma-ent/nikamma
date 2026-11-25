@@ -486,3 +486,67 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   }
+
+
+/* ---------- hero, split: name bottom-left, big photo right (reference: Caamp) ---------- */
+.ahero--split {
+  position: relative; isolation: isolate;
+  display: grid; grid-template-columns: minmax(0, 31%) minmax(0, 1fr);
+  margin: 0 0 0 calc(50% - 50vw); width: 100vw;
+  padding: clamp(28px, 4vh, 52px) clamp(28px, 2.8vw, 56px) clamp(28px, 4vh, 52px) clamp(28px, 2.8vw, 56px);
+  background: #f8f6f2;
+}
+.ahero--split .ahero__side { display: flex; align-items: flex-end; padding-bottom: 0; }
+.ahero--split .ahero__name {
+  font-family: var(--sans); font-size: clamp(40px, 4.4vw, 72px); font-weight: 700; letter-spacing: -.035em; line-height: .95;
+}
+.ahero--split .ahero__photo { margin: 0; display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }
+.ahero--split .ahero__bar { display: none; }
+.ahero--split .ahero__stage { aspect-ratio: 3 / 2; max-height: none; height: auto; background: #e9e6e0; }
+.ahero--split .ahero__bar { min-height: 34px; padding-top: 10px; }
+/* bio: plain text down the page, follow links on the right (reference: Caamp) */
+.abio {
+  width: 100vw; margin: clamp(64px, 12vh, 140px) 0 clamp(72px, 12vh, 140px) calc(50% - 50vw);
+  padding: 0 clamp(28px, 2.8vw, 56px);
+  display: grid; grid-template-columns: 17% minmax(0, 36%) minmax(0, 1fr) auto;
+  column-gap: clamp(24px, 3vw, 48px); align-items: start;
+}
+.abio .bio__copy { grid-column: 2; columns: 1; font-size: clamp(18px, 1.55vw, 23px); line-height: 1.55; max-width: none; }
+.abio .bio__copy p + p { margin-top: 1.1em; }
+.abio__follow { grid-column: 4; position: sticky; top: 24px; display: grid; gap: 18px; justify-items: start; }
+.abio__label { font-size: clamp(18px, 1.55vw, 23px); }
+.abio .ahero__icons { padding: 0; }
+.abio .ahero__contact { font-size: 14px; }
+@media (max-width: 860px) {
+  .abio { grid-template-columns: minmax(0, 1fr); }
+  .abio .bio__copy, .abio__follow { grid-column: 1; }
+  .abio__follow { position: static; }
+}
+
+.ahero__info {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;
+  margin: clamp(20px, 3vh, 32px) 0 clamp(56px, 9vh, 104px);
+}
+.ahero__info .ahero__icons { padding: 0; margin-left: auto; }
+.acrumb { display: none; }
+@media (max-width: 860px) {
+  .ahero--split { grid-template-columns: minmax(0, 1fr); height: auto; }
+  .ahero--split .ahero__side { order: 2; padding: 18px 0 0; }
+  .ahero--split .ahero__stage { aspect-ratio: 4 / 5; height: auto; }
+}
+
+
+/* scroll: the hero stays put and the page slides up over it (reference: Caamp) */
+.ahero--split { position: sticky; top: 0; z-index: 0; }
+.ahero--split ~ * {
+  position: relative; z-index: 1;
+  background: #fff;
+  box-shadow: 0 0 0 100vmax #fff; clip-path: inset(0 -100vmax);   /* paint white edge to edge */
+}
+.ahero--split ~ .afilm { box-shadow: 0 0 0 100vmax #000; background: #000; }
+.ahero--split ~ .abio { margin-top: 0; padding-top: clamp(64px, 12vh, 140px); }
+.apage { animation: none; }   /* a transform on the page would break the sticky hero */
+
+/* nav bar: same off-white as the hero, no yellow line */
+.top { background: #f8f6f2; border-bottom: 0; }
+.top__nav a::after { background: #000; }
