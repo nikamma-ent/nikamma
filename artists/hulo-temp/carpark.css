@@ -491,14 +491,15 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 /* ---------- hero, split: name bottom-left, big photo right (reference: Caamp) ---------- */
 .ahero--split {
   position: relative; isolation: isolate;
-  display: grid; grid-template-columns: minmax(0, 31%) minmax(0, 1fr);
+  display: grid; grid-template-columns: minmax(0, 30%) minmax(0, 70%);
   margin: 0 0 0 calc(50% - 50vw); width: 100vw;
-  padding: clamp(28px, 4vh, 52px) clamp(28px, 2.8vw, 56px) clamp(28px, 4vh, 52px) clamp(28px, 2.8vw, 56px);
+  /* proportions from the reference: ~12% side margins, photo ~53% of the width, big air above */
+  padding: clamp(80px, 17vh, 190px) 12vw clamp(40px, 6vh, 64px);
   background: #f8f6f2;
 }
 .ahero--split .ahero__side { display: flex; align-items: flex-end; padding-bottom: 0; }
 .ahero--split .ahero__name {
-  font-family: var(--sans); font-size: clamp(40px, 4.4vw, 72px); font-weight: 700; letter-spacing: -.035em; line-height: .95;
+  font-family: var(--sans); font-size: clamp(22px, 1.6vw, 32px); font-weight: 400; letter-spacing: -.005em; line-height: 1.1;
 }
 .ahero--split .ahero__photo { margin: 0; display: grid; grid-template-rows: minmax(0, 1fr); min-height: 0; }
 .ahero--split .ahero__bar { display: none; }
@@ -550,3 +551,59 @@ body.is-scroll { height: auto; min-height: 100vh; overflow-x: hidden; overflow-y
 /* nav bar: same off-white as the hero, no yellow line */
 .top { background: #f8f6f2; border-bottom: 0; }
 .top__nav a::after { background: #000; }
+
+/* nav like the reference: links on the left, the monkey on the right */
+.top { flex-direction: row-reverse; padding-top: 28px; padding-bottom: 28px; }
+.top__logo img { height: 40px; width: auto; }
+.top__nav { gap: clamp(20px, 2.2vw, 34px); }
+.top__nav a { font: 400 clamp(15px, 1vw, 18px)/1 var(--sans); letter-spacing: 0; }
+
+
+/* ---------- matched to Mom+Pop's own CSS (momandpopmusic.com/artists/caamp) ----------
+   their container: max 1536px with 48px side padding (so content is at most 1440px, centred);
+   hero: name column 30%, photo 70% at 16:10.5, both sitting on the bottom, 64px from it;
+   bio: starts 230px in, 450px wide, 18px/22.5px; "follow" column 360px on the right;
+   white content section starts with 96px of space. Hero colour #f9f7f3. */
+:root { --mp-side: max(48px, calc((100vw - 1440px) / 2)); }
+.ahero--split {
+  grid-template-columns: minmax(0, 30%) minmax(0, 70%);
+  align-items: end;
+  min-height: calc(100svh - 150px);
+  padding: 48px var(--mp-side) 64px;
+  background: #f9f7f3;
+}
+.ahero--split .ahero__stage { aspect-ratio: 16 / 10.5; }
+.ahero--split .ahero__name { font-size: 30px; line-height: 30px; font-weight: 400; letter-spacing: 0; }
+.top { background: #f9f7f3; padding-left: 48px; padding-right: 48px; }   /* their nav sits at the page edges, 48px in */
+.top__nav a { font-size: 18px; }
+.abio {
+  padding: 96px var(--mp-side) 96px;
+  grid-template-columns: 230px minmax(0, 450px) minmax(0, 1fr) 360px;
+  column-gap: 0;
+  margin-top: 0; margin-bottom: 0;
+}
+.abio .bio__copy { font-size: 18px; line-height: 22.5px; }
+.abio .bio__copy p + p { margin-top: 22px; }
+.abio__label { font-size: 18px; line-height: 18px; margin-bottom: 6px; }
+@media (max-width: 860px) {
+  :root { --mp-side: 20px; }
+  .ahero--split { grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  .abio { grid-template-columns: minmax(0, 1fr); row-gap: 40px; }
+}
+
+/* fixed nav: the ticker and nav bar stay on top while the page scrolls under them.
+   --head (their combined height) is measured by carpark.js. */
+.ticker { position: fixed; top: 0; left: 0; right: 0; z-index: 30; }
+.top { position: fixed; top: var(--ticker-h, 30px); left: 0; right: 0; z-index: 30; }
+body.is-scroll { padding-top: var(--head, 126px); }
+.ahero--split { top: var(--head, 126px); min-height: calc(100svh - var(--head, 126px)); }
+
+/* no see-through gaps: everything after the hero covers it fully,
+   so the spacing between sections is padding (painted white), not margin */
+.ahero--split ~ * { margin-top: 0 !important; margin-bottom: 0 !important; }
+.ahero--split ~ .box { padding-bottom: clamp(56px, 9vh, 104px); }
+.ahero--split ~ .afilm { margin-bottom: 0; }
+.ahero--split ~ .afilm + * { padding-top: clamp(48px, 8vh, 96px); }
+.ahero--split ~ .artist__pager { padding-bottom: 24px; }
+.apage { position: relative; z-index: 1; }
+footer.bar { position: relative; z-index: 2; background: #fff; }

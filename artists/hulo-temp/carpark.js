@@ -421,3 +421,17 @@ function paginateTour(box, per) {
   prevBtn.addEventListener('click', () => { pageNo -= 1; apply(); });
   nextBtn.addEventListener('click', () => { pageNo += 1; apply(); });
 }
+
+// fixed ticker + nav: measure them so the page starts below and the hero sticks under them
+(function () {
+  const ticker = document.querySelector('.ticker');
+  const top = document.querySelector('.top');
+  if (!top) return;
+  const set = () => {
+    const t = ticker ? ticker.offsetHeight : 0;
+    document.documentElement.style.setProperty('--ticker-h', `${t}px`);
+    document.documentElement.style.setProperty('--head', `${t + top.offsetHeight}px`);
+  };
+  set();
+  window.addEventListener('resize', set);
+})();
