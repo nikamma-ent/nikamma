@@ -1,0 +1,77 @@
+/* Layout test: Carpark-style scrolling homepage (index-temp.html only).
+   Loaded after styles.css; the real homepage doesn't use this file. */
+
+.home-temp .frame--tall { flex: none; height: calc(100svh - 132px); min-height: 460px; }
+.frame__down {
+  position: absolute; z-index: 2; left: 50%; bottom: 22px; transform: translateX(-50%);
+  color: #fff; font-size: 12px; letter-spacing: .06em; text-decoration: none;
+  border-bottom: 1px solid var(--accent); padding-bottom: 3px; opacity: .85;
+}
+.frame__down:hover { opacity: 1; color: var(--accent); }
+.hpage { display: block; width: 100%; }
+.hband { margin-top: clamp(16px, 2.2vw, 28px); }
+.hband[hidden] { display: none; }
+.hband--grey { background: #f4f4f4; }
+.hband--black { background: #000; color: #fff; }
+.hband__in { max-width: 1400px; margin: 0 auto; padding: clamp(56px, 10vh, 112px) var(--gut); }
+.hband__head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 32px; }
+.hband__label { font-size: 13px; font-weight: 600; letter-spacing: .02em; margin-bottom: 32px; }
+.hband__head .hband__label { margin-bottom: 0; }
+.hband__more { font-size: 13px; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+.hband__more:hover { color: var(--accent); }
+
+/* latest releases: stacked covers + big title */
+.rel { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 88px); align-items: center; }
+.rel__covers { position: relative; display: block; aspect-ratio: 1; margin: 0 6% 6% 0; }
+.rel__covers img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: #f2f2f2; }
+.rel__back { transform: translate(5%, 5%) rotate(3deg); opacity: .55; }
+.rel__front { box-shadow: 0 1px 0 rgba(0,0,0,.04); transition: opacity .16s, transform .4s ease; }
+.rel__front.is-swapping { opacity: 0; }
+.rel__covers:hover .rel__front { transform: translate(-1%, -1%); }
+.rel__covers img[hidden] { display: none; }
+.rel__label { font-size: 13px; color: var(--muted); }
+.rel__title { font-size: clamp(36px, 4.6vw, 68px); font-weight: 700; line-height: .98; letter-spacing: -.03em; margin: 12px 0 18px; overflow-wrap: anywhere; }
+.rel__link {
+  display: inline-block; margin-top: 26px; font-size: 15px; text-decoration: none;
+  border-bottom: 2px solid var(--accent); padding-bottom: 2px;
+}
+.rel__link:hover { color: #000; background: var(--accent); }
+.rel__nav { display: flex; align-items: center; gap: 14px; margin-top: 36px; font-size: 13px; }
+.rel__nav[hidden] { display: none; }
+.rel__nav button {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid #cfcfcf;
+  background: none; cursor: pointer; font-size: 15px; color: var(--ink);
+  transition: border-color .2s;
+}
+.rel__nav button:hover { border-color: var(--ink); }
+.rel__artist { font-size: 14px; }
+.rel__artist a { text-decoration: none; border-bottom: 1px solid #cfcfcf; padding-bottom: 1px; }
+.rel__artist a:hover { border-bottom-color: var(--accent); }
+
+/* news rows */
+.hnews { list-style: none; margin: 0; padding: 0; }
+.hnews li > * {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 24px;
+  padding: clamp(18px, 3vh, 28px) 0; text-decoration: none;
+  font-size: clamp(24px, 3vw, 44px); font-weight: 700; letter-spacing: -.02em; line-height: 1.1;
+}
+.hnews li + li > * { border-top: 1px solid #e6e6e6; }
+.hnews a::after { content: "↗"; font-weight: 400; font-size: .6em; color: var(--muted); }
+.hnews a:hover span { text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 3px; text-underline-offset: 6px; }
+
+/* roster cards on black */
+.hartists { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(16px, 2.4vw, 32px); }
+.hartist { text-decoration: none; color: #fff; display: grid; gap: 14px; }
+.hartist__img { aspect-ratio: 4 / 5; overflow: hidden; background: #111; }
+.hartist__img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease, opacity .3s; opacity: .92; }
+.hartist:hover .hartist__img img { transform: scale(1.03); opacity: 1; }
+.hartist__name { font-size: clamp(28px, 3vw, 44px); font-weight: 700; letter-spacing: -.03em; line-height: 1; }
+.hartist .chip:not(.chip--accent) { background: #222; color: #ddd; }
+
+@media (max-width: 860px) {
+  .rel { grid-template-columns: minmax(0, 1fr); }
+  .rel__covers { max-width: 420px; }
+  .hartists { grid-template-columns: minmax(0, 1fr); }
+  .press { grid-template-columns: minmax(0, 1fr); }
+  .home-temp .frame--tall { height: calc(100svh - 120px); }
+}
