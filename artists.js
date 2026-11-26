@@ -146,7 +146,14 @@ window.NIKAMMA_ARTISTS = [
       ],
     },
     bandsintown: { artist: 'id_15664566', appId: '' }, // bandsintown.com/a/15664566-begum
-    live: [],
+    live: [
+      { src: 'img/live/begum/goa-012.jpg' },
+      { src: 'img/live/begum/delhi-0078.jpg' },
+      { src: 'img/live/begum/bangalore-0092.jpg' },
+      { src: 'img/live/begum/delhi-0093.jpg' },
+      { src: 'img/live/begum/bangalore-0109.jpg' },
+      { src: 'img/live/begum/bangalore-0134.jpg' },
+    ],
     video: { id: 'Qn6c0cQ6qGU', title: 'Better Person' },
     store: [
       { title: 'We Are Okay! tour tee', where: 'tee', note: 'sold out', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
