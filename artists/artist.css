@@ -805,3 +805,13 @@ footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
 /* nav underline in banana yellow */
 .top__nav a::after { background: var(--accent); }
 .abio__music[hidden] { display: none !important; }
+
+/* all white: nav, hero and tour row too (only the videos and footer stay black) */
+:root { --warm-white: #fff; }
+.ahero--split .ahero__stage, .astage2 .live__stage { background: #f2f2f2; }
+
+/* rounded squares instead of circles: social icons and "play my city" */
+.ahero__icon { border-radius: 8px !important; }
+.astage2 .bit-widget .bit-play-my-city-cta, .astage2 .bit-widget [class*="play-my-city"] a { border-radius: 6px !important; }
+/* press now comes straight after the bio section */
+.ahero--split ~ #sec-press { padding-top: 0; }

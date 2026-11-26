@@ -363,7 +363,7 @@ function loadTour({ artist, appId }, box) {
       'play-my-city-cta-bg-color': 'rgba(0,0,0,0)',
       'play-my-city-cta-text-color': '#000000',
       'play-my-city-cta-border-color': 'rgba(0,0,0,0.25)',
-      'play-my-city-cta-border-radius': '99px',
+      'play-my-city-cta-border-radius': '6px',
     };
     // add ?sample-tour to an artist page's address to preview with Bandsintown's sample dates
     if (new URLSearchParams(location.search).has('sample-tour')) opts['sample-events'] = 'true';

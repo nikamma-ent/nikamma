@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../artist.css?v=2">
+  <link rel="stylesheet" href="../artist.css?v=4">
 </head>
 <body class="is-scroll" data-root="../../">
 
@@ -69,6 +69,18 @@
       </aside>
     </section>
 
+    <!-- press on the left, news on the right: same layout as bio + store -->
+    <section class="abio abio--press" id="sec-press" hidden>
+      <div class="abio__main">
+        <p class="abio__label">press</p>
+        <ol class="apress-list" id="press"></ol>
+      </div>
+      <aside class="abio__store abio__news">
+        <p class="abio__label">news</p>
+        <ol class="anews-list" id="news"></ol>
+      </aside>
+    </section>
+
     <!-- one full row: tour dates on the left, live photos on the right -->
     <section class="astage2" id="sec-stage">
       <div class="box box--tour" id="sec-tour" hidden>
@@ -90,18 +102,6 @@
 
 
 
-
-    <!-- news on the left, press on the right: same layout as bio + store -->
-    <section class="abio abio--press" id="sec-press" hidden>
-      <div class="abio__main">
-        <p class="abio__label">news</p>
-        <ol class="anews-list" id="news"></ol>
-      </div>
-      <aside class="abio__store abio__news">
-        <p class="abio__label">press</p>
-        <ol class="apress-list" id="press"></ol>
-      </aside>
-    </section>
 
     <section class="afilm" id="sec-video" hidden>
       <div class="afilm__inner">
@@ -125,6 +125,6 @@
   <script src="../../merch.js?v=62"></script>
   <script src="../../bios.js?v=62"></script>
   <script src="../../press.js?v=62"></script>
-  <script src="../artist.js?v=2"></script>
+  <script src="../artist.js?v=3"></script>
 </body>
 </html>
