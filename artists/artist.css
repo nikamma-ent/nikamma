@@ -1,3 +1,4 @@
+/* Artist pages (artists/<slug>/index.html): shared styles. Built on the Mom+Pop-style layout tested as hulo-temp. */
 :root {
   --paper: #ffffff;
   --ink: #000000;
@@ -803,3 +804,4 @@ footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
 
 /* nav underline in banana yellow */
 .top__nav a::after { background: var(--accent); }
+.abio__music[hidden] { display: none !important; }

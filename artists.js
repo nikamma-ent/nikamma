@@ -8,7 +8,7 @@
 // bioDoc:     Google Doc with the bio (shared: anyone with the link can view). The
 //             part under the heading "Short" is used, refreshed on the 1st of
 //             every month (tools/sync_bios.py → bios.js).
-// hero:       optional wider photo for the top of the artist page (test design);
+// hero:       optional wider photo for the top of the artist page;
 //             landscape, ideally 3:2 at 2400 × 1600. Falls back to photo.
 // photo:      file in img/artists/ (web-sized JPG, ~1500px, under ~400KB).
 // credit:     photographer of that photo. '' hides it.

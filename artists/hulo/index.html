@@ -9,12 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../styles.css?v=62">
+  <link rel="stylesheet" href="../artist.css?v=2">
 </head>
 <body class="is-scroll" data-root="../../">
 
+  <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
+
   <header class="top">
-    <a href="../../index.html" class="top__logo" aria-label="nikamma, home"><img src="../../img/logo.png" alt="nikamma" width="700" height="134"></a>
+    <a href="../../index.html" class="top__logo" aria-label="nikamma, home"><img src="../../img/mark.png" alt="nikamma" width="140" height="134"></a>
     <nav class="top__nav" aria-label="Main">
       <a href="../../artists.html" aria-current="page">Artists</a>
       <a href="../../work.html">Work</a>
@@ -23,71 +25,82 @@
     </nav>
   </header>
 
+  <p class="acrumb"><a href="../../artists.html">artists</a> / <span id="artist-n"></span> / hulo</p>
+
   <main id="main" class="apage" data-artist="hulo">
-    <section class="ahero">
-      <div class="ahero__inner">
-        <div class="ahero__text">
-          <p class="ahero__crumb"><a href="../../artists.html">artists</a> / <span id="artist-n"></span></p>
-          <h1 class="ahero__name" id="artist-name">Hulo</h1>
-          <p class="ahero__meta" id="artist-meta"></p>
-          <div class="ahero__icons" id="artist-links"></div>
-          <a class="ahero__contact" id="artist-contact" href="mailto:office@nikamma.co">contact</a>
-        </div>
-        <figure class="ahero__photo"><img id="artist-photo" alt=""><figcaption id="artist-credit"></figcaption></figure>
+    <!-- hero: name bottom-left, big photo on the right, on an off-white band -->
+    <section class="ahero ahero--split">
+      <div class="ahero__side">
+        <h1 class="ahero__name" id="artist-name">Hulo</h1>
       </div>
+      <figure class="ahero__photo">
+        <div class="ahero__stage" id="hero-stage"><img id="artist-photo" alt=""></div>
+        <figcaption class="ahero__bar">
+          <span id="artist-credit"></span>
+          <span class="ahero__nav" id="hero-nav" hidden>
+            <button type="button" id="hero-prev" aria-label="Previous photo">←</button>
+            <span id="hero-count"></span>
+            <button type="button" id="hero-next" aria-label="Next photo">→</button>
+          </span>
+        </figcaption>
+      </figure>
     </section>
 
-    <div class="abody">
-      <div class="abody__main">
-        <section class="box box--bio" id="sec-bio">
-          <h2>bio</h2>
-          <div class="bio__copy" id="artist-bio"></div>
-        </section>
 
-        <div class="ticker ticker--artist" id="artist-ticker" aria-label="News" hidden><div class="ticker__track" id="aticker"></div></div>
-
-        <section class="box box--tracks" id="sec-tracks">
-          <h2>music</h2>
+    <!-- bio: plain text that runs down the page; follow links on the right -->
+    <!-- bio + social links on the left, store in the right column -->
+    <section class="abio" id="sec-bio">
+      <div class="abio__main">
+        <div class="bio__copy" id="artist-bio"></div>
+        <div class="abio__follow">
+          <p class="abio__label">follow hulo</p>
+          <div class="ahero__icons" id="artist-links"></div>
+          <p class="ahero__meta" id="artist-meta" hidden></p>
+        </div>
+        <div class="abio__music" id="sec-tracks">
+          <p class="abio__label">music</p>
           <div class="player__frame" id="player"></div>
-        </section>
-
+        </div>
       </div>
-
-      <aside class="abody__side" id="sec-store" hidden>
-        <h2>store</h2>
+      <aside class="abio__store" id="sec-store" hidden>
+        <p class="abio__label">store</p>
         <div class="store" id="store"></div>
         <a class="store__more" id="store-more" target="_blank" rel="noopener">more in the store</a>
       </aside>
-    </div>
+    </section>
 
-    <!-- on stage: tour dates + live photos, one black band across the page -->
-    <div class="astage" id="sec-stage">
-      <div class="astage__in">
-        <section class="box box--tour" id="sec-tour" hidden>
-          <h2>tour dates</h2>
-          <div id="tour"></div>
-        </section>
-
-        <section class="box box--live" id="sec-live" hidden aria-label="Live">
-          <figure class="live__stage"><img id="live-img" alt=""></figure>
-          <div class="live__bar">
-            <p class="live__caption" id="live-caption"></p>
-            <div class="live__nav">
-              <button type="button" id="live-prev" aria-label="Previous photo">←</button>
-              <span id="live-count"></span>
-              <button type="button" id="live-next" aria-label="Next photo">→</button>
-            </div>
+    <!-- one full row: tour dates on the left, live photos on the right -->
+    <section class="astage2" id="sec-stage">
+      <div class="box box--tour" id="sec-tour" hidden>
+        <h2>tour dates</h2>
+        <div id="tour"></div>
+      </div>
+      <div class="box box--live" id="sec-live" hidden aria-label="Live">
+        <figure class="live__stage"><img id="live-img" alt=""></figure>
+        <div class="live__bar">
+          <p class="live__caption" id="live-caption"></p>
+          <div class="live__nav">
+            <button type="button" id="live-prev" aria-label="Previous photo">←</button>
+            <span id="live-count"></span>
+            <button type="button" id="live-next" aria-label="Next photo">→</button>
           </div>
-        </section>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- press: newest 3, one full-width row -->
-    <section class="apress" id="sec-press" hidden>
-      <div class="apress__in">
-        <h2>press</h2>
-        <ol class="press" id="press"></ol>
+
+
+
+    <!-- news on the left, press on the right: same layout as bio + store -->
+    <section class="abio abio--press" id="sec-press" hidden>
+      <div class="abio__main">
+        <p class="abio__label">news</p>
+        <ol class="anews-list" id="news"></ol>
       </div>
+      <aside class="abio__store abio__news">
+        <p class="abio__label">press</p>
+        <ol class="apress-list" id="press"></ol>
+      </aside>
     </section>
 
     <section class="afilm" id="sec-video" hidden>
@@ -100,19 +113,11 @@
       </div>
     </section>
 
-    <nav class="artist__pager" aria-label="More artists">
-      <a id="artist-prev" href="#"></a>
-      <a id="artist-next" href="#"></a>
-    </nav>
+
   </main>
 
-  <footer class="bar">
-    <div class="bar__links">
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://open.spotify.com/" target="_blank" rel="noopener">Spotify</a>
-      <a href="https://www.youtube.com/" target="_blank" rel="noopener">YouTube</a>
-    </div>
-    <p class="bar__note">© <span class="year">2026</span> nikamma</p>
+  <footer class="bar bar--note">
+    <p class="bar__note">© <span class="year">2026</span> nikamma entertainment services private limited. made with claude tokens and very little sleep.</p>
   </footer>
 
   <script src="../../news.js?v=62"></script>
@@ -120,6 +125,6 @@
   <script src="../../merch.js?v=62"></script>
   <script src="../../bios.js?v=62"></script>
   <script src="../../press.js?v=62"></script>
-  <script src="../../script.js?v=62"></script>
+  <script src="../artist.js?v=2"></script>
 </body>
 </html>

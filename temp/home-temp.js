@@ -5,7 +5,7 @@
   const $ = (id) => document.getElementById(id);
 
   // artists that have a test page in this design link there instead
-  const TEMP_PAGES = { hulo: 'artists/hulo-temp/' };
+  const TEMP_PAGES = {};   // none left: the artist pages now use the new design
   const pageFor = (a) => (TEMP_PAGES[a.slug] ? ROOT + TEMP_PAGES[a.slug] : artistUrl(a));
 
   // header: white bar once the photo has scrolled away; hamburger menu

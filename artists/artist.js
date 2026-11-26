@@ -184,7 +184,8 @@ function renderArtist(a, i) {
     const p = document.createElement('p'); p.textContent = t.trim(); return p;
   }));
   show('sec-bio', !!bio);
-  mountPlayer($('player'), a);   // spotify, right after the bio
+  // spotify after the social links; no link yet → no music block at all
+  if (spotifyEmbed(a.spotify)) mountPlayer($('player'), a); else show('sec-tracks', false);
 
 
   // tour dates: loads when it scrolls near the screen
