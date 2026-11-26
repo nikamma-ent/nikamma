@@ -88,3 +88,12 @@
 }
 .roster2 a { white-space: nowrap; }   /* each name on one line */
 .artists-page .about2__text { padding-right: 24px; }
+
+/* Artists page on phones: keep the two columns — names bottom-left, a tall (3:4) photo on the right.
+   Long names stay on one line and may run over the photo. */
+@media (max-width: 760px) {
+  .artists-page .about2 { grid-template-columns: minmax(0, 32%) minmax(0, 68%); align-items: end; gap: 0; padding: 28px 20px 48px; min-height: calc(100svh - 183px); }
+  .artists-page .about2__photos { order: 0; aspect-ratio: 3 / 4; }
+  .artists-page .about2__text { position: relative; z-index: 2; min-width: 0; padding-right: 12px; gap: 10px; }
+  .roster2 a { font-size: 22px; }
+}

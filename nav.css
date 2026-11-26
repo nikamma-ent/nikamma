@@ -1,0 +1,86 @@
+/* Phones: the nav links fold into a hamburger on the left, the monkey stays on the right.
+   nav.js adds the button and the full-screen menu to every page. Loaded last on each page. */
+
+.navx__btn, .navx { display: none; }
+
+@media (max-width: 760px) {
+  .top { flex-direction: row !important; justify-content: flex-start; padding: 16px 20px !important; }
+  .top__nav { display: none !important; }
+  .top__logo { margin-left: auto; }
+  .top__logo img { height: 36px !important; width: auto; }
+
+  /* hamburger (left) and ✕ (menu): icon only, same 44px tap target in the same spot */
+  .navx__btn, .navx__close {
+    display: inline-grid; place-items: center start; width: 44px; height: 44px;
+    padding: 0; margin: 0; border: 0; background: none; cursor: pointer;
+  }
+  .navx__btn { color: #000; }
+  .navx__close { color: #fff; }
+  .navx__burger { display: grid; gap: 5px; width: 24px; }
+  .navx__burger i { display: block; height: 2px; background: currentColor; border-radius: 1px; }
+  .navx__close svg { width: 24px; height: 24px; stroke: currentColor; stroke-width: 2; stroke-linecap: round; fill: none; display: block; }
+
+  /* the menu: full screen, black, big white lowercase links */
+  .navx {
+    position: fixed; inset: 0; z-index: 100; background: #000; color: #fff;
+    display: flex; flex-direction: column; padding: 0 20px 28px; box-sizing: border-box; overflow-y: auto;
+    opacity: 0; visibility: hidden; transition: opacity .25s ease, visibility 0s linear .25s;
+  }
+  .navx.is-open { opacity: 1; visibility: visible; transition: opacity .25s ease; }
+  /* nav.js sets --navx-top/--navx-h so ✕ and the monkey sit exactly where ☰ and the monkey were */
+  .navx__head {
+    flex: none; display: flex; align-items: center; box-sizing: border-box;
+    margin-top: var(--navx-top, 0px); min-height: var(--navx-h, 76px);
+  }
+  .navx__head > a { margin-left: auto; }
+  .navx__head img { height: 36px; width: auto; display: block; }
+
+  .navx__links { display: grid; gap: 6px; margin: auto 0; padding: 32px 0; }
+  .navx__links a {
+    justify-self: start; position: relative; color: #fff; text-decoration: none;
+    font: 400 clamp(44px, 13vw, 64px)/1.1 var(--sans, 'Avenir Next', Avenir, sans-serif); letter-spacing: -.03em;
+  }
+  /* same yellow line as the desktop nav: grows out from the middle */
+  .navx__links a::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 4px;
+    background: var(--accent, #ffd60a); transform: scaleX(0); transform-origin: center;
+    transition: transform .25s ease;
+  }
+  .navx__links a:hover::after, .navx__links a:focus-visible::after, .navx__links a:active::after,
+  .navx__links a[aria-current="page"]::after { transform: scaleX(1); }
+  .navx__links a:focus-visible { outline: none; }
+
+  /* bottom right: follow us + mailing list */
+  .navx__foot { flex: none; display: grid; gap: 28px; justify-items: end; text-align: right; margin-left: auto; width: min(100%, 340px); }
+  .navx__label { font-size: 15px; font-weight: 400; color: rgba(255,255,255,.6); margin: 0 0 12px; }
+  .navx__social { display: flex; gap: 10px; justify-content: flex-end; }
+  .navx__social a {
+    display: grid; place-items: center; width: 44px; height: 44px; box-sizing: border-box;
+    border: 1px solid #fff; border-radius: 8px; color: #fff; transition: background .2s, border-color .2s, color .2s;
+  }
+  .navx__social a:hover, .navx__social a:focus-visible { background: var(--accent, #ffd60a); border-color: var(--accent, #ffd60a); color: #000; }
+  .navx__social svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .navx__list { width: 100%; }
+  .navx__row { display: flex; gap: 8px; }
+  .navx__row input {
+    flex: 1 1 auto; min-width: 0; height: 44px; box-sizing: border-box; padding: 0 14px;
+    border: 1px solid #fff; border-radius: 8px; background: transparent; color: #fff;
+    font: 400 16px/1 var(--sans, 'Avenir Next', Avenir, sans-serif);
+  }
+  .navx__row input::placeholder { color: rgba(255,255,255,.55); }
+  .navx__row input:focus { outline: none; box-shadow: 0 0 0 3px var(--accent, #ffd60a); }
+  .navx__row button {
+    flex: 0 0 auto; height: 44px; padding: 0 18px; border: 1px solid #fff; border-radius: 8px;
+    background: transparent; color: #fff; font: 400 16px/1 var(--sans, 'Avenir Next', Avenir, sans-serif); cursor: pointer;
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .navx__row button:hover, .navx__row button:focus-visible { background: var(--accent, #ffd60a); border-color: var(--accent, #ffd60a); color: #000; }
+  .navx__row button[disabled] { opacity: .5; }
+  .navx__note { margin: 10px 0 0; min-height: 1.3em; font-size: 14px; color: rgba(255,255,255,.6); }
+  .navx__list.is-done .navx__row { display: none; }
+  .navx__list.is-done .navx__note { color: #fff; }
+  .navx__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  body.navx-lock { overflow: hidden; }
+}
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) { .navx, .navx__links a::after { transition: none; } }

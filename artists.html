@@ -10,7 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=71">
-  <link rel="stylesheet" href="about.css?v=6">
+  <link rel="stylesheet" href="about.css?v=10">
+  <link rel="stylesheet" href="nav.css?v=4">
 </head>
 <body data-root="" class="is-scroll about-page artists-page">
 
@@ -69,7 +70,14 @@
         li.append(link); list.append(li);
       });
       const first = list.querySelector('a'); if (first) first.classList.add('is-active');
+      // phones have no hover: step through the artists slowly instead
+      if (window.matchMedia('(hover: none)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const links = [...list.querySelectorAll('a')];
+        let i = 0;
+        setInterval(() => { i = (i + 1) % links.length; links[i].dispatchEvent(new Event('mouseenter')); }, 3000);
+      }
     })();
   </script>
+  <script src="nav.js?v=4"></script>
 </body>
 </html>

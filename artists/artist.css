@@ -861,3 +861,16 @@ a.anews__card:hover .anews__text { text-decoration: underline; text-underline-of
 .abio__music .player__frame { flex: none; }
 .abio__music .player__frame iframe { height: 744px !important; min-height: 0 !important; flex: none; }
 .abio__music { flex: none; }
+
+/* phones: keep the two columns — name bottom-left, a tall (3:4) photo on the right */
+@media (max-width: 760px) {
+  .ahero--split {
+    grid-template-columns: minmax(0, 32%) minmax(0, 68%) !important;
+    align-items: end; min-height: 0; padding: 28px 20px 40px;
+  }
+  .ahero--split .ahero__side { order: 0; padding: 0 12px 0 0; }
+  .ahero--split .ahero__side { position: relative; z-index: 2; min-width: 0; overflow: visible; }
+  .ahero--split .ahero__name { font-size: 22px; line-height: 1.1; white-space: nowrap; }   /* one line; may run over the photo */
+  .ahero--split .ahero__stage { aspect-ratio: 3 / 4; }
+  .ahero--split ~ .abio { padding-top: 24px !important; }
+}
