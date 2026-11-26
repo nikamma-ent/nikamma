@@ -9,6 +9,7 @@
 // category: one word tag, e.g. 'live', 'release', 'announcement'
 // img:      photo, ideally in img/news/ (landscape works best)
 // body:     paragraphs, in order
+// links:    optional buttons under the text: [{ label, url }]
 // list:     optional box on the right, e.g. tour dates: { title, items: [...] }
 window.NIKAMMA_POSTS = [
   {
@@ -35,6 +36,32 @@ window.NIKAMMA_POSTS = [
         "10th October — Goa",
         "15th October — Mumbai",
         "16th October — Bengaluru"
+      ]
+    }
+  },
+  {
+    "slug": "shashwat-bulusu-pinocchio-out-now",
+    "date": "2026-08-21",
+    "title": "Pinocchio Out Now!",
+    "artists": [
+      "shashwat-bulusu"
+    ],
+    "category": "release",
+    "img": "https://f4.bcbits.com/img/a1621554334_10.jpg",
+    "body": [
+      "Shashwat Bulusu’s second album, Pinocchio, is out now: a bittersweet autobiography disguised as the story of Pinocchio.",
+      "Twelve songs written over more than a decade, following his acclaimed debut Fitrat. Rather than retelling the fairy tale, Bulusu uses it to work through surviving abuse, self-harm, compulsive lying and narcissism in real time, and to ask what it takes to become human.",
+      "Shimmering guitars, electronic textures and intimate songwriting sit side by side, in a record that doesn’t promise the wounds disappear but learns to live beside them. The album comes with artwork painted by Bulusu himself and a self-published companion book of essays, illustrations and lyrics. Listening sessions across India and a national tour follow later this year."
+    ],
+    "links": [
+      { "label": "stream pinocchio", "url": "https://shashwatbulusu.bandcamp.com/album/pinocchio" }
+    ],
+    "list": {
+      "title": "Pinocchio",
+      "items": [
+        "Out 21 August 2026",
+        "Produced by Shashwat Bulusu, Ritwik De and Amar Pandey",
+        "Mixed and mastered by Jonathan Anderson at Protection Island, Vancouver"
       ]
     }
   }

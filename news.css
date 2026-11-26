@@ -21,3 +21,6 @@
 
 .news2__tags { margin: 0; }
 .news-page .about2__text .news2__tags { order: -1; }
+.news2__links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.news2__btn { display: inline-block; padding: 9px 16px; border: 1px solid #000; border-radius: 6px; color: #000; text-decoration: none; font-size: 14px; }
+.news2__btn:hover { background: var(--accent); border-color: var(--accent); }

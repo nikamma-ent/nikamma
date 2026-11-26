@@ -43,6 +43,14 @@
   $('post-date').after(tags(post));
   $('post-img').src = post.img || 'img/home.jpg';
   $('post-body').replaceChildren(...(post.body || []).map((t) => { const p = document.createElement('p'); p.textContent = t; return p; }));
+  if ((post.links || []).length) {
+    const row = document.createElement('p'); row.className = 'news2__links';
+    post.links.forEach((l) => {
+      const a = document.createElement('a'); a.className = 'news2__btn'; a.href = l.url;
+      a.target = '_blank'; a.rel = 'noopener'; a.textContent = `${l.label} ↗`; row.append(a);
+    });
+    $('post-body').append(row);
+  }
 
   const side = $('post-side');
   if (post.list && (post.list.items || []).length) {

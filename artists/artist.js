@@ -248,7 +248,7 @@ function renderArtist(a, i) {
       el.className = 'anews__card';
       if (n.link) { el.href = n.link; if (/^https?:/.test(n.link)) { el.target = '_blank'; el.rel = 'noopener'; } }
       const im = document.createElement('img');
-      im.src = ROOT + (n.img || `img/artists/${a.photo}`); im.alt = ''; im.loading = 'lazy';
+      im.src = /^https?:/.test(n.img || "") ? n.img : ROOT + (n.img || `img/artists/${a.photo}`); im.alt = ''; im.loading = 'lazy';
       const t = document.createElement('p'); t.className = 'anews__text'; t.textContent = n.text;
       el.append(im, t); li.append(el); $('news').append(li);
     });
