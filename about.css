@@ -70,3 +70,21 @@
 .about2__frame.is-on { opacity: 1; }
 .about2__frame img { position: static; opacity: 1; flex: 1 1 0; min-width: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
 .about2__frame.is-pair { gap: 6px; background: #fff; }
+
+
+/* ---------- Artists page: same layout, names instead of text ---------- */
+.artists-page .top, .artists-page .about2 { background: #fff; }
+.roster2__label { font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--muted); margin-bottom: 6px; }
+.roster2__label span { font-weight: 400; }
+.roster2 { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.roster2 a {
+  font: 400 30px/1.15 var(--sans); letter-spacing: -.005em; text-decoration: none; color: #c4c4c4;
+  transition: color .2s;
+}
+.roster2 a.is-active, .roster2 a:hover, .roster2 a:focus-visible { color: #000; }
+.roster2__photos img { transition: opacity .5s ease; }
+@media (max-width: 860px) {
+  .roster2 a { font-size: 26px; }
+}
+.roster2 a { white-space: nowrap; }   /* each name on one line */
+.artists-page .about2__text { padding-right: 24px; }
