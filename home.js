@@ -25,7 +25,7 @@
         const data = await res.json().catch(() => ({}));
         if (!res.ok || data.status === 'failed') throw new Error('failed');
         form.classList.add('is-done');
-        note.textContent = "you're in. check your inbox to confirm.";
+        note.textContent = 'we promise to not spam you!';
       } catch (err) {
         btn.disabled = false;
         if (err instanceof TypeError) { note.textContent = ''; form.submit(); return; }
