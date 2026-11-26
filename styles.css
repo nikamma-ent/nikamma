@@ -102,7 +102,7 @@ h1, h2, h3, p { margin: 0; }
 .top__nav a::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -3px; height: 2px;
   background: var(--accent);
-  transform: scaleX(0); transform-origin: left;
+  transform: scaleX(0); transform-origin: center;
   transition: transform .25s ease;
 }
 .top__nav a:hover::after, .top__nav a[aria-current="page"]::after { transform: scaleX(1); }

@@ -5,143 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>nikamma (layout test)</title>
   <meta name="robots" content="noindex">
-  <meta name="description" content="nikamma is a small independent music company from India. We work with artists, make records happen and build small, strange things for the people who listen.">
-  <meta property="og:title" content="nikamma">
-  <meta property="og:description" content="A small independent music company from India.">
-  <meta property="og:image" content="https://nikamma.co/img/home.jpg">
+  <meta name="description" content="nikamma is a small independent music company from India.">
   <link rel="icon" href="img/mark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=70">
-  <link rel="stylesheet" href="temp/home-temp.css?v=8">
+  <link rel="stylesheet" href="styles.css?v=71">
+  <link rel="stylesheet" href="about.css?v=6">
+  <link rel="stylesheet" href="news.css?v=3">
+  <link rel="stylesheet" href="temp/home-big.css?v=2">
 </head>
-<body class="home home-temp is-scroll">
+<body data-root="" class="is-scroll about-page news-page home-big">
+
+  <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
 
   <header class="top">
-    <a href="index-temp.html" class="top__logo" aria-label="nikamma, home"><img src="img/mark-white.png" alt="nikamma"></a>
+    <a href="index-temp.html" class="top__logo" aria-label="nikamma, home"><img src="img/mark.png" alt="nikamma" width="140" height="134"></a>
     <nav class="top__nav" aria-label="Main">
       <a href="artists.html">Artists</a>
       <a href="news.html">News</a>
-      <a href="work.html">Work</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
     </nav>
-    <button type="button" class="top__menu" id="menu-open" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
-      <span class="top__burger" aria-hidden="true"><i></i><i></i><i></i></span> menu
-    </button>
   </header>
 
-  <!-- full-screen menu (hamburger) -->
-  <div class="menu" id="menu" hidden>
-    <button type="button" class="menu__close" id="menu-close" aria-label="Close menu">close ✕</button>
-    <nav class="menu__nav" aria-label="Menu">
-      <a href="index-temp.html">home</a>
-      <a href="artists.html">artists</a>
-      <a href="work.html">work</a>
-      <a href="about.html">about</a>
-      <a href="contact.html">contact</a>
-    </nav>
-    <p class="menu__note">we're in the monkey business.</p>
-  </div>
-
-  <main id="main" class="hpage">
-  <section class="frame frame--tall">
-    <!-- slider: one slide per artist photo, built by temp/home-temp.js -->
-    <div class="frame__clip" id="hero-slides">
-      <img class="frame__photo" src="img/home.jpg" alt="Hulo playing live under stage lights" width="2000" height="1333">
-    </div>
-
-    <div class="frame__inner">
-      <div class="frame__center">
-        <h1 class="frame__logo"><img src="img/wordmark-white.png" alt="nikamma"></h1>
-        <p class="frame__tag">we're in the <em>monkey business</em>.</p>
-        <div class="frame__social">
-          <a href="https://open.spotify.com/" target="_blank" rel="noopener" aria-label="Spotify">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.4 9.8c3.3-.9 6.8-.5 9.4 1M7.9 12.7c2.7-.7 5.5-.4 7.8.9M8.5 15.4c2.1-.5 4.1-.3 5.9.7"/></svg>
-          </a>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+  <main id="main">
+    <!-- first screen: logo, line, socials, what we do -->
+    <section class="hb">
+      <div class="hb__main">
+        <h1 class="hb__brand"><img class="hb__logo" src="img/logo.png" alt="nikamma" width="700" height="134"></h1>
+        <p class="hb__tag">we're in the <em>monkey business</em>.</p>
+        <div class="hb__social">
+          <!-- TODO: nikamma's own profile links -->
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.6" cy="7.4" r=".7" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube">
+          <a href="https://open.spotify.com/" target="_blank" rel="noopener" aria-label="Spotify" title="Spotify">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M7.4 9.8c3.3-.9 6.8-.5 9.4 1M7.9 12.7c2.7-.7 5.5-.4 7.8.9M8.5 15.4c2.1-.5 4.1-.3 5.9.7"/></svg>
+          </a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube" title="YouTube">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="3.5"/><path d="M10.5 9.6v4.8l4-2.4z" fill="currentColor" stroke="none"/></svg>
           </a>
-          <a href="contact.html" aria-label="Email">
+          <a href="contact.html" aria-label="Email" title="Email">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg>
           </a>
         </div>
       </div>
-    </div>
-    <a class="frame__who" id="hero-who" hidden></a>
-    <div class="frame__dots" id="hero-dots"></div>
-    <a class="frame__down" href="#latest">scroll ↓</a>
-  </section>
-
-  <!-- the news ticker sits under the full-screen photo in this design -->
-  <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
-
-  <!-- latest releases: every album on the roster's Bandcamp, newest first (merch.js) -->
-  <section class="hband hband--grey" id="latest" hidden>
-    <div class="hband__in">
-      <h2 class="hband__label">latest releases</h2>
-      <div class="rel">
-        <a class="rel__covers" id="rel-covers" target="_blank" rel="noopener">
-          <img class="rel__back" id="rel-back" alt="">
-          <img class="rel__front" id="rel-front" alt="">
-        </a>
-        <div class="rel__text">
-          <p class="rel__artist"><a id="rel-artist"></a></p>
-          <h3 class="rel__title" id="rel-title"></h3>
-          <p class="rel__meta" id="rel-meta"></p>
-          <a class="rel__link" id="rel-link" target="_blank" rel="noopener">listen / buy ↗</a>
-          <div class="rel__nav" id="rel-nav">
-            <button type="button" id="rel-prev" aria-label="Previous release">←</button>
-            <span id="rel-count"></span>
-            <button type="button" id="rel-next" aria-label="Next release">→</button>
-          </div>
-        </div>
+      <div class="hb__what">
+        <h2>what we do</h2>
+        <ul>
+          <li>artist development</li>
+          <li>label services</li>
+          <li>live experiences</li>
+          <li>creative projects</li>
+        </ul>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- news: news.js (the bulletin board later) -->
-  <section class="hband" id="home-news" hidden>
-    <div class="hband__in">
-      <h2 class="hband__label">news</h2>
-      <ol class="hnews" id="hnews"></ol>
-    </div>
-  </section>
+    <!-- the artists, big -->
+    <section class="hb-artists">
+      <h2>artists <span>(a–z)</span></h2>
+      <ul class="hb__names" id="hb-names"></ul>
+    </section>
 
-  <!-- the roster -->
-  <section class="hband hband--black" id="home-artists">
-    <div class="hband__in">
-      <div class="hband__head">
-        <h2 class="hband__label">artists</h2>
-        <a class="hband__more" href="artists.html">all artists →</a>
+    <!-- the newest three posts -->
+    <section class="hb-latest">
+      <div class="hb-latest__head">
+        <h2>latest</h2>
+        <a class="news2__more" href="news.html">all news →</a>
       </div>
-      <div class="hartists" id="hartists"></div>
-    </div>
-  </section>
+      <ul class="news2-grid" id="hb-latest"></ul>
+    </section>
+  </main>
 
-  <!-- press across the roster: newest 3 -->
-  <section class="hband hband--grey" id="home-press" hidden>
-    <div class="hband__in">
-      <h2 class="hband__label">press</h2>
-      <ol class="press" id="hpress"></ol>
-    </div>
-  </section>
-</main>
-
-  <footer class="bar">
+  <footer class="bar bar--note">
     <p class="bar__note">© <span class="year">2026</span> nikamma entertainment services private limited. made with claude tokens and very little sleep.</p>
   </footer>
 
   <script src="news.js?v=70"></script>
   <script src="artists.js?v=70"></script>
-  <script src="merch.js?v=70"></script>
-  <script src="press.js?v=70"></script>
   <script src="posts.js?v=4"></script>
   <script src="script.js?v=70"></script>
-  <script src="temp/home-temp.js?v=3"></script>
+  <script src="temp/home-big.js?v=2"></script>
 </body>
 </html>
