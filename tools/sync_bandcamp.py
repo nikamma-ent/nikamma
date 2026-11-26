@@ -7,7 +7,7 @@ Reads the Bandcamp link of every artist in artists.js, then:
 and writes them to merch.js
 (window.NIKAMMA_MERCH = { slug: [ {kind, title, type, price, year, url, img}, ... ] }).
 Albums that already show up as merch (e.g. with a vinyl) aren't listed twice.
-Single tracks are left out.
+Singles (Bandcamp track pages) are included too, as 'digital single'.
 
 Runs every day from .github/workflows/bandcamp.yml; run it by hand with
     python3 tools/sync_bandcamp.py
@@ -84,7 +84,7 @@ def album(url):
     return {
         'kind': 'album',
         'title': cur.get('title') or '',
-        'type': 'digital album',
+        'type': 'digital single' if '/track/' in url else 'digital album',
         'price': '',
         'year': year.group(1) if year else '',
         'url': url,
@@ -95,11 +95,11 @@ def album(url):
 def music(base, skip):
     final, page = get(base + '/music')
     path = urlparse(final).path
-    if path.startswith('/album/'):  # only one release: Bandcamp opens it directly
+    if path.startswith(('/album/', '/track/')):  # only one release: Bandcamp opens it directly
         urls = [base + path]
     else:
         urls = []
-        for h in re.findall(r'<a href="(/album/[^"?#]+)"', page):
+        for h in re.findall(r'<a href="(/(?:album|track)/[^"?#]+)"', page):
             u = base + h
             if u not in urls:
                 urls.append(u)

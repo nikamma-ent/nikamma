@@ -815,3 +815,37 @@ footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
 .astage2 .bit-widget .bit-play-my-city-cta, .astage2 .bit-widget [class*="play-my-city"] a { border-radius: 6px !important; }
 /* press now comes straight after the bio section */
 .ahero--split ~ #sec-press { padding-top: 0; }
+
+
+/* news: cards with a photo, like the store */
+.anews-list { gap: 28px; }
+.anews__card { display: grid; gap: 10px; text-decoration: none; }
+.anews__card img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: #f2f2f2; display: block; }
+.anews__card .anews__text { font-size: 18px; line-height: 22.5px; }
+a.anews__card .anews__text::after { content: " ↗"; color: var(--muted); }
+a.anews__card:hover .anews__text { text-decoration: underline; text-underline-offset: 4px; }
+.anews-list a::after { content: none; }
+
+/* tickets: outlined box like "play my city" (not the yellow pill) */
+.astage2 .bit-widget .bit-offers { background: transparent !important; border: 1px solid rgba(0,0,0,.45) !important; border-radius: 6px !important; color: #000 !important; }
+.astage2 .bit-widget .bit-offers * { color: #000 !important; }
+.astage2 .bit-widget .bit-offers:hover { border-color: #000 !important; }
+
+/* videos: black band, but heading and link set like the rest of the page */
+.afilm__inner { max-width: none; padding: 96px var(--mp-side); }
+.afilm__head { margin-bottom: 24px; }
+.afilm h2 { font-size: 18px; font-weight: 400; letter-spacing: 0; color: #fff; }
+.afilm__all { font-size: 14px; color: #fff; border-bottom: 1px solid rgba(255,255,255,.4); padding-bottom: 2px; }
+.afilm__all:hover { color: #fff; border-bottom-color: #fff; }
+
+/* yellow on hover for every button and link-button */
+.ahero__icon, .astage2 .bit-widget .bit-offers, .astage2 .bit-widget .bit-play-my-city-cta,
+.astage2 .tour__pager button, .live__nav button { transition: background .15s, border-color .15s, color .15s; }
+.ahero__icon:hover, .ahero__icon:focus-visible { background: var(--accent); border-color: var(--accent); color: #000; }
+.astage2 .bit-widget .bit-offers:hover,
+.astage2 .bit-widget .bit-play-my-city-cta:hover,
+.astage2 .bit-widget [class*="play-my-city"] a:hover { background: var(--accent) !important; border-color: var(--accent) !important; color: #000 !important; }
+.astage2 .tour__pager button:hover:not(:disabled), .live__nav button:hover { background: var(--accent); border-color: var(--accent); color: #000; }
+.store__more:hover, .apress-list a:hover .apress__title, a.anews__card:hover .anews__text { text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
+.apress-list a:hover .apress__title, a.anews__card:hover .anews__text { display: inline; }
+.afilm__all:hover { color: var(--accent); border-bottom-color: var(--accent); }

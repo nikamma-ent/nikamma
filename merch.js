@@ -19,6 +19,15 @@ window.NIKAMMA_MERCH = {
       "year": "2026",
       "url": "https://hulo.bandcamp.com/album/damage-control",
       "img": "https://f4.bcbits.com/img/a0166239920_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "beenherebefore",
+      "type": "digital single",
+      "price": "",
+      "year": "2025",
+      "url": "https://hulo.bandcamp.com/track/beenherebefore",
+      "img": "https://f4.bcbits.com/img/a0518336183_16.jpg"
     }
   ],
   "shashwat-bulusu": [
@@ -30,6 +39,15 @@ window.NIKAMMA_MERCH = {
       "year": "2026",
       "url": "https://shashwatbulusu.bandcamp.com/album/pinocchio",
       "img": "https://f4.bcbits.com/img/a1621554334_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Padmini",
+      "type": "digital single",
+      "price": "",
+      "year": "2026",
+      "url": "https://shashwatbulusu.bandcamp.com/track/padmini",
+      "img": "https://f4.bcbits.com/img/a0570821479_16.jpg"
     },
     {
       "kind": "album",
@@ -57,6 +75,42 @@ window.NIKAMMA_MERCH = {
       "year": "2022",
       "url": "https://shashwatbulusu.bandcamp.com/album/aabad",
       "img": "https://f4.bcbits.com/img/a2549337076_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Winter Winter",
+      "type": "digital single",
+      "price": "",
+      "year": "2021",
+      "url": "https://shashwatbulusu.bandcamp.com/track/winter-winter",
+      "img": "https://f4.bcbits.com/img/a1433902382_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Sunset by the Vembanad",
+      "type": "digital single",
+      "price": "",
+      "year": "2019",
+      "url": "https://shashwatbulusu.bandcamp.com/track/sunset-by-the-vembanad",
+      "img": "https://f4.bcbits.com/img/a2481519185_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Forestfire",
+      "type": "digital single",
+      "price": "",
+      "year": "2019",
+      "url": "https://shashwatbulusu.bandcamp.com/track/forestfire",
+      "img": "https://f4.bcbits.com/img/a0071550531_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Playground",
+      "type": "digital single",
+      "price": "",
+      "year": "2019",
+      "url": "https://shashwatbulusu.bandcamp.com/track/playground",
+      "img": "https://f4.bcbits.com/img/a3596914578_16.jpg"
     }
   ],
   "begum": [
@@ -68,6 +122,51 @@ window.NIKAMMA_MERCH = {
       "year": "2022",
       "url": "https://begum.bandcamp.com/album/are-you-ok",
       "img": "https://f4.bcbits.com/img/a1800322033_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Meena Lisa",
+      "type": "digital single",
+      "price": "",
+      "year": "2022",
+      "url": "https://begum.bandcamp.com/track/meena-lisa-2",
+      "img": "https://f4.bcbits.com/img/a2406126791_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Maybe Baby",
+      "type": "digital single",
+      "price": "",
+      "year": "2022",
+      "url": "https://begum.bandcamp.com/track/maybe-baby-2",
+      "img": "https://f4.bcbits.com/img/a4285654923_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Only If You Care",
+      "type": "digital single",
+      "price": "",
+      "year": "2021",
+      "url": "https://begum.bandcamp.com/track/only-if-you-care",
+      "img": "https://f4.bcbits.com/img/a1641050789_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Better Person",
+      "type": "digital single",
+      "price": "",
+      "year": "2021",
+      "url": "https://begum.bandcamp.com/track/better-person",
+      "img": "https://f4.bcbits.com/img/a4188834376_16.jpg"
+    },
+    {
+      "kind": "album",
+      "title": "Sweet Nectar",
+      "type": "digital single",
+      "price": "",
+      "year": "2018",
+      "url": "https://begum.bandcamp.com/track/sweet-nectar",
+      "img": "https://f4.bcbits.com/img/a2470804312_16.jpg"
     },
     {
       "kind": "album",

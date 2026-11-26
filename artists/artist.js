@@ -227,7 +227,7 @@ function renderArtist(a, i) {
     const pinnedKeys = new Set(pinned.map(key));
     const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
     const nm = a.name.toLowerCase();
-    const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 4);
+    const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 3);   // 3 at a time
     const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     press.forEach((p) => {
       const li = document.createElement('li');
@@ -238,11 +238,15 @@ function renderArtist(a, i) {
       $('press').append(li);
     });
     news.forEach((n) => {
+      // a card: photo (the item's img, else the artist's photo), then the line
       const li = document.createElement('li');
-      const el = document.createElement(n.link ? 'a' : 'p');
-      el.textContent = n.text;
+      const el = document.createElement(n.link ? 'a' : 'div');
+      el.className = 'anews__card';
       if (n.link) { el.href = n.link; if (/^https?:/.test(n.link)) { el.target = '_blank'; el.rel = 'noopener'; } }
-      li.append(el); $('news').append(li);
+      const im = document.createElement('img');
+      im.src = ROOT + (n.img || `img/artists/${a.photo}`); im.alt = ''; im.loading = 'lazy';
+      const t = document.createElement('p'); t.className = 'anews__text'; t.textContent = n.text;
+      el.append(im, t); li.append(el); $('news').append(li);
     });
     if (!news.length) $('news').innerHTML = '<li><p class="anews__empty">nothing yet.</p></li>';
     show('sec-press', press.length > 0 || news.length > 0);
@@ -268,8 +272,8 @@ function renderArtist(a, i) {
   const STORE_CAP = 4;
   const bcAll = (window.NIKAMMA_MERCH || {})[a.slug] || [];
   const asCard = (m) => ({
-    title: m.title, url: m.url, img: m.img, where: 'bandcamp',
-    note: [m.type, m.price, m.year].filter(Boolean).join(' · '),
+    title: m.title, url: m.url, img: m.img,
+    note: [m.type, m.price, m.year].filter(Boolean).join(' · '),   // no "bandcamp" chip: first chip (yellow) is the type
   });
   const bcMerch = bcAll.filter((m) => m.kind === 'merch').map(asCard);
   const shops = a.store || [];
@@ -356,10 +360,10 @@ function loadTour({ artist, appId }, box) {
       'header-capitalization': 'lowercase',
       'location-capitalization': 'lowercase',
       'venue-capitalization': 'lowercase',
-      'event-ticket-cta-bg-color': accent,
+      'event-ticket-cta-bg-color': 'rgba(0,0,0,0)',   // tickets: outlined box, same as "play my city"
       'event-ticket-cta-text-color': '#000000',
-      'event-ticket-cta-border-color': accent,
-      'event-ticket-cta-border-radius': '99px',
+      'event-ticket-cta-border-color': 'rgba(0,0,0,0.45)',
+      'event-ticket-cta-border-radius': '6px',
       'play-my-city-cta-bg-color': 'rgba(0,0,0,0)',
       'play-my-city-cta-text-color': '#000000',
       'play-my-city-cta-border-color': 'rgba(0,0,0,0.25)',
