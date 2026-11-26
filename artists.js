@@ -129,8 +129,12 @@ window.NIKAMMA_ARTISTS = [
     photo: 'begum.jpg',
     credit: '',
     bioDoc: 'https://docs.google.com/document/d/1GllctKWiAUX0NmC_XU0HO0rA2HqAiZasdBUNdI5brGs/edit',
-    spotify: '', // TODO: add Begum's Spotify link
+    spotify: 'https://open.spotify.com/artist/6w9HvCLYiBHxp7YcN7zCvF',   // their top tracks
     links: {
+      Spotify: 'https://open.spotify.com/artist/6w9HvCLYiBHxp7YcN7zCvF',
+      'Apple Music': 'https://music.apple.com/in/artist/begum/971058291',
+      Instagram: 'https://www.instagram.com/begumdelhi/',
+      YouTube: 'https://www.youtube.com/@BegumBand',
       Bandcamp: 'https://begum.bandcamp.com',
     },
     press: {
@@ -143,9 +147,10 @@ window.NIKAMMA_ARTISTS = [
     },
     bandsintown: { artist: 'id_15664566', appId: '' }, // bandsintown.com/a/15664566-begum
     live: [],
+    video: { id: 'Qn6c0cQ6qGU', title: 'Better Person' },
     store: [
-      { title: 'We Are Okay! tour tee', where: 'begumdarbaar.com', note: 'pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
-      { title: 'AMFS tee', where: 'begumdarbaar.com', note: 'pre-order, pick up at the show', url: 'https://begumdarbaar.com', img: 'img/store/begum-amfs-tee.jpg' },
+      { title: 'We Are Okay! tour tee', where: 'tee', note: 'sold out', url: 'https://begumdarbaar.com', img: 'img/store/begum-tour-tee.jpg' },
+      { title: 'AMFS tee', where: 'tee', note: 'sold out', url: 'https://begumdarbaar.com', img: 'img/store/begum-amfs-tee.jpg' },
     ],
   },
 ];
