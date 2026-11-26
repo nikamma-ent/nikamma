@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=71">
   <link rel="stylesheet" href="about.css?v=6">
-  <link rel="stylesheet" href="home.css?v=1">
+  <link rel="stylesheet" href="home.css?v=2">
 </head>
 <body data-root="" class="is-scroll about-page home-big">
 
@@ -69,6 +69,16 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="1.5"/><path d="M4 7l8 6 8-6"/></svg>
           </a>
         </div>
+        <!-- mailing list: Kit form 10248609 (subscribers land in Kit, which sends the confirmation email) -->
+        <form class="hb-list" id="hb-list" action="https://app.kit.com/forms/10248609/subscriptions" method="post" target="_blank">
+          <h2 class="hb-listen__label">join the mailing list</h2>
+          <div class="hb-list__row">
+            <label class="hb-list__sr" for="hb-list-email">email address</label>
+            <input class="hb-list__input" id="hb-list-email" name="email_address" type="email" placeholder="your email" autocomplete="email" required>
+            <button class="hb-list__btn" type="submit">join</button>
+          </div>
+          <p class="hb-list__note" id="hb-list-note" aria-live="polite"></p>
+        </form>
       </div>
     </section>
   </main>
@@ -81,6 +91,6 @@
   <script src="artists.js?v=70"></script>
   <script src="posts.js?v=4"></script>
   <script src="script.js?v=70"></script>
-  <script src="home.js?v=1"></script>
+  <script src="home.js?v=2"></script>
 </body>
 </html>
