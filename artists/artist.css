@@ -794,8 +794,8 @@ footer.bar { position: relative; z-index: 2; background: #fff; }
 /* footer: just the line, on the left */
 footer.bar--note { justify-content: flex-start; padding-left: 48px; padding-right: 48px; }
 /* footer: black, carrying on from the videos */
-footer.bar--note { background: #000 !important; color: rgba(255,255,255,.7); padding-top: 28px; padding-bottom: 32px; }
-footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
+footer.bar--note { background: #000 !important; color: #fff; padding-top: 28px; padding-bottom: 32px; }
+footer.bar--note .bar__note { color: #fff; }
 
 
 /* seal the 1px seams between sections (the fixed hero was peeking through as thin lines):
@@ -873,4 +873,5 @@ a.anews__card:hover .anews__text { text-decoration: underline; text-underline-of
   .ahero--split .ahero__name { font-size: 22px; line-height: 1.1; white-space: nowrap; }   /* one line; may run over the photo */
   .ahero--split .ahero__stage { aspect-ratio: 3 / 4; }
   .ahero--split ~ .abio { padding-top: 24px !important; }
+  footer.bar--note { padding-left: 20px; padding-right: 20px; }
 }

@@ -6,6 +6,9 @@
 @media (max-width: 760px) {
   .top { flex-direction: row !important; justify-content: flex-start; padding: 16px 20px !important; }
   .top__nav { display: none !important; }
+  /* ticker and nav bar stay put while the page scrolls (artist pages already pin them) */
+  body.about-page .ticker { position: sticky; top: 0; z-index: 31; }
+  body.about-page .top { position: sticky; top: var(--navx-tick, 30px); z-index: 30; background: #fff; }
   .top__logo { margin-left: auto; }
   .top__logo img { height: 36px !important; width: auto; }
 

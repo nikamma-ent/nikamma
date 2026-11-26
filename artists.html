@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=71">
-  <link rel="stylesheet" href="about.css?v=10">
-  <link rel="stylesheet" href="nav.css?v=4">
+  <link rel="stylesheet" href="about.css?v=17">
+  <link rel="stylesheet" href="nav.css?v=5">
 </head>
 <body data-root="" class="is-scroll about-page artists-page">
 
@@ -31,7 +31,7 @@
     <section class="about2">
       <div class="about2__text">
         <h1 class="roster2__label">artists <span>(a–z)</span></h1>
-        <ul class="roster2" id="roster2"></ul>
+        <div class="roster2-wheel"><ul class="roster2" id="roster2"></ul></div>
       </div>
       <figure class="about2__photos roster2__photos" id="roster2-photos" aria-label="Artist photo"></figure>
     </section>
@@ -70,14 +70,31 @@
         li.append(link); list.append(li);
       });
       const first = list.querySelector('a'); if (first) first.classList.add('is-active');
-      // phones have no hover: step through the artists slowly instead
-      if (window.matchMedia('(hover: none)').matches && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        const links = [...list.querySelectorAll('a')];
-        let i = 0;
-        setInterval(() => { i = (i + 1) % links.length; links[i].dispatchEvent(new Event('mouseenter')); }, 3000);
-      }
+      // phones: the names are a little wheel you swipe up and down (it snaps to a name);
+      // the name in the middle is the one shown, and tapping it opens their page
+      const wheelBox = list.parentElement;
+      const links = [...list.querySelectorAll('a')];
+      const phone = window.matchMedia('(max-width: 760px)');
+      let current = 0;
+      const wheel = () => {
+        if (!phone.matches) { links.forEach((l) => { l.style.opacity = ''; }); return; }
+        const row = links[0].parentElement.offsetHeight || 1;
+        const p = wheelBox.scrollTop / row;
+        links.forEach((l, i) => { l.style.opacity = String(Math.max(0.35, 1 - Math.abs(i - p) * 0.5)); });
+        const n = Math.min(links.length - 1, Math.max(0, Math.round(p)));
+        if (n !== current) { current = n; links[n].dispatchEvent(new Event('mouseenter')); }
+      };
+      wheelBox.addEventListener('scroll', wheel, { passive: true });
+      phone.addEventListener('change', wheel);
+      // tapping a faded name rolls it to the middle first; tapping the middle one opens it
+      links.forEach((l, i) => l.addEventListener('click', (e) => {
+        if (!phone.matches || i === current) return;
+        e.preventDefault();
+        wheelBox.scrollTo({ top: i * l.parentElement.offsetHeight, behavior: 'smooth' });
+      }));
+      wheel();
     })();
   </script>
-  <script src="nav.js?v=4"></script>
+  <script src="nav.js?v=5"></script>
 </body>
 </html>

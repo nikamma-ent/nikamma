@@ -61,6 +61,11 @@
   });
   document.body.append(menu);
 
+  // the nav bar sticks right under the ticker on phones
+  const tick = document.querySelector('.ticker');
+  const setTick = () => document.documentElement.style.setProperty('--navx-tick', `${tick ? tick.offsetHeight : 0}px`);
+  setTick(); window.addEventListener('resize', setTick);
+
   // keep ✕ and the monkey exactly where ☰ and the monkey are (under the ticker, if it's on screen)
   const place = () => {
     const r = top.getBoundingClientRect();

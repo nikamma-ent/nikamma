@@ -36,7 +36,7 @@
 
 /* footer: black, one line on the left */
 .about-page footer.bar--note { background: #000; justify-content: flex-start; padding: 28px 48px 32px; }
-.about-page footer.bar--note .bar__note { color: rgba(255,255,255,.7); }
+.about-page footer.bar--note .bar__note { color: #fff; }
 
 /* the story: white, like the bio (starts 230px in, 450px wide, 18/22.5) with a 360px column on the right */
 .about2-story {
@@ -89,11 +89,28 @@
 .roster2 a { white-space: nowrap; }   /* each name on one line */
 .artists-page .about2__text { padding-right: 24px; }
 
-/* Artists page on phones: keep the two columns — names bottom-left, a tall (3:4) photo on the right.
-   Long names stay on one line and may run over the photo. */
+/* Artists page on phones: photo top right, names lower left under it (a stagger).
+   The names are a small wheel you swipe up and down; it snaps so one name sits in the
+   middle row, and that's the one shown (artists.html). */
 @media (max-width: 760px) {
-  .artists-page .about2 { grid-template-columns: minmax(0, 32%) minmax(0, 68%); align-items: end; gap: 0; padding: 28px 20px 48px; min-height: calc(100svh - 183px); }
-  .artists-page .about2__photos { order: 0; aspect-ratio: 3 / 4; }
-  .artists-page .about2__text { position: relative; z-index: 2; min-width: 0; padding-right: 12px; gap: 10px; }
-  .roster2 a { font-size: 22px; }
+  .artists-page .about2 {
+    box-sizing: border-box; min-height: calc(100svh - 183px);
+    grid-template-columns: minmax(0, 32%) minmax(0, 68%); grid-template-rows: auto auto;
+    align-content: center; align-items: start; gap: 0; padding: 20px 20px 32px;
+  }
+  .artists-page .about2__photos { grid-column: 2; grid-row: 1; order: 0; aspect-ratio: 3 / 4; }
+  .artists-page .about2__text {
+    grid-column: 1 / -1; grid-row: 2; position: relative; z-index: 2;
+    min-width: 0; padding: 28px 0 0; gap: 12px; align-content: start;
+  }
+  .artists-page .roster2-wheel {
+    height: calc(3 * 42px); overflow-y: auto; overscroll-behavior: contain;
+    scroll-snap-type: y mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+            mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  }
+  .artists-page .roster2-wheel::-webkit-scrollbar { display: none; }
+  .artists-page .roster2 { display: block; padding: 42px 0; }   /* lets the first and last name reach the middle */
+  .artists-page .roster2 > li { height: 42px; display: flex; align-items: center; scroll-snap-align: center; }
+  .artists-page .roster2 a { font-size: 30px; line-height: 42px; display: block; transition: color .2s; }
 }
