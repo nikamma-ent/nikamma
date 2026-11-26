@@ -11,6 +11,7 @@ img/pinocchio.jpg
 # live photos: full-size originals stay local, the web copies are published
 img/live/**/*\[*
 img/live/**/*.png
+img/live/**/* *
 # about photos: only the web copies (about-NN.jpg) are published; originals stay local
 img/about/*
 !img/about/about-*.jpg

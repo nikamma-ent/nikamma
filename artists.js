@@ -32,9 +32,10 @@
 // video:      the featured YouTube video, full width at the end of the page:
 //             { id: 'the part after watch?v=', title: '…' }. Leave it out to hide it.
 //             "more videos" next to it links to the YouTube in links.
+// bandcampSingles: false → the store leaves out Bandcamp singles (albums/EPs only).
 // store:      merch from shops other than Bandcamp: { title, where, note, url, img }.
 //             where is the shop (shown as the yellow chip); img is optional.
-//             The store shows 4 cards: Bandcamp merch, these, then Bandcamp albums.
+//             The store shows 3 cards: Bandcamp merch, these, then Bandcamp albums.
 //             "more in the store" goes to storeUrl if set, else the first shop here
 //             that isn't Bandcamp, else their Bandcamp.
 //             Bandcamp merch and albums are added by themselves every day
@@ -91,14 +92,14 @@ window.NIKAMMA_ARTISTS = [
     photo: 'shashwat-bulusu.jpg',
     credit: 'Krish Wadhwa',
     bioDoc: 'https://docs.google.com/document/d/1wrIakRF5feU7GN-zbDvywmvTllz_BEr2yVbD6fkzPY4/edit',
-    spotify: 'https://open.spotify.com/album/4C6Cgfuc0ZjnEMV76tnyUK',
+    spotify: 'https://open.spotify.com/artist/0OxO7c4K0ozx5CTPDhFOXO',   // his top tracks
+    bandcampSingles: false,   // store: albums and EPs only, no singles
     links: {
       Spotify: 'https://open.spotify.com/artist/0OxO7c4K0ozx5CTPDhFOXO',
       'Apple Music': 'https://music.apple.com/in/artist/shashwat-bulusu/1457492073',
       Instagram: 'https://www.instagram.com/bullu.frog',
       YouTube: 'https://youtube.com/@shashwatbulusu',
       Bandcamp: 'https://shashwatbulusu.bandcamp.com/music',
-      'Pinocchio ↗': 'https://pinocchio.nikamma.co',
     },
     press: {
       query: '"Shashwat Bulusu"',
@@ -110,7 +111,12 @@ window.NIKAMMA_ARTISTS = [
       ],
     },
     bandsintown: { artist: 'id_15507468', appId: '' }, // bandsintown.com/a/15507468-shashwat-bulusu
-    live: [],
+    live: [
+      { src: 'img/live/shashwat-bulusu/mumbai-krish-wadhwa-1.jpg' },
+      { src: 'img/live/shashwat-bulusu/live-002.jpg' },
+      { src: 'img/live/shashwat-bulusu/mumbai-krish-wadhwa-2.jpg' },
+      { src: 'img/live/shashwat-bulusu/live-009.jpg' },
+    ],
     store: [],
   },
   {
