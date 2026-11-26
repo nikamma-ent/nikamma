@@ -1,0 +1,39 @@
+// News: everything we publish. Newest first.
+// Each post gets its own page at news.html?p=<slug>, shows on the News page,
+// and on the artist pages of the artists it's tagged with.
+//
+// slug:     short id for the address (letters, numbers, dashes)
+// date:     'YYYY-MM-DD'
+// title:    headline
+// artists:  slugs of the artists it's about, e.g. ['begum'] (optional)
+// img:      photo, ideally in img/news/ (landscape works best)
+// body:     paragraphs, in order
+// list:     optional box on the right, e.g. tour dates: { title, items: [...] }
+window.NIKAMMA_POSTS = [
+  {
+    "slug": "begum-we-are-okay-tour",
+    "date": "2026-09-15",
+    "title": "Begum Announce We Are Okay! Tour, Marking Their Return After Three Years",
+    "artists": [
+      "begum"
+    ],
+    "img": "img/artists/begum.jpg",
+    "body": [
+      "Indie cult classic Begum have announced a four-city India tour, marking their return after a three-year hiatus.",
+      "The We Are Okay! Tour will take Begum to Delhi, Goa, Mumbai, and Bengaluru, bringing the band back to the cities and audiences that have been waiting for their return.",
+      "Over the last three years, while Begum have been away from the live circuit, their music has continued to find its way to listeners. The audiences who have stayed with the band’s music through their hiatus have grown alongside a completely new generation discovering Begum for the first time.",
+      "Initially formed as an exercise in allowing lyrics and sonics to spill out without second thoughts, Begum’s music has evolved considerably over almost a decade, while remaining rooted in the same instinctive approach. Their sound sits somewhere between a subconscious revelation of internalised pop music tropes and a resolve to find comfort in presenting the uncomfortable.",
+      "Begum’s music has developed into a signature that has made them a quintessential “band’s band” — the kind of music that makes other musicians wonder, “why didn’t I think of that?”, while drawing new listeners into a world they instinctively connect with, even if they can’t quite explain why.",
+      "We Are Okay! marks the beginning of this next chapter, a return to the stage after an extended pause and the first opportunity for audiences across four cities to experience Begum’s new iteration live."
+    ],
+    "list": {
+      "title": "We Are Okay! Tour",
+      "items": [
+        "9th October — New Delhi",
+        "10th October — Goa",
+        "15th October — Mumbai",
+        "16th October — Bengaluru"
+      ]
+    }
+  }
+];

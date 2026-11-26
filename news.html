@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>News · nikamma</title>
+  <meta name="description" content="nikamma is a small independent music company from India. We work with artists, make records happen and build small, strange things for the people who listen.">
+  <meta property="og:title" content="nikamma">
+  <meta property="og:description" content="A small independent music company from India.">
+  <meta property="og:image" content="img/home.jpg">
+  <link rel="icon" href="img/mark.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,400;6..12,600;6..12,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=69">
+  <link rel="stylesheet" href="about.css?v=7">
+  <link rel="stylesheet" href="news.css?v=1">
+</head>
+<body class="is-scroll about-page news-page">
+
+  <div class="ticker" aria-label="News"><div class="ticker__track" id="ticker"></div></div>
+
+  <header class="top">
+    <a href="index.html" class="top__logo" aria-label="nikamma, home"><img src="img/mark.png" alt="nikamma" width="140" height="134"></a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="artists.html">Artists</a>
+      <a href="news.html" aria-current="page">News</a>
+      <a href="work.html">Work</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <!-- the list (news.html) or one post (news.html?p=<slug>), built from posts.js -->
+  <main id="main" class="news2">
+    <section class="news2-list" id="news-list" hidden>
+      <h1 class="news2__label">news</h1>
+      <ol class="news2-grid" id="news-grid"></ol>
+    </section>
+
+    <article id="news-post" hidden>
+      <section class="about2">
+        <div class="about2__text">
+          <p class="news2__date" id="post-date"></p>
+          <h1 class="about2__lead" id="post-title"></h1>
+        </div>
+        <figure class="about2__photos"><img id="post-img" alt="" class="is-on"></figure>
+      </section>
+      <section class="about2-story">
+        <div class="about2-story__copy" id="post-body"></div>
+        <aside class="about2-story__side" id="post-side"></aside>
+      </section>
+    </article>
+  </main>
+
+  <footer class="bar bar--note">
+    <p class="bar__note">© <span class="year">2026</span> nikamma entertainment services private limited. made with claude tokens and very little sleep.</p>
+  </footer>
+
+  <script src="news.js?v=69"></script>
+  <script src="artists.js?v=69"></script>
+  <script src="posts.js?v=1"></script>
+  <script src="script.js?v=69"></script>
+  <script src="news-page.js?v=1"></script>
+</body>
+</html>

@@ -227,7 +227,11 @@ function renderArtist(a, i) {
     const pinnedKeys = new Set(pinned.map(key));
     const press = [...pinned, ...((window.NIKAMMA_PRESS || {})[a.slug] || []).filter((p) => !pinnedKeys.has(key(p)))].slice(0, 3);
     const nm = a.name.toLowerCase();
-    const news = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm)).slice(0, 3);   // 3 at a time
+    // our posts tagged with this artist (posts.js) first, then ticker lines that name them
+    const fromPosts = (window.NIKAMMA_POSTS || []).filter((p) => (p.artists || []).includes(a.slug))
+      .map((p) => ({ text: p.title, link: `${ROOT}news.html?p=${encodeURIComponent(p.slug)}`, img: p.img }));
+    const fromTicker = (window.NIKAMMA_NEWS || []).filter((n) => n.text.toLowerCase().includes(nm));
+    const news = [...fromPosts, ...fromTicker].slice(0, 3);   // 3 at a time
     const fmtDay = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
     press.forEach((p) => {
       const li = document.createElement('li');
