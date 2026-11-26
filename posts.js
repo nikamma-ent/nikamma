@@ -5,7 +5,8 @@
 // slug:     short id for the address (letters, numbers, dashes)
 // date:     'YYYY-MM-DD'
 // title:    headline
-// artists:  slugs of the artists it's about, e.g. ['begum'] (optional)
+// artists:  slugs of the artists it's about, e.g. ['begum'] (shown as tags)
+// category: one word tag, e.g. 'live', 'release', 'announcement'
 // img:      photo, ideally in img/news/ (landscape works best)
 // body:     paragraphs, in order
 // list:     optional box on the right, e.g. tour dates: { title, items: [...] }
@@ -17,7 +18,8 @@ window.NIKAMMA_POSTS = [
     "artists": [
       "begum"
     ],
-    "img": "img/artists/begum.jpg",
+    "category": "live",
+    "img": "img/news/begum-we-are-okay-tour.jpg",
     "body": [
       "Indie cult classic Begum have announced a four-city India tour, marking their return after a three-year hiatus.",
       "The We Are Okay! Tour will take Begum to Delhi, Goa, Mumbai, and Bengaluru, bringing the band back to the cities and audiences that have been waiting for their return.",

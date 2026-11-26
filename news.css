@@ -18,3 +18,6 @@
   .news2-list { padding: 32px 20px 64px; }
   .news2-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+.news2__tags { margin: 0; }
+.news-page .about2__text .news2__tags { order: -1; }

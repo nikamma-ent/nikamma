@@ -6,6 +6,16 @@
   const fmt = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
   const when = (d) => (d ? fmt.format(new Date(d)) : '');
   const slug = new URLSearchParams(location.search).get('p');
+  // tags: category (yellow chip) then the artists (grey chips)
+  const tags = (p) => {
+    const box = document.createElement('p'); box.className = 'chips news2__tags';
+    if (p.category) { const c = document.createElement('span'); c.className = 'chip chip--accent'; c.textContent = p.category; box.append(c); }
+    (p.artists || []).forEach((s) => {
+      const a = artists.find((x) => x.slug === s); if (!a) return;
+      const c = document.createElement('span'); c.className = 'chip'; c.textContent = a.name; box.append(c);
+    });
+    return box;
+  };
   const post = slug && posts.find((p) => p.slug === slug);
 
   if (!post) {
@@ -18,6 +28,7 @@
       li.querySelector('img').src = p.img || 'img/home.jpg';
       li.querySelector('.news2__date').textContent = when(p.date);
       li.querySelector('h2').textContent = p.title;
+      li.querySelector('.news2__date').after(tags(p));
       $('news-grid').append(li);
     });
     if (!posts.length) $('news-grid').innerHTML = '<li class="news2__empty">nothing yet.</li>';
@@ -29,6 +40,7 @@
   $('news-post').hidden = false;
   $('post-date').textContent = when(post.date);
   $('post-title').textContent = post.title;
+  $('post-date').after(tags(post));
   $('post-img').src = post.img || 'img/home.jpg';
   $('post-body').replaceChildren(...(post.body || []).map((t) => { const p = document.createElement('p'); p.textContent = t; return p; }));
 

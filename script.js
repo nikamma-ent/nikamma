@@ -30,7 +30,7 @@ function fillTicker(track, news) {
   }
   return true;
 }
-fillTicker(document.getElementById('ticker'), window.NIKAMMA_NEWS || []);
+fillTicker(document.getElementById('ticker'), (window.NIKAMMA_POSTS || []).map((p) => ({ text: p.title, link: `${document.body.dataset.root || ''}news.html?p=${encodeURIComponent(p.slug)}` })).concat(window.NIKAMMA_NEWS || []));   // posts first, then news.js lines
 
 document.querySelectorAll('.year').forEach((el) => { el.textContent = new Date().getFullYear(); });
 

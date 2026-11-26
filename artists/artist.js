@@ -1,7 +1,7 @@
-// ---------- ticker: built from news.js ----------
+// ---------- ticker: our posts (posts.js), then any news.js lines ----------
 (function buildTicker() {
   const track = document.getElementById('ticker');
-  const news = window.NIKAMMA_NEWS || [];
+  const news = (window.NIKAMMA_POSTS || []).map((p) => ({ text: p.title, link: `${document.body.dataset.root || ''}news.html?p=${encodeURIComponent(p.slug)}` })).concat(window.NIKAMMA_NEWS || []);
   if (!track || !news.length) return;
 
   const item = (n, hidden) => {

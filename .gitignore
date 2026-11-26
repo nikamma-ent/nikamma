@@ -15,3 +15,6 @@ img/live/**/* *
 # about photos: only the web copies (about-NN.jpg) are published; originals stay local
 img/about/*
 !img/about/about-*.jpg
+# news photos: originals stay local, the web copies (.jpg without spaces) are published
+img/news/*.png
+img/news/* *
