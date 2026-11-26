@@ -98,7 +98,7 @@ window.NIKAMMA_ARTISTS = [
       Spotify: 'https://open.spotify.com/artist/0OxO7c4K0ozx5CTPDhFOXO',
       'Apple Music': 'https://music.apple.com/in/artist/shashwat-bulusu/1457492073',
       Instagram: 'https://www.instagram.com/bullu.frog',
-      YouTube: 'https://youtube.com/@shashwatbulusu',
+      YouTube: 'https://www.youtube.com/@ShashwatBulusu',
       Bandcamp: 'https://shashwatbulusu.bandcamp.com/music',
     },
     press: {
@@ -117,6 +117,7 @@ window.NIKAMMA_ARTISTS = [
       { src: 'img/live/shashwat-bulusu/mumbai-krish-wadhwa-2.jpg' },
       { src: 'img/live/shashwat-bulusu/live-009.jpg' },
     ],
+    video: { id: 'dNhbbjA9VvM', title: 'Tanashahi' },
     store: [],
   },
   {

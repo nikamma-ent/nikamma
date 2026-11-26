@@ -849,3 +849,15 @@ a.anews__card:hover .anews__text { text-decoration: underline; text-underline-of
 .store__more:hover, .apress-list a:hover .apress__title, a.anews__card:hover .anews__text { text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 1px; }
 .apress-list a:hover .apress__title, a.anews__card:hover .anews__text { display: inline; }
 .afilm__all:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* no upcoming shows: "no upcoming shows / play my city" left aligned too (it sits inside the list then) */
+.astage2 .bit-widget .bit-play-my-city-wrapper {
+  flex-direction: column !important; align-items: flex-start !important; justify-content: flex-start !important;
+  gap: 10px; margin: 0 !important; padding: 0 !important; text-align: left !important;
+}
+.astage2 .bit-widget .bit-play-my-city-wrapper > * { margin-left: 0 !important; margin-right: 0 !important; }
+
+/* spotify: exactly 10 tracks tall (header + 10 rows), no stretching */
+.abio__music .player__frame { flex: none; }
+.abio__music .player__frame iframe { height: 744px !important; min-height: 0 !important; flex: none; }
+.abio__music { flex: none; }
