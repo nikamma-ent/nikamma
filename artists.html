@@ -22,7 +22,6 @@
       <a href="artists.html" aria-current="page">Artists</a>
       <a href="news.html">News</a>
       <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
@@ -54,7 +53,7 @@
       const imgs = {};
       artists.forEach((a, i) => {
         const im = document.createElement('img');
-        im.src = `img/artists/${a.photo}`; im.alt = a.name;
+        im.src = `img/artists/${a.hero || a.photo}`; im.alt = a.name; // same photo as the top of their page
         if (i === 0) im.classList.add('is-on');
         box.append(im); imgs[a.slug] = im;
 
