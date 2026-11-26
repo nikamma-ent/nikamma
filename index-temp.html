@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="styles.css?v=71">
   <link rel="stylesheet" href="about.css?v=6">
   <link rel="stylesheet" href="news.css?v=3">
-  <link rel="stylesheet" href="temp/home-big.css?v=2">
+  <link rel="stylesheet" href="temp/home-big.css?v=11">
 </head>
 <body data-root="" class="is-scroll about-page news-page home-big">
 
@@ -30,13 +30,35 @@
   </header>
 
   <main id="main">
-    <!-- first screen: logo, line, socials, what we do -->
-    <section class="hb">
-      <div class="hb__main">
-        <h1 class="hb__brand"><img class="hb__logo" src="img/logo.png" alt="nikamma" width="700" height="134"></h1>
-        <p class="hb__tag">we're in the <em>monkey business</em>.</p>
+    <!-- like the artist pages: what we do on the left, a photo on the right (16:10.5).
+         Photos live in img/home/ -->
+    <section class="about2 hb-hero" id="about">
+      <div class="about2__text">
+        <h1 class="hb-what__label">what we do</h1>
+        <ul class="hb-what">
+          <li>artist development</li>
+          <li>label + artist services</li>
+          <li>live bookings</li>
+          <li>event curation</li>
+          <li>++</li>
+        </ul>
+      </div>
+      <figure class="about2__photos hb-hero__photo">
+        <img class="is-on" src="img/home/nikamma-tht-stage.jpg" alt="nikamma projected on a stage">
+        <figcaption class="hb-hero__tag">we're in the monkey business.</figcaption>
+      </figure>
+    </section>
+
+    <!-- second section: the nikamma playlist on the left, follow us on the right -->
+    <!-- TODO: swap data-playlist for the nikamma playlist link (stand-in: Hulo on Spotify) -->
+    <section class="hb-listen">
+      <div class="hb-listen__player">
+        <h2 class="hb-listen__label">nikamma playlist</h2>
+        <div class="hb-listen__embed" id="hb-playlist" data-playlist="https://open.spotify.com/artist/0VmqJsRLRKbPBh9ZgnBzdB"></div>
+      </div>
+      <div class="hb-listen__follow">
+        <h2 class="hb-listen__label">follow us</h2>
         <div class="hb__social">
-          <!-- TODO: nikamma's own profile links -->
           <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
             <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.6" cy="7.4" r=".7" fill="currentColor" stroke="none"/></svg>
           </a>
@@ -51,14 +73,15 @@
           </a>
         </div>
       </div>
-      <div class="hb__what">
-        <h2>what we do</h2>
-        <ul>
-          <li>artist development</li>
-          <li>label services</li>
-          <li>live experiences</li>
-          <li>creative projects</li>
-        </ul>
+    </section>
+
+    <section class="about2-story">
+      <div class="about2-story__copy">
+        <p>nikamma started in 2025, born out of a shared love for music and a desire to do things a little differently.</p>
+        <p>We didn't start out as industry professionals or seasoned business people. We were a bunch of creative folks brought together by a shared love for music, figuring things out as we went. Much of what we know, we've learnt along the way, and we're still learning.</p>
+        <p>Today, we work across the many ways music and ideas find their way into the world. From artist development and label services to live experiences and creative projects, our work is driven by a curiosity for what music can be, where it can go and how it can connect with people.</p>
+        <p class="about2-story__sign">Here's to the good-for-nothings.</p>
+        <p><a class="news2__more" href="about.html">more about us →</a></p>
       </div>
     </section>
 
@@ -86,6 +109,6 @@
   <script src="artists.js?v=70"></script>
   <script src="posts.js?v=4"></script>
   <script src="script.js?v=70"></script>
-  <script src="temp/home-big.js?v=2"></script>
+  <script src="temp/home-big.js?v=6"></script>
 </body>
 </html>

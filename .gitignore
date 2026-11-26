@@ -18,3 +18,9 @@ img/about/*
 # news photos: originals stay local, the web copies (.jpg without spaces) are published
 img/news/*.png
 img/news/* *
+
+# homepage photo originals (web copies are the .jpg files)
+img/home/*.png
+img/home/*.heic
+img/home/*.HEIC
+img/home/* *

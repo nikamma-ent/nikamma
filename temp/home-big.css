@@ -1,20 +1,30 @@
-/* Test homepage: logo, "we're in the monkey business", socials and what we do;
-   then the artists and the latest three posts. No photos up top.
+/* Test homepage: what we do + a photo (like the artist pages), then the story,
+   the artists and the latest three posts.
    Loaded after styles.css, about.css and news.css. */
 
 .home-big .top { background: #fff; }
 
-/* first screen */
-.hb {
-  min-height: calc(100svh - 126px); box-sizing: border-box;
-  display: flex; flex-direction: column; justify-content: space-between; gap: 64px;
-  padding: 56px var(--side) 56px; background: #fff;
-}
-.hb__main { display: grid; gap: 28px; justify-items: start; margin-top: auto; }
-.hb__logo { width: clamp(260px, 42vw, 640px); height: auto; display: block; }
-.hb__tag { font: 400 clamp(28px, 3.4vw, 52px)/1.1 var(--sans); letter-spacing: -0.02em; margin: 0; }
-.hb__tag em { font-style: normal; background: linear-gradient(transparent 62%, var(--accent) 62%); }
+/* first screen: same two columns as the artist pages (about.css .about2) */
+.home-big .about2.hb-hero { background: #fff; }
+.hb-what__label { font-size: 18px; font-weight: 400; color: var(--muted); margin: 0; }
+.hb-what { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.hb-what li { font: 400 clamp(26px, 2.3vw, 36px)/1.15 var(--sans); letter-spacing: -.01em; }
 
+/* the line sits just under the projected "nikamma" in the photo; sizes follow the photo's width */
+.hb-hero__photo { container-type: inline-size; }
+.hb-hero__tag {
+  position: absolute; left: 52.6%; top: 53.5%; transform: translateX(-50%);
+  margin: 0; padding: 0; white-space: nowrap; color: #fff;
+  font: 400 max(11px, 2.5cqw)/1.1 var(--sans); letter-spacing: -.005em;
+}
+
+/* second section: playlist (left) + follow us (right, 360px like the artist pages) */
+.hb-listen {
+  display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px clamp(32px, 6vw, 120px);
+  padding: 96px var(--side) 24px; background: #fff;
+}
+.hb-listen__label { font-size: 18px; font-weight: 400; margin: 0 0 18px; }
+.hb-listen__embed iframe { display: block; width: 100%; height: 452px; border: 0; border-radius: 12px; }
 .hb__social { display: flex; gap: 10px; flex-wrap: wrap; }
 .hb__social a {
   display: grid; place-items: center; width: 44px; height: 44px; box-sizing: border-box;
@@ -23,12 +33,8 @@
 .hb__social a:hover, .hb__social a:focus-visible { background: var(--accent); border-color: var(--accent); }
 .hb__social svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 
-/* what we do: one row along the bottom of the first screen */
-.hb__what { border-top: 1px solid #000; padding-top: 18px; }
-.hb__what h2 { font-size: 13px; font-weight: 400; color: var(--muted); margin: 0 0 14px; }
-.hb__what ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-.hb__what li { font-size: clamp(18px, 1.6vw, 24px); line-height: 1.2; }
-.hb__what li span { display: block; font-size: 15px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+/* the story after it (about.css) */
+.home-big .about2-story { padding-top: 96px; }
 
 /* artists: big names, no photos */
 .hb-artists { background: #fff; padding: 88px var(--side) 24px; }
@@ -50,8 +56,10 @@
 .hb-latest__head h2 { margin: 0; }
 
 @media (max-width: 860px) {
-  .hb { min-height: calc(100svh - 76px); padding: 40px 20px 40px; gap: 48px; }
-  .hb__what ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .hb-listen { grid-template-columns: minmax(0, 1fr); padding: 48px 20px 8px; }
+  .hb-listen__embed iframe { height: 352px; }
+  .hb-what li { font-size: 26px; }
+  .home-big .about2-story { padding-top: 48px; }
   .hb-artists { padding: 56px 20px 8px; }
   .hb__names a { font-size: clamp(40px, 12vw, 80px); }
   .hb-latest { padding: 56px 20px 72px; }
